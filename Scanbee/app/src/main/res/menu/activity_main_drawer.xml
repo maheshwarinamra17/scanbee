@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item android:icon="@drawable/ic_menu_manage" android:id="@+id/all_press_news" android:title="@string/all_press_news" />
+        <item android:icon="@drawable/ic_menu_manage" android:id="@+id/art_entertainment" android:title="@string/art_entertainment" />
+    </group>
+    <item android:title="Admin">
+        <menu>
+            <item android:icon="@drawable/ic_menu_share" android:id="@+id/nav_share" android:title="Share" />
+            <item android:icon="@drawable/ic_menu_send" android:id="@+id/nav_send" android:title="Send" />
+            <item android:icon="@drawable/ic_menu_send" android:id="@+id/logoout" android:title="Logout" />
+        </menu>
+    </item>
+</menu>

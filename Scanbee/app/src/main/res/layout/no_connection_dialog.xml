@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layoutAnimation="@anim/list_bounce_anim"
+    android:background="@null" >
+
+    <RelativeLayout
+        android:id="@+id/layoutBg"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_marginTop="130dp"
+        android:background="@drawable/bg_no_connection" >
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="55dp"
+            android:layout_marginTop="40dp"
+            android:text="@string/no_internet_connection_play"
+            android:textColor="#C73839"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/okTv"
+            android:layout_width="200dp"
+            android:layout_height="40sp"
+            android:layout_below="@+id/title"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/button_app_color"
+            android:gravity="center"
+            android:paddingBottom="3dp"
+            android:text="@android:string/ok"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/netConnMasscot"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="5dp"
+        android:contentDescription="@string/logout_avatar"
+        android:src="@drawable/exit_mascot" />
+
+</RelativeLayout>

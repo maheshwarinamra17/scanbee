@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="app_color">#1976D2</color>
+    <color name="app_green">#4CAF50</color>
+    <color name="black">#212121</color>
+    <color name="white">#FFFFFF</color>
+    <color name="gray_light">#E5E5E5</color>
+    <color name="grey">#727272</color>
+    <color name="stroke_grey">#c8c8c8</color>
+    <color name="grey_not_selected">#e4e4e4</color>
+    <color name="dark_grey">#707070</color>
+    <color name="dark_grey_1">#727273</color>
+    <color name="loader_bg">#E9FFFB</color>
+    <color name="loading_txt_color">#003D36</color>
+    <color name="loader_border_color">#057C35</color>
+    <color name="loader_progress_color">#7ED5A5</color>
+    <color name="leapColor">#00ac4c</color>
+
+
+</resources>

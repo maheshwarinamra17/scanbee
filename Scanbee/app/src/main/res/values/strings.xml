@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">Scanbee</string>
+    <string name="action_settings">setting</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="scanning">Scanning</string>
+    <string name="cart_item">Cart</string>
+    <string name="tool_bar_item_title1">delete image</string>
+    <string name="tool_bar_item_title">cart image</string>
+    <string name="toolbar_del_img"></string>
+    <string name="all_press_news">Item1</string>
+    <string name="art_entertainment">Item2</string>
+    <string name="automotive">AutoMotive</string>
+    <string name="cart_value">CART VALUE</string>
+    <string name="tax">TAX</string>
+    <string name="discount">DISCOUNT</string>
+    <string name="computer">Computer</string>
+    <string name="design">Design</string>
+    <string name="no_internet_connection">No Internet Connection</string>
+    <string name="no_internet_connection_play">There is no network connection available. Please try later.</string>
+    <string name="logout_avatar">Avatar</string>
+    <string name="please_wait">Please Wait..</string>
+    <string name="Rs">\u20B9</string>
+
+    <string name="order_id">ORDER ID</string>
+    <string name="items_scanned">ITEM SCANNED</string>
+    <string name="scanning_data">Scanning Items...</string>
+    <string name="continue_btn">CONTINUE</string>
+
+    <string name="roboto_font">fonts/Roboto-Regular.ttf</string>
+    <string name="roboto_thin">fonts/Roboto-Thin.ttf</string>
+    <string name="roboto_med">fonts/Roboto-Medium.ttf</string>
+    <string name="noto_serif">fonts/NotoSerif-Regular.ttf</string>
+    <string name="noto_sans">fonts/NotoSans-Regular.ttf</string>
+
+</resources>

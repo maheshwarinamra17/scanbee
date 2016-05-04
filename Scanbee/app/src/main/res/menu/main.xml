@@ -1,0 +1,25 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+   <group android:id="@+id/group1">
+    <item
+        android:id="@+id/delete"
+        app:showAsAction="always"
+        android:visible="false"
+        app:theme= "@style/NavigationIconStyle"
+        android:icon="@mipmap/delete"
+        android:title="@string/tool_bar_item_title">
+    </item>
+    </group>
+    <group android:id="@+id/group2">
+        <item
+            android:id="@+id/cart"
+            android:icon="@mipmap/shopping"
+            app:showAsAction="always"
+            app:theme= "@style/NavigationIconStyle"
+            android:visible="false"
+            android:title="@string/tool_bar_item_title1">
+        </item>
+    </group>
+
+</menu>
