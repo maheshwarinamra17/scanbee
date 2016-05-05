@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/cart"/>
+        <TextView
+            android:id="@+id/orderIdTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="8"
+            android:textSize="25dp"
+            android:gravity="center_horizontal"
+            android:textColor="@color/app_color"/>
+        <TextView
+            android:id="@+id/orderId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ORDERID"
+            android:textSize="25dp"
+            android:gravity="center_horizontal"/>
+
+        <TextView
+            android:id="@+id/amountPaidTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="8"
+            android:textSize="25dp"
+            android:textColor="@color/app_color"
+            android:gravity="center_horizontal"/>
+        <TextView
+            android:id="@+id/amountPaidTxtTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Amount Paid"
+            android:textSize="25dp"
+            android:gravity="center_horizontal"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp">
+        <TextView
+            android:id="@+id/circleImgTv"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:text="B"
+            android:gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/circle"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/custNameTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="bobbyAlexlord"
+                android:textSize="23sp"
+                android:gravity="center_vertical"
+                android:textColor="@color/app_color"
+                android:layout_marginLeft="20dp"/>
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal">
+            <TextView
+                android:id="@+id/typeTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Customer,"
+                android:textSize="20dp"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="20dp"/>
+               <TextView
+                   android:id="@+id/mobileNoTv"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="9654785421"
+                   android:textSize="20dp"
+                   android:gravity="center_vertical"
+                   android:layout_marginLeft="5dp"/>
+        </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/printInvoiceBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Print invoice"
+            android:textSize="25dp"
+            android:background="@drawable/button_app_color"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/white"/>
+        <Button
+            android:id="@+id/shareInvoiceBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Share Invoice"
+            android:textSize="25dp"
+            android:background="@drawable/button_app_color"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+
+</LinearLayout>

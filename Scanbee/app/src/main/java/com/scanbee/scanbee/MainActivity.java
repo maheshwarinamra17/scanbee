@@ -5,6 +5,7 @@ package com.scanbee.scanbee;
  */
 
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -45,12 +46,16 @@ public class MainActivity extends AppCompatActivity
             window.setStatusBarColor(Color.parseColor("#115292"));
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawerUI();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        Typeface NotoSans=Typeface.createFromAsset(getResources().getAssets(),getString(R.string.noto_sans));
+        Menu navMenu = navigationView.getMenu();
+
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -111,8 +116,36 @@ public class MainActivity extends AppCompatActivity
                     .replace(R.id.content_frame, fragment)
                     .commit();
         }*/
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+
+
         return true;
+    }
+    public void drawerUI(){
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        TextView nav_row1 = (TextView) drawer.findViewById(R.id.navrowText1);
+        TextView nav_row2 = (TextView) drawer.findViewById(R.id.navrowText2);
+        TextView nav_row3 = (TextView) drawer.findViewById(R.id.navrowText3);
+        TextView nav_row4 = (TextView) drawer.findViewById(R.id.navrowText4);
+        TextView nav_row5 = (TextView) drawer.findViewById(R.id.navrowText5);
+        TextView nav_row6 = (TextView) drawer.findViewById(R.id.navrowText6);
+        TextView nav_row7 = (TextView) drawer.findViewById(R.id.navrowText7);
+
+        TextView navHeaderText = (TextView) drawer.findViewById(R.id.storenametv);
+        TextView nvHeaderCaption = (TextView) drawer.findViewById(R.id.userstoretv);
+
+        Typeface Roboto=Typeface.createFromAsset(getResources().getAssets(),getString(R.string.roboto_font));
+        Typeface RobotoMed=Typeface.createFromAsset(getResources().getAssets(),getString(R.string.roboto_med));
+        Typeface NotoSans=Typeface.createFromAsset(getResources().getAssets(),getString(R.string.noto_sans));
+
+        nav_row1.setTypeface(Roboto);
+        nav_row2.setTypeface(Roboto);
+        nav_row3.setTypeface(Roboto);
+        nav_row4.setTypeface(Roboto);
+        nav_row5.setTypeface(Roboto);
+        nav_row6.setTypeface(Roboto);
+        nav_row7.setTypeface(Roboto);
+        navHeaderText.setTypeface(RobotoMed);
+        nvHeaderCaption.setTypeface(NotoSans);
+        drawer.closeDrawer(GravityCompat.START);
     }
 }

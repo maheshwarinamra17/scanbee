@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -10,18 +11,26 @@
         android:layout_marginRight="@dimen/side_margin"
         android:orientation="vertical">
 
+        <!--<com.wang.avi.AVLoadingIndicatorView-->
+            <!--android:id="@+id/avloadingIndicatorView"-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="200dp"-->
+            <!--android:visibility="visible"-->
+            <!--app:indicator="BallPulse"-->
+            <!--app:indicator_color="#3498db"/>-->
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="@dimen/big_icon"
             android:layout_marginTop="@dimen/top_margin"
-            android:src="@mipmap/scanner_img"/>
+            android:src="@drawable/cart"/>
 
         <TextView
             android:id="@+id/orderIdTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="XXXXXXX"
-            android:layout_marginTop="@dimen/top_margin"
+            android:text="-"
+            android:layout_marginTop="@dimen/side_margin"
             android:textSize="@dimen/head_title"
             android:gravity="center_horizontal"
             android:textColor="@color/app_color"/>
@@ -38,10 +47,10 @@
             android:id="@+id/itemScannedTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/elem_margin"
-            android:text="YY"
+            android:layout_marginTop="@dimen/row_item_margin"
+            android:text="8"
             android:textSize="@dimen/head_title"
-            android:textColor="@color/app_green"
+            android:textColor="@color/app_color"
             android:gravity="center_horizontal"/>
         <TextView
             android:id="@+id/itemScannedTxtTv"
@@ -57,21 +66,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="@dimen/elem_margin"
-        android:layout_marginBottom="@dimen/top_margin"
+        android:layout_marginTop="@dimen/row_item_margin"
+        android:layout_marginBottom="@dimen/side_margin"
+        android:padding="@dimen/row_margin"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="@dimen/side_margin"
-        android:layout_marginRight="@dimen/side_margin">
+        android:gravity="center"
+        android:background="@drawable/rounded_bg"
+        android:layout_marginLeft="@dimen/top_margin"
+        android:layout_marginRight="@dimen/top_margin">
+
+        <ImageView
+            android:id="@+id/pendingIv"
+            android:layout_width="@dimen/mid_icon"
+            android:layout_height="@dimen/mid_icon"
+            android:layout_marginLeft="@dimen/row_margin"
+            android:layout_marginRight="@dimen/elem_margin"
+            android:src="@drawable/voucher"
+            android:gravity="center_vertical" />
 
         <TextView
             android:id="@+id/circleImgTv"
-            android:layout_width="@dimen/circle_icon"
-            android:layout_height="@dimen/circle_icon"
-            android:text="B"
-            android:textSize="@dimen/icon_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="6"
+            android:textSize="@dimen/head_title"
             android:textColor="@color/white"
-            android:gravity="center"
-            android:background="@drawable/circle"/>
+            android:gravity="center_vertical" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -83,16 +103,16 @@
                 android:id="@+id/custNameTv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Bobby Axelrod"
+                android:text="Orders"
                 android:textSize="@dimen/body_title"
-                android:textColor="@color/app_color"
+                android:textColor="@color/white"
                 android:layout_marginLeft="@dimen/elem_margin"/>
             <TextView
                 android:id="@+id/storeTv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAllCaps="true"
-                android:text="Pet Product Store, Gurgaon"
+                android:textColor="@color/white"
+                android:text="Pending in shop"
                 android:textSize="@dimen/body_caption"
                 android:layout_marginTop="@dimen/body_margin"
                 android:layout_marginLeft="@dimen/elem_margin"/>

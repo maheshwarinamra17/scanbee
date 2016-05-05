@@ -81,14 +81,17 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
     public void setUpUi(){
 
             idTv = (TextView)viewMain.findViewById(R.id.orderIdTv);
-            totalIitemSelectedTv = (TextView)viewMain.findViewById(R.id.itemScannedTxtTv);
+            totalIitemSelectedTv = (TextView)viewMain.findViewById(R.id.itemScannedTv);
             handlerNameTv = (TextView) viewMain.findViewById(R.id.custNameTv);
             storeName = (TextView) viewMain.findViewById(R.id.storeTv);
             circleImgTv = (TextView) viewMain.findViewById(R.id.circleImgTv);
             orderId = (TextView)viewMain.findViewById(R.id.orderId);
             itemScan = (TextView)viewMain.findViewById(R.id.itemScannedTxtTv);
+//        viewMain.findViewById(R.id.avloadingIndicatorView).setVisibility(View.VISIBLE);
 
-            continue_btn = (Button) viewMain.findViewById(R.id.continue_btn);
+
+
+        continue_btn = (Button) viewMain.findViewById(R.id.continue_btn);
             continue_btn.setEnabled(false);
             continue_btn.setBackgroundResource(R.drawable.button_gray_color);
             continue_btn.setText(R.string.scanning_data);
@@ -99,14 +102,14 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
             Typeface RobotoMed=Typeface.createFromAsset(getResources().getAssets(),getString(R.string.roboto_med));
             Typeface NotoSans=Typeface.createFromAsset(getResources().getAssets(),getString(R.string.noto_sans));
 
-            idTv.setTypeface(Roboto);
-            totalIitemSelectedTv.setTypeface(Roboto);
+            idTv.setTypeface(NotoSans);
+            totalIitemSelectedTv.setTypeface(NotoSans);
             continue_btn.setTypeface(Roboto);
-            circleImgTv.setTypeface(RobotoThin);
+            circleImgTv.setTypeface(RobotoMed);
             handlerNameTv.setTypeface(RobotoMed);
             orderId.setTypeface(NotoSans);
-            itemScan.setTypeface(NotoSans);
-            storeName.setTypeface(NotoSans);
+            itemScan.setTypeface(Roboto);
+            storeName.setTypeface(Roboto);
 
         System.out.println("orderId==========>>>>>>>> :"+readPref.getOrderId());
         }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
@@ -18,8 +19,183 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/activity_main_drawer" />
+        android:fitsSystemWindows="true">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff"
+            android:orientation="vertical">
+
+            <include layout="@layout/nav_header_main" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="@dimen/row_item_margin"
+                android:layout_marginTop="@dimen/side_margin"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/navrowIcon1"
+                    android:layout_width="@dimen/nav_icon_size"
+                    android:layout_height="@dimen/nav_icon_size"
+                    android:src="@drawable/shop"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/side_margin"
+                    android:textSize="@dimen/body_title"
+                    android:text="@string/shop"
+                    android:textColor="@color/app_color"
+                    android:id="@+id/navrowText1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="@dimen/row_item_margin"
+                android:layout_marginTop="@dimen/side_margin"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/navrowIcon2"
+                    android:layout_width="@dimen/nav_icon_size"
+                    android:layout_height="@dimen/nav_icon_size"
+                    android:src="@drawable/cash_register"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/side_margin"
+                    android:textSize="@dimen/body_title"
+                    android:textColor="@color/grey"
+                    android:text="@string/order"
+                    android:id="@+id/navrowText2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="@dimen/row_item_margin"
+                android:layout_marginTop="@dimen/side_margin"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/navrowIcon3"
+                    android:layout_width="@dimen/nav_icon_size"
+                    android:layout_height="@dimen/nav_icon_size"
+                    android:src="@drawable/customers"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/side_margin"
+                    android:textSize="@dimen/body_title"
+                                   android:text="@string/customer"
+                    android:id="@+id/navrowText3" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="@dimen/row_item_margin"
+                android:layout_marginTop="@dimen/side_margin"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/navrowIcon4"
+                    android:layout_width="@dimen/nav_icon_size"
+                    android:layout_height="@dimen/nav_icon_size"
+                    android:src="@drawable/inventory"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/side_margin"
+                    android:textSize="@dimen/body_title"
+                     android:text="@string/inventory"
+                    android:id="@+id/navrowText4" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="@dimen/row_item_margin"
+                android:layout_marginTop="@dimen/side_margin"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/navrowIcon5"
+                    android:layout_width="@dimen/nav_icon_size"
+                    android:layout_height="@dimen/nav_icon_size"
+                    android:src="@drawable/analytics"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/side_margin"
+                    android:textSize="@dimen/body_title"
+                    android:text="@string/analysis"
+                    android:id="@+id/navrowText5" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="@dimen/row_item_margin"
+                android:layout_marginTop="@dimen/side_margin"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/navrowIcon6"
+                    android:layout_width="@dimen/nav_icon_size"
+                    android:layout_height="@dimen/nav_icon_size"
+                    android:src="@drawable/help"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/side_margin"
+                    android:textSize="@dimen/body_title"
+                     android:text="@string/help"
+                    android:id="@+id/navrowText6" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="@dimen/row_item_margin"
+                android:layout_marginTop="@dimen/side_margin"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/navrowIcon7"
+                    android:layout_width="@dimen/nav_icon_size"
+                    android:layout_height="@dimen/nav_icon_size"
+                    android:src="@drawable/settings"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/side_margin"
+                    android:textSize="@dimen/body_title"
+                    android:text="@string/settings"
+                    android:id="@+id/navrowText7" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </android.support.design.widget.NavigationView>
+
+
 
 </android.support.v4.widget.DrawerLayout>

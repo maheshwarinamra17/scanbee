@@ -19,7 +19,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.scanbee.adapter.CartItemAdapter;
 import com.scanbee.model.CartItemModelClass;
@@ -122,23 +121,8 @@ public class CartItemFragment extends Fragment{
             @Override
             public void onClick(View view) {
 
-                try{
-                    JSONObject options = new JSONObject("{" +
-                            "description: 'Demoing Charges'," +
-                            "image: 'https://rzp-mobile.s3.amazonaws.com/images/rzp.png'," +
-                            "currency: 'INR'}"
-                    );
+                getFragmentManager().beginTransaction().replace(R.id.content_frame, new com.scanbee.fragment.PaymentGetWayFragment()).commit();
 
-                    options.put("amount", "500");
-                    options.put("name", "Razorpay Corp");
-                    options.put("prefill", new JSONObject("{email: 'sm@razorpay.com', contact: '9876543210'}"));
-
-                    co.open(activity, options);
-
-                } catch(Exception e){
-                    Toast.makeText(activity, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    e.printStackTrace();
-                }
             }
         });
     }
