@@ -21,6 +21,7 @@
 
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="big_icon">96dp</dimen>
+    <dimen name="vbig_icon">120dp</dimen>
     <dimen name="circle_icon">48dp</dimen>
     <dimen name="mid_icon">36dp</dimen>
     <dimen name="nav_icon_size">16dp</dimen>

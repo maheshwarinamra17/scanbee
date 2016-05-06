@@ -4,7 +4,8 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
+    <string name="scanbee">SCANBEE</string>
+    <string name="scanbeeMoto">Intellifying retail stores</string>
     <string name="scanning">Shop</string>
     <string name="cart_item">Cart</string>
     <string name="tool_bar_item_title1">delete image</string>
@@ -23,6 +24,9 @@
     <string name="logout_avatar">Avatar</string>
     <string name="please_wait">Please Wait..</string>
     <string name="Rs">\u20B9</string>
+    <string name="login">Login</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
 
     <string name="order_id">ORDER ID</string>
     <string name="items_scanned">ITEMS SCANNED</string>
@@ -36,10 +40,12 @@
     <string name="analysis">Analytics</string>
     <string name="settings">Settings</string>
     <string name="help">Ask Scanbee</string>
+    <string name="helphash">#AskScanbee</string>
 
     <string name="roboto_font">fonts/Roboto-Regular.ttf</string>
     <string name="roboto_thin">fonts/Roboto-Thin.ttf</string>
     <string name="roboto_med">fonts/Roboto-Medium.ttf</string>
+    <string name="roboto_light">fonts/Roboto-Light.ttf</string>
     <string name="noto_serif">fonts/NotoSerif-Regular.ttf</string>
     <string name="noto_sans">fonts/NotoSans-Regular.ttf</string>
 
