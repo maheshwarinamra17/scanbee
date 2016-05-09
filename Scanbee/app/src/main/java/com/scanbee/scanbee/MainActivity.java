@@ -20,7 +20,6 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.scanbee.fragment.GenerateOrderidFragment;
 
@@ -37,9 +36,9 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        mtoolbatTitle=(TextView)findViewById(R.id.toolbar_title);
-        assert mtoolbatTitle != null;
-        mtoolbatTitle.setText(R.string.scanning);
+//        mtoolbatTitle=(TextView)findViewById(R.id.toolbar_title);
+//        assert mtoolbatTitle != null;
+//        mtoolbatTitle.setText(R.string.scanning);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -76,23 +75,23 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.delete) {
-            Toast.makeText(MainActivity.this, "delete item", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        if (id==R.id.cart){
-            Toast.makeText(MainActivity.this, "delete item", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.delete) {
+//            Toast.makeText(MainActivity.this, "delete item", Toast.LENGTH_SHORT).show();
+//            return true;
+//        }
+//        if (id==R.id.cart){
+//            Toast.makeText(MainActivity.this, "delete item", Toast.LENGTH_SHORT).show();
+//            return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {

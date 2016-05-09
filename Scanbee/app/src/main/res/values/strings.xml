@@ -8,6 +8,8 @@
     <string name="scanbeeMoto">Intellifying retail stores</string>
     <string name="scanning">Shop</string>
     <string name="cart_item">Cart</string>
+    <string name="payment">Payment</string>
+    <string name="invoice">Invoice</string>
     <string name="tool_bar_item_title1">delete image</string>
     <string name="tool_bar_item_title">cart image</string>
     <string name="toolbar_del_img"></string>
@@ -32,6 +34,17 @@
     <string name="items_scanned">ITEMS SCANNED</string>
     <string name="scanning_data">Scanning Items...</string>
     <string name="continue_btn">CONTINUE</string>
+    <string name="amount_paid">Amount to be Paid</string>
+    <string name="credits">Store Credits</string>
+    <string name="cust_card">Card number</string>
+    <string name="cust_expiry">Expiry (MM/YYYY)</string>
+    <string name="cust_name">Customer Name</string>
+    <string name="cust_cvv">CVV</string>
+    <string name="cont_invoice">Continue to invoice</string>
+    <string name="print_invoice">Print invoice</string>
+    <string name="share_invoice">Share invoice</string>
+    <string name="load_prod">Fetching product data</string>
+
 
     <string name="shop">Shop</string>
     <string name="order">Orders</string>

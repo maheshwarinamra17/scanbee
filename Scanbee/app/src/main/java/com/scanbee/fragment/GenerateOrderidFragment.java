@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,9 +15,11 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.scanbee.dialog.NoConnectionDialog;
+import com.scanbee.scanbee.MainActivity;
 import com.scanbee.scanbee.R;
 import com.scanbee.servercommunication.NetworkAvailablity;
 import com.scanbee.servercommunication.WebRequest;
@@ -24,6 +27,7 @@ import com.scanbee.servercommunication.WebServicePostCall;
 import com.scanbee.servercommunication.WebServiceUrl;
 import com.scanbee.sharedpref.ReadPref;
 import com.scanbee.sharedpref.SavePref;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -55,6 +59,7 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
         savePref=new SavePref(getActivity());
         readPref=new ReadPref(getActivity());
         progressDialog = new ProgressDialog(getActivity());
+        setupActionBar();
         setUpUi();
         System.out.println("check for internetconnection===>>>"+NetworkAvailablity.chkStatus(activity));
 
@@ -78,6 +83,25 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
 //        super.onCreateOptionsMenu(menu, inflater);
 //    }
 
+    private void setupActionBar() {
+        ActionBar actionBar = ((MainActivity) getActivity())
+                .getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setHomeButtonEnabled(false);
+        actionBar.setDisplayShowHomeEnabled(false);
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setDisplayShowCustomEnabled(false);
+
+        Activity activity = getActivity();
+        if(activity != null){
+            Toolbar toolbar = (Toolbar)activity.findViewById(R.id.toolbar);
+            ImageView cancelButton = (ImageView) activity.findViewById(R.id.cancelorder);
+            cancelButton.setVisibility(View.VISIBLE);
+            TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+            mTitle.setText(R.string.scanning);
+        }
+    }
+
     public void setUpUi(){
 
             idTv = (TextView)viewMain.findViewById(R.id.orderIdTv);
@@ -90,8 +114,7 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
 //        viewMain.findViewById(R.id.avloadingIndicatorView).setVisibility(View.VISIBLE);
 
 
-
-        continue_btn = (Button) viewMain.findViewById(R.id.continue_btn);
+            continue_btn = (Button) viewMain.findViewById(R.id.continue_btn);
             continue_btn.setEnabled(false);
             continue_btn.setBackgroundResource(R.drawable.button_gray_color);
             continue_btn.setText(R.string.scanning_data);
@@ -135,7 +158,6 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
 
         @Override
         protected void onPreExecute() {
-
 //            progressDialog.setMessage("Loading...");
 //            //show dialog
 //            progressDialog.show();
@@ -161,12 +183,16 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
 
         @Override
         protected void onPostExecute(String result) {
-
+            AVLoadingIndicatorView loader = (AVLoadingIndicatorView) viewMain.findViewById(R.id.orderLoader);
+            ImageView shopIcon = (ImageView) viewMain.findViewById(R.id.shopIcon);
+            loader.setVisibility(View.GONE);
+            shopIcon.setVisibility(View.VISIBLE);
             parseJson(result);
 //            progressDialog.dismiss();
             new GetOrderIdAsynctask().execute();
 
             super.onPostExecute(result);
+            loader.setVisibility(View.GONE);
             //tvWeatherJson.setText(s);
             Log.i("json", result);
         }

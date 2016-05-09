@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent">
 
     <LinearLayout
@@ -11,18 +13,22 @@
         android:layout_marginRight="@dimen/side_margin"
         android:orientation="vertical">
 
-        <!--<com.wang.avi.AVLoadingIndicatorView-->
-            <!--android:id="@+id/avloadingIndicatorView"-->
-            <!--android:layout_width="100dp"-->
-            <!--android:layout_height="200dp"-->
-            <!--android:visibility="visible"-->
-            <!--app:indicator="BallPulse"-->
-            <!--app:indicator_color="#3498db"/>-->
+        <com.wang.avi.AVLoadingIndicatorView
+            android:id="@+id/orderLoader"
+            android:layout_width="@dimen/big_icon"
+            android:layout_height="@dimen/big_icon"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/top_margin"
+            android:visibility="visible"
+            app:indicator="BallGridPulse"
+            app:indicator_color="@color/app_green"/>
 
         <ImageView
+            android:id="@+id/shopIcon"
             android:layout_width="match_parent"
             android:layout_height="@dimen/big_icon"
             android:layout_marginTop="@dimen/top_margin"
+            android:visibility="gone"
             android:src="@drawable/cart"/>
 
         <TextView
@@ -54,9 +60,9 @@
             android:gravity="center_horizontal"/>
         <TextView
             android:id="@+id/itemScannedTxtTv"
+            android:text="@string/items_scanned"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/items_scanned"
             android:textColor="@color/grey"
             android:textSize="@dimen/body_title"
             android:gravity="center_horizontal"/>

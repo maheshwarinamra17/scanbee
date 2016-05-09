@@ -42,7 +42,7 @@
         android:layout_marginLeft="@dimen/top_margin"
         android:layout_marginRight="@dimen/top_margin"
         android:layout_marginTop="@dimen/top_margin"
-        android:layout_marginBottom="@dimen/elem_margin"
+        android:layout_marginBottom="@dimen/row_item_margin"
         app:met_textColorHint="@color/white"
         app:met_underlineColor="@color/gray_light"
         app:met_primaryColor="@color/app_color"

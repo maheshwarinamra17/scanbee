@@ -37,8 +37,8 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.ViewHo
             Typeface RobotoThin=Typeface.createFromAsset(mCtx.getResources().getAssets(),mCtx.getString(R.string.roboto_thin));
             Typeface RobotoMed=Typeface.createFromAsset(mCtx.getResources().getAssets(), mCtx.getString(R.string.roboto_med));
             Typeface NotoSans=Typeface.createFromAsset(mCtx.getResources().getAssets(),mCtx.getString(R.string.noto_sans));
-            circleTxt.setTypeface(RobotoThin);
-            mrp.setTypeface(Roboto);
+            circleTxt.setTypeface(Roboto);
+            mrp.setTypeface(NotoSans);
             title.setTypeface(RobotoMed);
             itemInfo.setTypeface(NotoSans);
 
