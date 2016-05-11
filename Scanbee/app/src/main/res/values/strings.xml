@@ -22,7 +22,7 @@
     <string name="computer">Computer</string>
     <string name="design">Design</string>
     <string name="no_internet_connection">No Internet Connection</string>
-    <string name="no_internet_connection_play">There is no network connection available. Please try later.</string>
+    <string name="no_internet_connection_play">There is no network connection available. Please try again.</string>
     <string name="logout_avatar">Avatar</string>
     <string name="please_wait">Please Wait..</string>
     <string name="Rs">\u20B9</string>
@@ -35,16 +35,22 @@
     <string name="scanning_data">Scanning Items...</string>
     <string name="continue_btn">CONTINUE</string>
     <string name="amount_paid">Amount to be Paid</string>
+    <string name="amount_paid_post">Amount Paid</string>
     <string name="credits">Store Credits</string>
     <string name="cust_card">Card number</string>
     <string name="cust_expiry">Expiry (MM/YYYY)</string>
     <string name="cust_name">Customer Name</string>
     <string name="cust_cvv">CVV</string>
     <string name="cont_invoice">Continue to invoice</string>
-    <string name="print_invoice">Print invoice</string>
+    <string name="print_invoice">SMS invoice</string>
     <string name="share_invoice">Share invoice</string>
+    <string name="ok">ok</string>
+    <string name="cancel">cancel</string>
+    <string name="save">save</string>
+    <string name="try_again">Try again</string>
+    <string name="cancel_order">Do you want to cancel current order ?</string>
     <string name="load_prod">Fetching product data</string>
-
+    <string name="rasp_ip">Enter Raspberry IP</string>
 
     <string name="shop">Shop</string>
     <string name="order">Orders</string>
@@ -61,5 +67,6 @@
     <string name="roboto_light">fonts/Roboto-Light.ttf</string>
     <string name="noto_serif">fonts/NotoSerif-Regular.ttf</string>
     <string name="noto_sans">fonts/NotoSans-Regular.ttf</string>
+
 
 </resources>

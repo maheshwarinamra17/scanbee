@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/ipAddressET"
+        android:hint="@string/rasp_ip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:cursorVisible="true"
+        android:inputType="text"
+        android:textSize="@dimen/body_caption"
+        android:layout_marginTop="@dimen/elem_margin"
+        android:layout_marginLeft="@dimen/top_margin"
+        android:layout_marginRight="@dimen/top_margin"
+        android:layout_marginBottom="@dimen/top_margin"
+        app:met_textColorHint="@color/app_color"
+        app:met_underlineColor="@color/gray_light"
+        app:met_primaryColor="@color/app_color"
+        app:met_textColor="@color/app_green"
+        app:met_floatingLabelTextColor="@color/gray_light"
+        app:met_typeface="fonts/NotoSans-Regular.ttf"
+        app:met_accentTypeface="fonts/NotoSans-Regular.ttf"
+        app:met_errorColor="@color/app_red"
+        app:met_floatingLabel="highlight"/>
+
+    <Button
+        android:id="@+id/saveBtn"
+        android:text="@string/save"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:textSize="@dimen/button_text"
+        android:background="@drawable/button_app_color"
+        android:layout_marginLeft="@dimen/side_margin"
+        android:layout_marginRight="@dimen/side_margin"
+        android:layout_marginBottom="@dimen/side_margin"
+        android:textColor="@color/white"/>
+</RelativeLayout>

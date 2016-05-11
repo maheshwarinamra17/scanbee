@@ -32,10 +32,7 @@ public class LoadingBar {
 		progDialog.setCancelable(false);
 			
 			TextView text = (TextView) progDialog.findViewById(R.id.msg);
-			//mProgressBar.getIndeterminateDrawable().setColorFilter(new LightingColorFilter(0xFF000000, 0xFFFFFF));
 			text.setText(msg);
-	//		text.setTypeface(Typeface.createFromAsset(context.getAssets(),
-	//				"eurof55.ttf"));
 			progDialog.show();
 			
 			return progDialog;

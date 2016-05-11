@@ -29,7 +29,7 @@
             android:id="@+id/amountPaidInTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/amount_paid"
+            android:text="@string/amount_paid_post"
             android:textAllCaps="true"
             android:textColor="@color/grey"
             android:textSize="@dimen/body_title"

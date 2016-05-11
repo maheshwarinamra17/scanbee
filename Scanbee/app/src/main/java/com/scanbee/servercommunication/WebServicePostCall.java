@@ -21,16 +21,7 @@ public class WebServicePostCall {
             url = new URL(targetURL);
             connection = (HttpURLConnection)url.openConnection();
             connection.setRequestMethod("POST");
-            /*connection.setRequestProperty("Content-Type",
-                    "application/x-www-form-urlencoded");
-*/
             connection.setRequestProperty("Content-Type","application/json");
-            connection.setRequestProperty("Host", "android.schoolportal.gr");
-
-           /* connection.setRequestProperty("Content-Length", "" +
-                    Integer.toString(urlParameters.getBytes().length));
-            connection.setRequestProperty("Content-Language", "en-US");
-*/
             connection.setUseCaches (false);
             connection.setDoInput(true);
             connection.setDoOutput(true);

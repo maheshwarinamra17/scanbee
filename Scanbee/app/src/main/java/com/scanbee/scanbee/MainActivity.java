@@ -17,15 +17,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.scanbee.fragment.GenerateOrderidFragment;
+import com.scanbee.fragment.PaymentGetWayFragment;
+import com.scanbee.fragment.SettingFragment;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
-    TextView mtoolbatTitle;
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener  {
+    DrawerLayout drawer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,15 +39,12 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-//        mtoolbatTitle=(TextView)findViewById(R.id.toolbar_title);
-//        assert mtoolbatTitle != null;
-//        mtoolbatTitle.setText(R.string.scanning);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.parseColor("#115292"));
         }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerUI();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         Typeface NotoSans=Typeface.createFromAsset(getResources().getAssets(),getString(R.string.noto_sans));
         Menu navMenu = navigationView.getMenu();
-
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -120,7 +119,6 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
     public void drawerUI(){
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         TextView nav_row1 = (TextView) drawer.findViewById(R.id.navrowText1);
         TextView nav_row2 = (TextView) drawer.findViewById(R.id.navrowText2);
         TextView nav_row3 = (TextView) drawer.findViewById(R.id.navrowText3);
@@ -128,6 +126,14 @@ public class MainActivity extends AppCompatActivity
         TextView nav_row5 = (TextView) drawer.findViewById(R.id.navrowText5);
         TextView nav_row6 = (TextView) drawer.findViewById(R.id.navrowText6);
         TextView nav_row7 = (TextView) drawer.findViewById(R.id.navrowText7);
+
+        nav_row1.setOnClickListener(this);
+        nav_row2.setOnClickListener(this);
+        nav_row3.setOnClickListener(this);
+        nav_row4.setOnClickListener(this);
+        nav_row5.setOnClickListener(this);
+        nav_row6.setOnClickListener(this);
+        nav_row7.setOnClickListener(this);
 
         TextView navHeaderText = (TextView) drawer.findViewById(R.id.storenametv);
         TextView nvHeaderCaption = (TextView) drawer.findViewById(R.id.userstoretv);
@@ -146,5 +152,53 @@ public class MainActivity extends AppCompatActivity
         navHeaderText.setTypeface(RobotoMed);
         nvHeaderCaption.setTypeface(NotoSans);
         drawer.closeDrawer(GravityCompat.START);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.navrowText1:
+                getFragmentManager().beginTransaction().replace(R.id.content_frame, new PaymentGetWayFragment()).commit();
+                if (drawer.isDrawerOpen(GravityCompat.START)) {
+                    drawer.closeDrawer(GravityCompat.START);
+                }
+                break;
+            case R.id.navrowText2:
+                getFragmentManager().beginTransaction().replace(R.id.content_frame, new PaymentGetWayFragment()).commit();
+                if (drawer.isDrawerOpen(GravityCompat.START)) {
+                    drawer.closeDrawer(GravityCompat.START);
+                }
+                break;
+            case R.id.navrowText3:
+                getFragmentManager().beginTransaction().replace(R.id.content_frame, new PaymentGetWayFragment()).commit();
+                if (drawer.isDrawerOpen(GravityCompat.START)) {
+                    drawer.closeDrawer(GravityCompat.START);
+                }
+                break;
+            case R.id.navrowText4:
+                getFragmentManager().beginTransaction().replace(R.id.content_frame, new PaymentGetWayFragment()).commit();
+                if (drawer.isDrawerOpen(GravityCompat.START)) {
+                    drawer.closeDrawer(GravityCompat.START);
+                }
+                break;
+            case R.id.navrowText5:
+                getFragmentManager().beginTransaction().replace(R.id.content_frame, new PaymentGetWayFragment()).commit();
+                if (drawer.isDrawerOpen(GravityCompat.START)) {
+                    drawer.closeDrawer(GravityCompat.START);
+                }
+                break;
+            case R.id.navrowText6:
+                getFragmentManager().beginTransaction().replace(R.id.content_frame, new PaymentGetWayFragment()).commit();
+                if (drawer.isDrawerOpen(GravityCompat.START)) {
+                    drawer.closeDrawer(GravityCompat.START);
+                }
+                break;
+            case R.id.navrowText7:
+                getFragmentManager().beginTransaction().replace(R.id.content_frame, new SettingFragment()).commit();
+                if (drawer.isDrawerOpen(GravityCompat.START)) {
+                    drawer.closeDrawer(GravityCompat.START);
+                }
+                break;
+        }
     }
 }

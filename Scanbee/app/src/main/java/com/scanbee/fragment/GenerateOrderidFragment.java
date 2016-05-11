@@ -18,7 +18,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.scanbee.dialog.NoConnectionDialog;
+import com.scanbee.dialog.DialogCustom;
 import com.scanbee.scanbee.MainActivity;
 import com.scanbee.scanbee.R;
 import com.scanbee.servercommunication.NetworkAvailablity;
@@ -61,12 +61,11 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
         progressDialog = new ProgressDialog(getActivity());
         setupActionBar();
         setUpUi();
-        System.out.println("check for internetconnection===>>>"+NetworkAvailablity.chkStatus(activity));
 
         if (NetworkAvailablity.chkStatus(getActivity())) {
             new FetchData().execute();
         } else {
-            new NoConnectionDialog(activity).show();
+            new DialogCustom(activity,getString(R.string.no_internet_connection_play),activity.getDrawable(R.drawable.router),getString(R.string.try_again)).show();
         }
 
         return viewMain;
@@ -91,12 +90,19 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
         actionBar.setDisplayShowHomeEnabled(false);
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayShowCustomEnabled(false);
-
-        Activity activity = getActivity();
+        final Activity activity = getActivity();
         if(activity != null){
             Toolbar toolbar = (Toolbar)activity.findViewById(R.id.toolbar);
             ImageView cancelButton = (ImageView) activity.findViewById(R.id.cancelorder);
             cancelButton.setVisibility(View.VISIBLE);
+            cancelButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    new DialogCustom(activity,getString(R.string.cancel_order),activity.getDrawable(R.drawable.cancel_order),getString(R.string.ok),getString(R.string.cancel)).show();
+                    return;
+
+                }
+            });
             TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
             mTitle.setText(R.string.scanning);
         }
@@ -141,7 +147,7 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
     @Override
     public void onClick(View view) {
         if(!NetworkAvailablity.chkStatus(activity)){
-            new NoConnectionDialog(activity).show();
+            new DialogCustom(activity,getString(R.string.no_internet_connection_play),activity.getDrawable(R.drawable.router),getString(R.string.try_again)).show();
             return;
         }
             Fragment fragment = null;
