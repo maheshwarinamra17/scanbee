@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.navrowText1:
-                getFragmentManager().beginTransaction().replace(R.id.content_frame, new PaymentGetWayFragment()).commit();
+                getFragmentManager().beginTransaction().replace(R.id.content_frame, new GenerateOrderidFragment()).commit();
                 if (drawer.isDrawerOpen(GravityCompat.START)) {
                     drawer.closeDrawer(GravityCompat.START);
                 }

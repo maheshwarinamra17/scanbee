@@ -20,7 +20,7 @@ public class WebServicePostCall {
             //Create connection
             url = new URL(targetURL);
             connection = (HttpURLConnection)url.openConnection();
-            connection.setRequestMethod("POST");
+//            connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type","application/json");
             connection.setUseCaches (false);
             connection.setDoInput(true);

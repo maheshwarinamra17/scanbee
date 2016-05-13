@@ -51,8 +51,6 @@ public class WebRequest {
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(15000);
             conn.setConnectTimeout(15000);
-            conn.setDoInput(true);
-            conn.setDoOutput(true);
 
             if (requestmethod == POST) {
                 conn.setRequestMethod("POST");
@@ -60,7 +58,11 @@ public class WebRequest {
                 conn.setRequestMethod("GET");
             }
 
+            conn.setDoInput(true);
+
+
             if (params != null) {
+                conn.setDoOutput(true);
                 OutputStream os = conn.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(
                         new OutputStreamWriter(os, "UTF-8"));

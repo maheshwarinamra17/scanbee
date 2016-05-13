@@ -2,6 +2,7 @@ package com.scanbee.dialog;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,40 +16,34 @@ public class ToastCustom {
 
 	View layout;
 	Toast toast;
+	TextView toastText;
 
 	@SuppressLint("InflateParams")
 	public ToastCustom(Context context) {
 		super();
 		this.context = context;
 		LayoutInflater inflater = LayoutInflater.from(context);
-
 		layout = inflater.inflate(R.layout.toast_dialog, null);
-
+		toastText = (TextView) layout.findViewById(R.id.toast_msg);
+		Typeface NotoSans=Typeface.createFromAsset(context.getResources().getAssets(),context.getString(R.string.noto_sans));
+		toastText.setTypeface(NotoSans);
 		// Toast...
 		toast = new Toast(context);
 		toast.setDuration(Toast.LENGTH_LONG);
 		toast.setView(layout);
-		// toast.show();
 	}
 
 	public void show(String msg) {
 		if (toast != null) {
-			// set a message
-			TextView text = (TextView) layout.findViewById(R.id.msg);
-			text.setText(Html.fromHtml(msg));
-		//	text.setTypeface(Typeface.createFromAsset(context.getAssets(),
-		//			"eurof55.ttf"));
+			toastText.setText(Html.fromHtml(msg));
 			toast.show();
 		}
 	}
 
 	public void showTwoLine(String msg) {
 		if (toast != null) {
-			// set a message
-			TextView text = (TextView) layout.findViewById(R.id.msg);
-			text.setText((msg));
-		//	text.setTypeface(Typeface.createFromAsset(context.getAssets(),
-		//			"eurof55.ttf"));
+			toastText = (TextView) layout.findViewById(R.id.toast_msg);
+			toastText.setText((msg));
 			toast.show();
 		}
 	}

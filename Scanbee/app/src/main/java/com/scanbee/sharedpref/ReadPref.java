@@ -28,5 +28,8 @@ public class ReadPref {
 		res = prefs.getString("ip_address", "");
 		return res;
 	}
-
+	public String getOrderType(){
+		res = prefs.getString("order_type", "");
+		return res;
+	}
 }

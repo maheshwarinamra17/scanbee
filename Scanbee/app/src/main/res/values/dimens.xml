@@ -19,7 +19,6 @@
     <dimen name="rectbox_radius">2dp</dimen>
     <dimen name="dialog_radius">5dp</dimen>
 
-
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="big_icon">96dp</dimen>
     <dimen name="midbig_icon">72dp</dimen>

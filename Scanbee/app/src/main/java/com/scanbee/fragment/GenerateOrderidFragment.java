@@ -9,7 +9,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -35,7 +34,6 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.net.HttpURLConnection;
-import java.util.ArrayList;
 
 /**
  * Created by kshitij on 4/23/2016.
@@ -49,6 +47,7 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
     TextView idTv, totalIitemSelectedTv, handlerNameTv, storeName, circleImgTv,orderId,itemScan;
     Button continue_btn;
     Activity activity;
+    String raspberryData;
     Menu menu;
 
     @Override
@@ -70,17 +69,6 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
 
         return viewMain;
     }
-//    @Override
-//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//        inflater.inflate(R.menu.main,menu);
-//        // menu.setGroupVisible(R.id.group2,true);
-//
-//        if (menu != null) {
-//
-//            menu.findItem(R.id.delete).setVisible(true);
-//        }
-//        super.onCreateOptionsMenu(menu, inflater);
-//    }
 
     private void setupActionBar() {
         ActionBar actionBar = ((MainActivity) getActivity())
@@ -117,9 +105,6 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
             circleImgTv = (TextView) viewMain.findViewById(R.id.circleImgTv);
             orderId = (TextView)viewMain.findViewById(R.id.orderId);
             itemScan = (TextView)viewMain.findViewById(R.id.itemScannedTxtTv);
-//        viewMain.findViewById(R.id.avloadingIndicatorView).setVisibility(View.VISIBLE);
-
-
             continue_btn = (Button) viewMain.findViewById(R.id.continue_btn);
             continue_btn.setEnabled(false);
             continue_btn.setBackgroundResource(R.drawable.button_gray_color);
@@ -140,7 +125,6 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
             itemScan.setTypeface(Roboto);
             storeName.setTypeface(Roboto);
 
-        System.out.println("orderId==========>>>>>>>> :"+readPref.getOrderId());
         }
 
 
@@ -164,9 +148,6 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
 
         @Override
         protected void onPreExecute() {
-//            progressDialog.setMessage("Loading...");
-//            //show dialog
-//            progressDialog.show();
             super.onPreExecute();
         }
 
@@ -180,56 +161,79 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
             // Will contain the raw JSON response as a string.
             String forecastJsonStr = null;
             WebRequest webRequest= new WebRequest();
+//          forecastJsonStr=webRequest.makeWebServiceCall(WebServiceUrl.BASE_URL+ WebServiceUrl.GENERATE_DUMMY_ORDER,webRequest.GET);
 
-            forecastJsonStr=webRequest.makeWebServiceCall(WebServiceUrl.BASE_URL+ WebServiceUrl.GENERATE_DUMMY_ORDER,webRequest.GET);
-            System.out.println("response===>>>>"+forecastJsonStr);
+            readPref = new ReadPref(getActivity());
+            forecastJsonStr=webRequest.makeWebServiceCall("http://"+readPref.getIpAddress()+ WebServiceUrl.GET_RASPBERRY_DATA,webRequest.GET);
             return forecastJsonStr;
 
         }
 
         @Override
         protected void onPostExecute(String result) {
-            AVLoadingIndicatorView loader = (AVLoadingIndicatorView) viewMain.findViewById(R.id.orderLoader);
-            ImageView shopIcon = (ImageView) viewMain.findViewById(R.id.shopIcon);
-            loader.setVisibility(View.GONE);
-            shopIcon.setVisibility(View.VISIBLE);
-            parseJson(result);
-//            progressDialog.dismiss();
-            new GetOrderIdAsynctask().execute();
-
-            super.onPostExecute(result);
-            loader.setVisibility(View.GONE);
-            //tvWeatherJson.setText(s);
-            Log.i("json", result);
+            if(isAdded()) {
+                AVLoadingIndicatorView loader = (AVLoadingIndicatorView) viewMain.findViewById(R.id.orderLoader);
+                ImageView shopIcon = (ImageView) viewMain.findViewById(R.id.shopIcon);
+                loader.setVisibility(View.GONE);
+                shopIcon.setVisibility(View.VISIBLE);
+                if (result.length() == 0) {
+                    new DialogCustom(activity, getString(R.string.no_rasp_hub), activity.getDrawable(R.drawable.raspberry), getString(R.string.ok)).show();
+                }
+//              parseJson(result);
+                raspberryData = result;
+                new GetOrderIdAsynctask().execute();
+                super.onPostExecute(result);
+                loader.setVisibility(View.GONE);
+            }
         }
     }
-    public void parseJson(String json) {
+//    public void parseJson(String json) {
+//
+//        JSONObject mainObj = null;
+//        try {
+//            mainObj = new JSONObject(json);
+//
+//           JSONObject orderDataObj= mainObj.optJSONObject("order_data");
+//            String timeStamp= orderDataObj.optString("timestamp","2016-04-12 23:09:11");
+//            System.out.println(timeStamp);
+//            JSONArray barcodeDataArray=orderDataObj.optJSONArray("barcode_data");
+//            for (int i=0;i<barcodeDataArray.length();i++){
+//                ArrayList<Integer> idList=new ArrayList<Integer>();
+//                idList.add(i);
+//            }
+//            JSONArray quantArray=orderDataObj.optJSONArray("quant_array");
+//            for (int i=0;i<barcodeDataArray.length();i++){
+//                ArrayList<Integer> quantList=new ArrayList<Integer>();
+//                quantList.add(i);
+//            }
+//                    int machineId=orderDataObj.optInt("machine_id");
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//    }
+////    public void parseRaspberryJSON(String json) {
+////
+////        JSONObject mainObj = null;
+////        try {
+////            mainObj = new JSONObject(json);
+////            String timeStamp= mainObj.optString("timestamp","2016-04-12 23:09:11");
+////            System.out.println(timeStamp);
+////            JSONArray barcodeDataArray=mainObj.optJSONArray("barcode_data");
+////            for (int i=0;i<barcodeDataArray.length();i++){
+////                ArrayList<Integer> idList=new ArrayList<Integer>();
+////                idList.add(i);
+////            }
+////            JSONArray quantArray=mainObj.optJSONArray("quant_array");
+////            for (int i=0;i<barcodeDataArray.length();i++){
+////                ArrayList<Integer> quantList=new ArrayList<Integer>();
+////                quantList.add(i);
+////            }
+////            int machineId=mainObj.optInt("machine_id");
+////        } catch (JSONException e) {
+////            e.printStackTrace();
+////        }
+////    }
 
-        JSONObject mainObj = null;
-        try {
-            mainObj = new JSONObject(json);
-            String massage=mainObj.optString("message");
-            System.out.println(massage);
-
-
-               JSONObject orderDataObj= mainObj.optJSONObject("order_data");
-                String timeStamp= orderDataObj.optString("timestamp","2016-04-12 23:09:11");
-                System.out.println(timeStamp);
-                JSONArray barcodeDataArray=orderDataObj.optJSONArray("barcode_data");
-                for (int i=0;i<barcodeDataArray.length();i++){
-                    ArrayList<Integer> idList=new ArrayList<Integer>();
-                    idList.add(i);
-                }
-                JSONArray quantArray=orderDataObj.optJSONArray("quant_array");
-                for (int i=0;i<barcodeDataArray.length();i++){
-                    ArrayList<Integer> quantList=new ArrayList<Integer>();
-                    quantList.add(i);
-                }
-                        int machineId=orderDataObj.optInt("machine_id");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-}
     private String createUserDataJson() {
 
         JSONObject obj = new JSONObject();
@@ -250,46 +254,44 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
             obj.put("quant_array",quantArray);
             obj.put("machine_id","21");
 
-            System.out.println("json object is----------   " + obj);
-            //return obj.toString();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return obj.toString();
     }
+
     private class GetOrderIdAsynctask extends AsyncTask<Void, Void, String> {
-        ProgressDialog progressDialog;
 
         @Override
         protected void onPreExecute() {
-//            progressDialog = new ProgressDialog(getActivity());
-//            progressDialog.setMessage("postRequest...");
-//            //show dialog
-//            progressDialog.show();
             super.onPreExecute();
         }
 
         @Override
         protected String doInBackground(Void... params) {
-              String param=createUserDataJson();
+          String param;
+
+            if(readPref.getOrderType().equals("1")){
+                param = raspberryData;
+            }else{
+                param = createUserDataJson();
+            }
 
             WebServicePostCall webServicePostCal=new WebServicePostCall();
-            String response=  webServicePostCal.excutePost(WebServiceUrl.BASE_URL+WebServiceUrl.GENERATE_ORDER_ID,param);
-            System.out.println("PostData responce===>>>>"+response);
+            String response =  webServicePostCal.excutePost(WebServiceUrl.BASE_URL+WebServiceUrl.GENERATE_ORDER_ID, param);
             return response ;
 
         }
 
         @Override
         protected void onPostExecute(String result) {
-            System.out.println("PostData responce===>>>>"+result);
-            parseJson1(result);
-            super.onPostExecute(result);
-            //tvWeatherJson.setText(s);
-            Log.i("json", result);
+            if(isAdded()) {
+                parseJson(result);
+                super.onPostExecute(result);
+            }
         }
     }
-      public void parseJson1(String result){
+      public void parseJson(String result){
           try {
               JSONObject newObj=new JSONObject(result);
               int status=newObj.optInt("status");
@@ -301,7 +303,9 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
               String message=newObj.optString("Success");
               int order_id=newObj.optInt("order_id");
               savePref.saveOrderId(order_id);
-              idTv.setText("SBO"+String.valueOf(order_id));
+              if(order_id!=0){
+                idTv.setText("SBO"+String.valueOf(order_id));
+              }
           } catch (JSONException e) {
               e.printStackTrace();
           }

@@ -22,8 +22,13 @@ public class SavePref {
     }
     public void saveIpAddress(String ipAddress){
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("ip_address",ipAddress);
+        editor.putString("ip_address", ipAddress);
         editor.commit();
     }
-
+    // Dummy - 2, live - 1
+    public void saveOrderType(String ordertype){
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("order_type", ordertype);
+        editor.commit();
+    }
 }

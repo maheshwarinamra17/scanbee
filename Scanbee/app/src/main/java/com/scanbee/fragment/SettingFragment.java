@@ -12,9 +12,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.rengwuxian.materialedittext.MaterialEditText;
+import com.scanbee.dialog.ToastCustom;
 import com.scanbee.scanbee.MainActivity;
 import com.scanbee.scanbee.R;
 import com.scanbee.sharedpref.ReadPref;
@@ -26,7 +26,7 @@ import com.scanbee.sharedpref.SavePref;
 public class SettingFragment extends Fragment {
     View viewMain;
     Button saveBtn;
-    MaterialEditText ipAddressET;
+    MaterialEditText ipAddressET,orderType;
     SavePref savePref;
     ReadPref readPref;
 
@@ -42,17 +42,27 @@ public class SettingFragment extends Fragment {
         savePref = new SavePref(getActivity());
         readPref = new ReadPref(getActivity());
         ipAddressET = (MaterialEditText) viewMain.findViewById(R.id.ipAddressET);
+        orderType = (MaterialEditText) viewMain.findViewById(R.id.order_type);
         ipAddressET.setText(readPref.getIpAddress());
+        orderType.setText(readPref.getOrderType());
         saveBtn = (Button)viewMain.findViewById(R.id.saveBtn);
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ToastCustom customToast = new ToastCustom(getActivity());
                 if (ipAddressET.getText().toString().trim().isEmpty()) {
-                    Toast.makeText(getActivity(), "Please fill IP address", Toast.LENGTH_LONG).show();
+                    customToast.show("Please fill IP address.");
                 } else {
                     savePref.saveIpAddress(ipAddressET.getText().toString().trim());
                     System.out.println(readPref.getIpAddress());
-                    Toast.makeText(getActivity(), "Succussfully saved.", Toast.LENGTH_LONG).show();
+                    customToast.show("Successfully saved.");
+                }
+
+                if (orderType.getText().toString().trim().isEmpty()) {
+                    customToast.show("Please fill Order Type");
+                } else {
+                    savePref.saveOrderType(orderType.getText().toString().trim());
+                    customToast.show("Successfully saved.");
                 }
             }
         });
