@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.scanbee.fragment.GenerateOrderidFragment;
@@ -127,13 +128,20 @@ public class MainActivity extends AppCompatActivity
         TextView nav_row6 = (TextView) drawer.findViewById(R.id.navrowText6);
         TextView nav_row7 = (TextView) drawer.findViewById(R.id.navrowText7);
 
-        nav_row1.setOnClickListener(this);
-        nav_row2.setOnClickListener(this);
-        nav_row3.setOnClickListener(this);
-        nav_row4.setOnClickListener(this);
-        nav_row5.setOnClickListener(this);
-        nav_row6.setOnClickListener(this);
-        nav_row7.setOnClickListener(this);
+        LinearLayout linearLayout1 = (LinearLayout) drawer.findViewById(R.id.shopLinearLayout);
+        LinearLayout linearLayout2 = (LinearLayout) drawer.findViewById(R.id.orderLinearLayout);
+        LinearLayout linearLayout3 = (LinearLayout) drawer.findViewById(R.id.custLinearLayout);
+        LinearLayout linearLayout4 = (LinearLayout) drawer.findViewById(R.id.iventryLinearLayout);
+        LinearLayout linearLayout5 = (LinearLayout) drawer.findViewById(R.id.analyticsLinearLayout);
+        LinearLayout linearLayout6 = (LinearLayout) drawer.findViewById(R.id.askScanBeeLinearLayout);
+        LinearLayout linearLayout7= (LinearLayout) drawer.findViewById(R.id.settingLinearLayout);
+        linearLayout1.setOnClickListener(this);
+        linearLayout2.setOnClickListener(this);
+        linearLayout3.setOnClickListener(this);
+        linearLayout4.setOnClickListener(this);
+        linearLayout5.setOnClickListener(this);
+        linearLayout6.setOnClickListener(this);
+        linearLayout7.setOnClickListener(this);
 
         TextView navHeaderText = (TextView) drawer.findViewById(R.id.storenametv);
         TextView nvHeaderCaption = (TextView) drawer.findViewById(R.id.userstoretv);
@@ -157,44 +165,44 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.navrowText1:
-                getFragmentManager().beginTransaction().replace(R.id.content_frame, new GenerateOrderidFragment()).commit();
+            case R.id.shopLinearLayout:
+                getFragmentManager().beginTransaction().replace(R.id.content_frame,new PaymentGetWayFragment()).commit();
                 if (drawer.isDrawerOpen(GravityCompat.START)) {
                     drawer.closeDrawer(GravityCompat.START);
                 }
                 break;
-            case R.id.navrowText2:
-                getFragmentManager().beginTransaction().replace(R.id.content_frame, new PaymentGetWayFragment()).commit();
+            case R.id.orderLinearLayout:
+                getFragmentManager().beginTransaction().replace(R.id.content_frame,new PaymentGetWayFragment()).commit();
                 if (drawer.isDrawerOpen(GravityCompat.START)) {
                     drawer.closeDrawer(GravityCompat.START);
                 }
                 break;
-            case R.id.navrowText3:
-                getFragmentManager().beginTransaction().replace(R.id.content_frame, new PaymentGetWayFragment()).commit();
+            case R.id.custLinearLayout:
+                getFragmentManager().beginTransaction().replace(R.id.content_frame,new PaymentGetWayFragment()).commit();
                 if (drawer.isDrawerOpen(GravityCompat.START)) {
                     drawer.closeDrawer(GravityCompat.START);
                 }
                 break;
-            case R.id.navrowText4:
-                getFragmentManager().beginTransaction().replace(R.id.content_frame, new PaymentGetWayFragment()).commit();
+            case R.id.iventryLinearLayout:
+                getFragmentManager().beginTransaction().replace(R.id.content_frame,new PaymentGetWayFragment()).commit();
                 if (drawer.isDrawerOpen(GravityCompat.START)) {
                     drawer.closeDrawer(GravityCompat.START);
                 }
                 break;
-            case R.id.navrowText5:
-                getFragmentManager().beginTransaction().replace(R.id.content_frame, new PaymentGetWayFragment()).commit();
+            case R.id.analyticsLinearLayout:
+                getFragmentManager().beginTransaction().replace(R.id.content_frame,new PaymentGetWayFragment()).commit();
                 if (drawer.isDrawerOpen(GravityCompat.START)) {
                     drawer.closeDrawer(GravityCompat.START);
                 }
                 break;
-            case R.id.navrowText6:
-                getFragmentManager().beginTransaction().replace(R.id.content_frame, new PaymentGetWayFragment()).commit();
+            case R.id.askScanBeeLinearLayout:
+                getFragmentManager().beginTransaction().replace(R.id.content_frame,new PaymentGetWayFragment()).commit();
                 if (drawer.isDrawerOpen(GravityCompat.START)) {
                     drawer.closeDrawer(GravityCompat.START);
                 }
                 break;
-            case R.id.navrowText7:
-                getFragmentManager().beginTransaction().replace(R.id.content_frame, new SettingFragment()).commit();
+            case R.id.settingLinearLayout:
+                getFragmentManager().beginTransaction().replace(R.id.content_frame,new SettingFragment()).commit();
                 if (drawer.isDrawerOpen(GravityCompat.START)) {
                     drawer.closeDrawer(GravityCompat.START);
                 }

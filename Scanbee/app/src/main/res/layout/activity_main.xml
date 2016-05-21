@@ -31,6 +31,8 @@
             <include layout="@layout/nav_header_main" />
 
             <LinearLayout
+                android:id="@+id/shopLinearLayout"
+                android:background="@android:drawable/list_selector_background"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
@@ -55,6 +57,8 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/orderLinearLayout"
+                android:background="@android:drawable/list_selector_background"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
@@ -79,6 +83,8 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/custLinearLayout"
+                android:background="@android:drawable/list_selector_background"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
@@ -102,6 +108,8 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/iventryLinearLayout"
+                android:background="@android:drawable/list_selector_background"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
@@ -124,6 +132,8 @@
                     android:id="@+id/navrowText4" />
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/analyticsLinearLayout"
+                android:background="@android:drawable/list_selector_background"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
@@ -147,6 +157,8 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/askScanBeeLinearLayout"
+                android:background="@android:drawable/list_selector_background"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
@@ -170,6 +182,8 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/settingLinearLayout"
+                android:background="@android:drawable/list_selector_background"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
@@ -192,11 +206,6 @@
                     android:text="@string/settings"
                     android:id="@+id/navrowText7" />
             </LinearLayout>
-
-
         </LinearLayout>
     </android.support.design.widget.NavigationView>
-
-
-
 </android.support.v4.widget.DrawerLayout>

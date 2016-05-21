@@ -10,5 +10,6 @@ public class WebServiceUrl {
     public static final String GENERATE_DUMMY_ORDER = "generate_dummy_order";
     public static final String GENERATE_ORDER_ID = "generate_order_id";
     public static final String GET_ORDER_DATA = "get_order_data";
+    public static final String GET_USER_LOGIN = "user_login";
 
 }
