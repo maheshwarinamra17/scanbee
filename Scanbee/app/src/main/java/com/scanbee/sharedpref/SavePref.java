@@ -31,4 +31,11 @@ public class SavePref {
         editor.putString("order_type", ordertype);
         editor.commit();
     }
+
+    public void saveOrderTimeStamp(String timestamp){
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("timestamp", timestamp);
+        editor.commit();
+    }
 }
+

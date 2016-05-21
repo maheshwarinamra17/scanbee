@@ -54,9 +54,9 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.ViewHo
     public void onBindViewHolder(CartItemAdapter.ViewHolder holder, int position) {
          CartItemModelClass modelClass=cartItemDataList.get(position);
         holder.title.setText(modelClass.getTitle());
-        holder.mrp.setText(mCtx.getString(R.string.Rs)+String.valueOf(modelClass.getMrp()));
+        holder.mrp.setText(mCtx.getString(R.string.Rs)+String.valueOf(modelClass.getMrp() * modelClass.getQuantity()));
         holder.circleTxt.setText(String.valueOf(modelClass.getTitle().charAt(0)));
-        String itemInfoText = "2" + " x "+ mCtx.getString(R.string.Rs) + modelClass.getMrp()+ ", "+
+        String itemInfoText = String.valueOf(modelClass.getQuantity()) + " x "+ mCtx.getString(R.string.Rs) + modelClass.getMrp()+ ", "+
             modelClass.getContent()+ " " + modelClass.getContentItem();
         holder.itemInfo.setText(itemInfoText);
 

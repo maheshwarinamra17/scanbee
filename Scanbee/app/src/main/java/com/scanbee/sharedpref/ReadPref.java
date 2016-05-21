@@ -32,4 +32,9 @@ public class ReadPref {
 		res = prefs.getString("order_type", "");
 		return res;
 	}
+	public String getOrderTimeStamp(){
+		res = prefs.getString("timestamp", "");
+		return res;
+	}
+
 }

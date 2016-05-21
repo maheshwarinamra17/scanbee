@@ -53,11 +53,10 @@ public class CartItemFragment extends Fragment{
     Button chargRsBtn;
     ArrayList<CartItemModelClass> cartItemList;
     CartItemAdapter cartItemAdapter;
-    int amount_charge;
-    int cart_value;
-    int discount;
-    int tax;
-    final String public_key = "rzp_test_1DP5mmOlF5G5ag";
+    Double amount_charge;
+    Double cart_value;
+    Double discount;
+    Double tax;
 
     public CartItemFragment() {
     }
@@ -114,7 +113,6 @@ public class CartItemFragment extends Fragment{
     }
     public void setUpUi(){
         final CheckoutFragment co = new CheckoutFragment();
-        co.setPublicKey(public_key);
         cartItemList=new ArrayList<>();
         discountTv=(TextView)viewMain.findViewById(R.id.discountTv);
         taxTv=(TextView)viewMain.findViewById(R.id.taxTv);
@@ -192,10 +190,10 @@ public class CartItemFragment extends Fragment{
                 String message=parentObj.optString("Success");
                 JSONObject orderDataObj=parentObj.optJSONObject("order_data");
                 JSONObject cartData=orderDataObj.optJSONObject("cart_data");
-                 amount_charge=cartData.optInt("amount_charge");
-                 cart_value=cartData.optInt("cart_value");
-                 discount=cartData.optInt("discount");
-                 tax=cartData.optInt("tax");
+                 amount_charge=cartData.optDouble("amount_charge");
+                 cart_value=cartData.optDouble("cart_value");
+                 discount=cartData.optDouble("discount");
+                 tax=cartData.optDouble("tax");
                 JSONArray prodDataArray=orderDataObj.optJSONArray("prod_data");
 
                 for (int i=0;i<prodDataArray.length();i++){
@@ -208,11 +206,13 @@ public class CartItemFragment extends Fragment{
                     String cat_name=prodDataObj.optString("cat_name");
                     int cat_id=prodDataObj.optInt("cat_id");
                     String item_id=prodDataObj.optString("item_id");
-                    int mrp=prodDataObj.optInt("mrp");
-                    int cp=prodDataObj.optInt("cp");
+                    Double mrp=prodDataObj.optDouble("mrp");
+                    Double cp=prodDataObj.optDouble("cp");
                     String created_at=prodDataObj.optString("created_at");
                     String updated_at=prodDataObj.optString("updated_at");
-                    CartItemModelClass cartItemModelClass = new CartItemModelClass(id,brand,title,content,content_unit,cat_name,cat_id,item_id,mrp,cp,created_at,updated_at);
+                    int quantity=prodDataObj.optInt("quantity");
+
+                    CartItemModelClass cartItemModelClass = new CartItemModelClass(id,brand,title,content,content_unit,cat_name,cat_id,item_id,mrp,cp,created_at,updated_at,quantity);
                     cartItemList.add(cartItemModelClass);
                 }
             }

@@ -12,12 +12,14 @@ public class CartItemModelClass {
     String catName;
     int carId;
     String itemId;
-    float mrp;
-    float cp;
+    Double mrp;
+    Double cp;
     String createdAt;
     String updatedAt;
+    int quantity;
 
-    public CartItemModelClass(int id, String brand, String title, float content, String contentItem, String catName, int carId, String itemId, float mrp, float cp, String createdAt, String updatedAt) {
+
+    public CartItemModelClass(int id, String brand, String title, float content, String contentItem, String catName, int carId, String itemId, Double mrp, Double cp, String createdAt, String updatedAt,int quantity) {
         this.id = id;
         this.brand = brand;
         this.title = title;
@@ -30,6 +32,7 @@ public class CartItemModelClass {
         this.cp = cp;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.quantity = quantity;
     }
 
     public int getId() {
@@ -64,11 +67,11 @@ public class CartItemModelClass {
         return itemId;
     }
 
-    public float getMrp() {
+    public Double getMrp() {
         return mrp;
     }
 
-    public float getCp() {
+    public Double getCp() {
         return cp;
     }
 
@@ -78,5 +81,8 @@ public class CartItemModelClass {
 
     public String getUpdatedAt() {
         return updatedAt;
+    }
+    public int getQuantity() {
+        return quantity;
     }
 }

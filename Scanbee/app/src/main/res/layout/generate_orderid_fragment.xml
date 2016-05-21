@@ -21,7 +21,7 @@
             android:layout_marginTop="@dimen/top_margin"
             android:visibility="visible"
             app:indicator="BallGridPulse"
-            app:indicator_color="@color/app_color"/>
+            app:indicator_color="@color/app_green"/>
 
         <ImageView
             android:id="@+id/shopIcon"
@@ -54,7 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/row_item_margin"
-            android:text="8"
+            android:text="-"
             android:textSize="@dimen/head_title"
             android:textColor="@color/app_color"
             android:gravity="center_horizontal"/>

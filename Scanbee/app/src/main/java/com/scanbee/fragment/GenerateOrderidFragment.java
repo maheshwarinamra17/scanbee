@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -34,6 +33,7 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.net.HttpURLConnection;
+import java.util.HashMap;
 
 /**
  * Created by kshitij on 4/23/2016.
@@ -48,7 +48,8 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
     Button continue_btn;
     Activity activity;
     String raspberryData;
-    Menu menu;
+    AVLoadingIndicatorView loader;
+    ImageView shopIcon;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -162,9 +163,12 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
             String forecastJsonStr = null;
             WebRequest webRequest= new WebRequest();
 //          forecastJsonStr=webRequest.makeWebServiceCall(WebServiceUrl.BASE_URL+ WebServiceUrl.GENERATE_DUMMY_ORDER,webRequest.GET);
-
             readPref = new ReadPref(getActivity());
-            forecastJsonStr=webRequest.makeWebServiceCall("http://"+readPref.getIpAddress()+ WebServiceUrl.GET_RASPBERRY_DATA,webRequest.GET);
+            if(readPref.getOrderType().equals("1")){
+                forecastJsonStr=webRequest.makeWebServiceCall("http://"+readPref.getIpAddress()+ WebServiceUrl.GET_RASPBERRY_DATA,webRequest.GET);
+            }else{
+                forecastJsonStr=webRequest.makeWebServiceCall(WebServiceUrl.BASE_URL + WebServiceUrl.GENERATE_DUMMY_ORDER ,webRequest.GET);
+            }
             return forecastJsonStr;
 
         }
@@ -172,93 +176,67 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
         @Override
         protected void onPostExecute(String result) {
             if(isAdded()) {
-                AVLoadingIndicatorView loader = (AVLoadingIndicatorView) viewMain.findViewById(R.id.orderLoader);
-                ImageView shopIcon = (ImageView) viewMain.findViewById(R.id.shopIcon);
-                loader.setVisibility(View.GONE);
-                shopIcon.setVisibility(View.VISIBLE);
+                loader = (AVLoadingIndicatorView) viewMain.findViewById(R.id.orderLoader);
+                shopIcon = (ImageView) viewMain.findViewById(R.id.shopIcon);
                 if (result.length() == 0) {
                     new DialogCustom(activity, getString(R.string.no_rasp_hub), activity.getDrawable(R.drawable.raspberry), getString(R.string.ok)).show();
+                }else {
+                    raspberryData = RaspToOrderIDData(result);
+                    if(raspberryData.equals(getString(R.string.duplicacy))){
+                        new DialogCustom(activity, getString(R.string.dup_order), activity.getDrawable(R.drawable.fishy), getString(R.string.ok),getString(R.string.try_again)).show();
+                        return;
+                    }else {
+                        new GetOrderIdAsynctask().execute();
+                        super.onPostExecute(result);
+                    }
                 }
-//              parseJson(result);
-                raspberryData = result;
-                new GetOrderIdAsynctask().execute();
-                super.onPostExecute(result);
-                loader.setVisibility(View.GONE);
             }
         }
     }
-//    public void parseJson(String json) {
-//
-//        JSONObject mainObj = null;
-//        try {
-//            mainObj = new JSONObject(json);
-//
-//           JSONObject orderDataObj= mainObj.optJSONObject("order_data");
-//            String timeStamp= orderDataObj.optString("timestamp","2016-04-12 23:09:11");
-//            System.out.println(timeStamp);
-//            JSONArray barcodeDataArray=orderDataObj.optJSONArray("barcode_data");
-//            for (int i=0;i<barcodeDataArray.length();i++){
-//                ArrayList<Integer> idList=new ArrayList<Integer>();
-//                idList.add(i);
-//            }
-//            JSONArray quantArray=orderDataObj.optJSONArray("quant_array");
-//            for (int i=0;i<barcodeDataArray.length();i++){
-//                ArrayList<Integer> quantList=new ArrayList<Integer>();
-//                quantList.add(i);
-//            }
-//                    int machineId=orderDataObj.optInt("machine_id");
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//    }
-////    public void parseRaspberryJSON(String json) {
-////
-////        JSONObject mainObj = null;
-////        try {
-////            mainObj = new JSONObject(json);
-////            String timeStamp= mainObj.optString("timestamp","2016-04-12 23:09:11");
-////            System.out.println(timeStamp);
-////            JSONArray barcodeDataArray=mainObj.optJSONArray("barcode_data");
-////            for (int i=0;i<barcodeDataArray.length();i++){
-////                ArrayList<Integer> idList=new ArrayList<Integer>();
-////                idList.add(i);
-////            }
-////            JSONArray quantArray=mainObj.optJSONArray("quant_array");
-////            for (int i=0;i<barcodeDataArray.length();i++){
-////                ArrayList<Integer> quantList=new ArrayList<Integer>();
-////                quantList.add(i);
-////            }
-////            int machineId=mainObj.optInt("machine_id");
-////        } catch (JSONException e) {
-////            e.printStackTrace();
-////        }
-////    }
 
-    private String createUserDataJson() {
+    public String RaspToOrderIDData(String json) {
 
-        JSONObject obj = new JSONObject();
-        JSONArray barcodeArray=new JSONArray();
-        JSONArray quantArray=new JSONArray();
+        JSONObject raspData = null;
+        JSONObject newData = new JSONObject();
+        readPref = new ReadPref(getActivity());
+        savePref = new SavePref(getActivity());
         try {
-            obj.put("timestamp","2016-04-12 23:09:11");
-            barcodeArray.put("13095949");
-            barcodeArray.put("57840055");
-            barcodeArray.put("91749284");
-            barcodeArray.put("84865601");
-            obj.put("barcode_data", barcodeArray);
+            raspData = new JSONObject(json);
+            String timeStamp= raspData.optString("timestamp", "2000-01-1 22:11:00");
+            if(readPref.getOrderTimeStamp().equals(timeStamp)) {
+                return getString(R.string.duplicacy);
+            }else{
+                savePref.saveOrderTimeStamp(timeStamp);
+            }
+            JSONArray barcodeDataArray=raspData.optJSONArray("barcode_data");
+            int machineId=raspData.optInt("machine_id");
 
-            quantArray.put(2);
-            quantArray.put(4);
-            quantArray.put(3);
-            quantArray.put(4);
-            obj.put("quant_array",quantArray);
-            obj.put("machine_id","21");
-
-        } catch (Exception e) {
+            HashMap<String,Integer> prodHash = new HashMap<String,Integer>();
+            for (int i=0;i<barcodeDataArray.length();i++){
+                String barcode = barcodeDataArray.getString(i);
+                if(!prodHash.containsKey(barcode)){
+                    prodHash.put(barcode,1);
+                }else {
+                    prodHash.put(barcode,prodHash.get(barcode).intValue()+1);
+                }
+            }
+            JSONArray newBarcodeData = new JSONArray();
+            JSONArray quantArray = new JSONArray();
+            for(HashMap.Entry<String, Integer> entry : prodHash.entrySet())
+            {   newBarcodeData.put(entry.getKey());
+                quantArray.put(entry.getValue());
+            }
+            newData.put("timestamp",timeStamp);
+            newData.put("barcode_data", newBarcodeData);
+            newData.put("quant_array",quantArray);
+            newData.put("machine_id", machineId);
+        } catch (JSONException e) {
             e.printStackTrace();
         }
-        return obj.toString();
+        return newData.toString();
     }
+
+
 
     private class GetOrderIdAsynctask extends AsyncTask<Void, Void, String> {
 
@@ -269,14 +247,8 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
 
         @Override
         protected String doInBackground(Void... params) {
-          String param;
-
-            if(readPref.getOrderType().equals("1")){
-                param = raspberryData;
-            }else{
-                param = createUserDataJson();
-            }
-
+            String param;
+            param = raspberryData;
             WebServicePostCall webServicePostCal=new WebServicePostCall();
             String response =  webServicePostCal.excutePost(WebServiceUrl.BASE_URL+WebServiceUrl.GENERATE_ORDER_ID, param);
             return response ;
@@ -287,6 +259,8 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
         protected void onPostExecute(String result) {
             if(isAdded()) {
                 parseJson(result);
+                loader.setVisibility(View.GONE);
+                shopIcon.setVisibility(View.VISIBLE);
                 super.onPostExecute(result);
             }
         }
@@ -300,12 +274,16 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
                   continue_btn.setText(R.string.continue_btn);
                   continue_btn.setBackgroundResource(R.drawable.button_app_color);
               }
-              String message=newObj.optString("Success");
-              int order_id=newObj.optInt("order_id");
+              String message=newObj.optString("message");
+              JSONObject orderdata  = newObj.optJSONObject("order_data");
+              int order_id=orderdata.optInt("orderid");
+              int quantity=orderdata.optInt("quantity");
               savePref.saveOrderId(order_id);
               if(order_id!=0){
                 idTv.setText("SBO"+String.valueOf(order_id));
+                totalIitemSelectedTv.setText(String.valueOf(quantity));
               }
+
           } catch (JSONException e) {
               e.printStackTrace();
           }
