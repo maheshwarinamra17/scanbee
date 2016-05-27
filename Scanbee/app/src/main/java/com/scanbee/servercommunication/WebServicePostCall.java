@@ -12,7 +12,7 @@ import java.net.URL;
  */
 public class WebServicePostCall {
     static String LOGGER_TAG="tag";
-    public static String excutePost(String targetURL, String urlParameters)
+    public static String excutePost(String targetURL, String urlParameters, String token)
     {
         URL url;
         HttpURLConnection connection = null;
@@ -22,6 +22,8 @@ public class WebServicePostCall {
             connection = (HttpURLConnection)url.openConnection();
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type","application/json");
+            if(token!=null)
+                connection.setRequestProperty("Authorization","Token token="+token);
             connection.setUseCaches (false);
             connection.setDoInput(true);
             connection.setDoOutput(true);

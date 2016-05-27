@@ -162,12 +162,11 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
             // Will contain the raw JSON response as a string.
             String forecastJsonStr = null;
             WebRequest webRequest= new WebRequest();
-//          forecastJsonStr=webRequest.makeWebServiceCall(WebServiceUrl.BASE_URL+ WebServiceUrl.GENERATE_DUMMY_ORDER,webRequest.GET);
             readPref = new ReadPref(getActivity());
             if(readPref.getOrderType().equals("1")){
-                forecastJsonStr=webRequest.makeWebServiceCall("http://"+readPref.getIpAddress()+ WebServiceUrl.GET_RASPBERRY_DATA,webRequest.GET);
+                forecastJsonStr=webRequest.makeWebServiceCall("http://"+readPref.getIpAddress()+ WebServiceUrl.GET_RASPBERRY_DATA,webRequest.GET,readPref.getAuthToken());
             }else{
-                forecastJsonStr=webRequest.makeWebServiceCall(WebServiceUrl.BASE_URL + WebServiceUrl.GENERATE_DUMMY_ORDER ,webRequest.GET);
+                forecastJsonStr=webRequest.makeWebServiceCall(WebServiceUrl.BASE_URL + WebServiceUrl.GENERATE_DUMMY_ORDER ,webRequest.GET,readPref.getAuthToken());
             }
             return forecastJsonStr;
 
@@ -250,7 +249,7 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
             String param;
             param = raspberryData;
             WebServicePostCall webServicePostCal=new WebServicePostCall();
-            String response =  webServicePostCal.excutePost(WebServiceUrl.BASE_URL+WebServiceUrl.GENERATE_ORDER_ID, param);
+            String response =  webServicePostCal.excutePost(WebServiceUrl.BASE_URL+WebServiceUrl.GENERATE_ORDER_ID, param,readPref.getAuthToken());
             return response ;
 
         }

@@ -23,6 +23,8 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.scanbee.dialog.ToastCustom;
+import com.scanbee.fragment.AnalyticsFragment;
 import com.scanbee.fragment.GenerateOrderidFragment;
 import com.scanbee.fragment.PaymentGetWayFragment;
 import com.scanbee.fragment.SettingFragment;
@@ -60,12 +62,8 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+        ToastCustom customToast = new ToastCustom(getApplicationContext());
+        customToast.show(getString(R.string.not_allowed));
     }
 
     @Override
@@ -74,24 +72,6 @@ public class MainActivity extends AppCompatActivity
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.delete) {
-//            Toast.makeText(MainActivity.this, "delete item", Toast.LENGTH_SHORT).show();
-//            return true;
-//        }
-//        if (id==R.id.cart){
-//            Toast.makeText(MainActivity.this, "delete item", Toast.LENGTH_SHORT).show();
-//            return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -119,6 +99,7 @@ public class MainActivity extends AppCompatActivity
 
         return true;
     }
+
     public void drawerUI(){
         TextView nav_row1 = (TextView) drawer.findViewById(R.id.navrowText1);
         TextView nav_row2 = (TextView) drawer.findViewById(R.id.navrowText2);
@@ -166,7 +147,7 @@ public class MainActivity extends AppCompatActivity
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.shopLinearLayout:
-                getFragmentManager().beginTransaction().replace(R.id.content_frame,new PaymentGetWayFragment()).commit();
+                getFragmentManager().beginTransaction().replace(R.id.content_frame,new GenerateOrderidFragment()).commit();
                 if (drawer.isDrawerOpen(GravityCompat.START)) {
                     drawer.closeDrawer(GravityCompat.START);
                 }
@@ -190,7 +171,7 @@ public class MainActivity extends AppCompatActivity
                 }
                 break;
             case R.id.analyticsLinearLayout:
-                getFragmentManager().beginTransaction().replace(R.id.content_frame,new PaymentGetWayFragment()).commit();
+                getFragmentManager().beginTransaction().replace(R.id.content_frame,new AnalyticsFragment()).commit();
                 if (drawer.isDrawerOpen(GravityCompat.START)) {
                     drawer.closeDrawer(GravityCompat.START);
                 }

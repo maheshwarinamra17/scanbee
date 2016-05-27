@@ -20,8 +20,8 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/top_margin"
             android:visibility="visible"
-            app:indicator="BallGridPulse"
-            app:indicator_color="@color/app_green"/>
+            app:indicator="LineScalePulseOutRapid"
+            app:indicator_color="@color/app_color"/>
 
         <ImageView
             android:id="@+id/shopIcon"

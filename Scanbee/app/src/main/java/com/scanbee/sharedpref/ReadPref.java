@@ -36,5 +36,8 @@ public class ReadPref {
 		res = prefs.getString("timestamp", "");
 		return res;
 	}
-
+	public String getAuthToken(){
+		res = prefs.getString("auth_token", "");
+		return res;
+	}
 }

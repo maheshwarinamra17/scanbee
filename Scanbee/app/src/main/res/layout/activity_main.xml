@@ -32,7 +32,6 @@
 
             <LinearLayout
                 android:id="@+id/shopLinearLayout"
-                android:background="@android:drawable/list_selector_background"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
@@ -58,7 +57,7 @@
 
             <LinearLayout
                 android:id="@+id/orderLinearLayout"
-                android:background="@android:drawable/list_selector_background"
+
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
@@ -84,7 +83,7 @@
 
             <LinearLayout
                 android:id="@+id/custLinearLayout"
-                android:background="@android:drawable/list_selector_background"
+
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
@@ -109,7 +108,7 @@
 
             <LinearLayout
                 android:id="@+id/iventryLinearLayout"
-                android:background="@android:drawable/list_selector_background"
+
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
@@ -133,7 +132,7 @@
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/analyticsLinearLayout"
-                android:background="@android:drawable/list_selector_background"
+
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
@@ -158,7 +157,7 @@
 
             <LinearLayout
                 android:id="@+id/askScanBeeLinearLayout"
-                android:background="@android:drawable/list_selector_background"
+
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
@@ -183,7 +182,7 @@
 
             <LinearLayout
                 android:id="@+id/settingLinearLayout"
-                android:background="@android:drawable/list_selector_background"
+
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
