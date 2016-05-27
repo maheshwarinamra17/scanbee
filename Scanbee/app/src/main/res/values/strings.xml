@@ -10,6 +10,7 @@
     <string name="scanning">Shop</string>
     <string name="cart_item">Cart</string>
     <string name="payment">Payment</string>
+    <string name="analytics">Analysis</string>
     <string name="invoice">Invoice</string>
     <string name="tool_bar_item_title1">delete image</string>
     <string name="tool_bar_item_title">cart image</string>
@@ -26,6 +27,7 @@
     <string name="no_internet_connection_play">There is no network connection available. Please try again.</string>
     <string name="no_rasp_hub">Please check Raspberry Hub Power and internet connectivity</string>
     <string name="dup_order">Oops! sounds like a duplicate order scan and try again</string>
+    <string name="unp_error">Enter Username and Password</string>
     <string name="logout_avatar">Avatar</string>
     <string name="please_wait">Please Wait..</string>
     <string name="Rs">\u20B9</string>
@@ -54,6 +56,8 @@
     <string name="try_again">Try again</string>
     <string name="cancel_order">Do you want to cancel current order ?</string>
     <string name="load_prod">Fetching product data</string>
+    <string name="load_logging">Logging in</string>
+    <string name="not_allowed">Operation not allowed</string>
     <string name="rasp_ip">Enter Raspberry IP</string>
     <string name="order_type_hint">Order Type</string>
     <string name="helpline">9391734766</string>
@@ -73,6 +77,9 @@
     <string name="roboto_light">fonts/Roboto-Light.ttf</string>
     <string name="noto_serif">fonts/NotoSerif-Regular.ttf</string>
     <string name="noto_sans">fonts/NotoSans-Regular.ttf</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

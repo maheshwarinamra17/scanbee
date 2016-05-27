@@ -30,9 +30,10 @@ public class WebRequest {
      * @url - url to make request
      * @requestmethod - http request method
      */
-    public String makeWebServiceCall(String url, int requestmethod) {
-        return this.makeWebServiceCall(url, requestmethod, null);
+    public String makeWebServiceCall(String url, int requestmethod, String token) {
+        return this.makeWebServiceCall(url, requestmethod, null, token);
     }
+
 
     /**
      * Making service call
@@ -42,13 +43,14 @@ public class WebRequest {
      * @params - http request params
      */
     public String makeWebServiceCall(String urladdress, int requestmethod,
-                                     HashMap<String, String> params) {
+                                     HashMap<String, String> params, String token) {
         URL url;
         String response = "";
         try {
             url = new URL(urladdress);
-
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            if(token!=null)
+                conn.setRequestProperty("Authorization","Token token="+token);
             conn.setReadTimeout(1500);
             conn.setConnectTimeout(1500);
 

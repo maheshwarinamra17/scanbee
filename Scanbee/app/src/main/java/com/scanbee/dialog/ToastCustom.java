@@ -29,7 +29,7 @@ public class ToastCustom {
 		toastText.setTypeface(NotoSans);
 		// Toast...
 		toast = new Toast(context);
-		toast.setDuration(Toast.LENGTH_LONG);
+		toast.setDuration(Toast.LENGTH_SHORT);
 		toast.setView(layout);
 	}
 

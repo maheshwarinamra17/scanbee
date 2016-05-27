@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:id="@+id/activityRoot"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:gravity="center"
     android:background="@drawable/splash"
     android:layout_height="match_parent">
@@ -11,22 +13,27 @@
         android:id="@+id/logo"
         android:layout_width="@dimen/vbig_icon"
         android:layout_height="@dimen/vbig_icon"
+        android:layout_centerHorizontal="true"
         android:src="@drawable/sb_icon"
         android:scaleType="fitXY"
-        android:layout_marginTop="@dimen/elem_margin"/>
+        android:layout_marginTop="@dimen/row_item_margin"/>
 
     <TextView
         android:id="@+id/scanbeeName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:textSize="@dimen/head_title"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/icon_text"
+        android:layout_below="@id/logo"
         android:text="@string/scanbee" />
 
     <TextView
         android:id="@+id/scanbeeSubtext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/scanbeeName"
+        android:layout_centerHorizontal="true"
         android:textColor="@color/app_green"
         android:layout_marginTop="@dimen/body_margin"
         android:textSize="@dimen/body_caption"
@@ -37,6 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:cursorVisible="true"
+        android:layout_below="@id/scanbeeSubtext"
         android:hint="@string/username"
         android:inputType="textEmailAddress"
         android:textSize="@dimen/body_caption"
@@ -59,6 +67,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:cursorVisible="true"
+        android:layout_below="@id/userNameET"
         android:hint="@string/password"
         android:inputType="textPassword"
         android:textSize="@dimen/body_caption"
@@ -78,6 +87,7 @@
     <Button
         android:id="@+id/loginBtn"
         android:text="@string/login"
+        android:layout_below="@id/passwordET"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/button_text"
@@ -88,6 +98,7 @@
         />
     <TextView
         android:id="@+id/loginHelp"
+        android:layout_below="@id/loginBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/app_green"
@@ -96,4 +107,4 @@
         android:layout_marginTop="@dimen/side_margin"
         android:text="@string/helphash"/>
 
-</LinearLayout>
+</RelativeLayout>

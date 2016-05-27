@@ -170,7 +170,7 @@ public class CartItemFragment extends Fragment{
             WebRequest webRequest= new WebRequest();
             HashMap<String,String>param=new HashMap<>();
             param.put("orderid", String.valueOf(orderId));
-            forecastJsonStr=webRequest.makeWebServiceCall(WebServiceUrl.BASE_URL+ WebServiceUrl.GET_ORDER_DATA,webRequest.GET,param);
+            forecastJsonStr=webRequest.makeWebServiceCall(WebServiceUrl.BASE_URL+ WebServiceUrl.GET_ORDER_DATA,webRequest.GET,param,readPref.getAuthToken());
             System.out.println("response===>>>>"+forecastJsonStr);
             return forecastJsonStr;
         }
@@ -207,7 +207,7 @@ public class CartItemFragment extends Fragment{
                     int cat_id=prodDataObj.optInt("cat_id");
                     String item_id=prodDataObj.optString("item_id");
                     Double mrp=prodDataObj.optDouble("mrp");
-                    Double cp=prodDataObj.optDouble("cp");
+                    Double cp = prodDataObj.optDouble("cp");
                     String created_at=prodDataObj.optString("created_at");
                     String updated_at=prodDataObj.optString("updated_at");
                     int quantity=prodDataObj.optInt("quantity");

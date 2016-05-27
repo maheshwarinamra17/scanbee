@@ -37,5 +37,10 @@ public class SavePref {
         editor.putString("timestamp", timestamp);
         editor.commit();
     }
+    public void saveAuthToken(String token){
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("auth_token", token);
+        editor.commit();
+    }
 }
 
