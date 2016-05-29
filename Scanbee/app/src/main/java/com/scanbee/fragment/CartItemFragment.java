@@ -1,6 +1,7 @@
 package com.scanbee.fragment;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.graphics.Typeface;
@@ -19,6 +20,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,6 +29,7 @@ import com.scanbee.model.CartItemModelClass;
 import com.scanbee.scanbee.MainActivity;
 import com.scanbee.scanbee.R;
 import com.scanbee.servercommunication.WebRequest;
+import com.scanbee.servercommunication.WebServicePostCall;
 import com.scanbee.servercommunication.WebServiceUrl;
 import com.scanbee.sharedpref.ReadPref;
 
@@ -130,11 +133,10 @@ public class CartItemFragment extends Fragment{
         chargRsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                getFragmentManager().beginTransaction().replace(R.id.content_frame, new com.scanbee.fragment.PaymentGetWayFragment()).commit();
-
+                openDialouge();
             }
         });
+
         Typeface Roboto=Typeface.createFromAsset(getResources().getAssets(),getString(R.string.roboto_font));
         Typeface NotoSans=Typeface.createFromAsset(getResources().getAssets(),getString(R.string.noto_sans));
 
@@ -147,6 +149,82 @@ public class CartItemFragment extends Fragment{
         discountTvTxt.setTypeface(NotoSans);
 
 
+    }
+    public void openDialouge(){
+        final Dialog dialog = new Dialog(activity);
+        dialog.setContentView(R.layout.dialog_layout);
+        dialog.setTitle(R.string.custInformation);
+        dialog.show();
+       // MaterialEditText phoneNoEt = (MaterialEditText)dialog.findViewById(R.id.phoneNoET);
+        EditText phoneNoEt = (EditText)dialog.findViewById(R.id.phoneNoET);
+        Button skipBtn =(Button)dialog.findViewById(R.id.skipButton);
+        Button okBtn =(Button)dialog.findViewById(R.id.okButton);
+        okBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Close dialog
+                new GeneratePaymentAsynctask().execute();
+                dialog.dismiss();
+                getFragmentManager().beginTransaction().replace(R.id.content_frame, new com.scanbee.fragment.PaymentGetWayFragment()).commit();
+            }
+        });
+        skipBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Close dialog
+                new GeneratePaymentAsynctask().execute();
+                dialog.dismiss();
+                getFragmentManager().beginTransaction().replace(R.id.content_frame, new com.scanbee.fragment.PaymentGetWayFragment()).commit();
+            }
+        });
+    }
+    public String createJsonData() throws JSONException {
+        JSONObject mainJsonObject = new JSONObject();
+        JSONObject childJsonObject = new JSONObject();
+
+        mainJsonObject.put("payment_type",1);
+        mainJsonObject.put("cust_id",1);
+        mainJsonObject.put("order_id",readPref.getOrderId());
+        mainJsonObject.put("amount_paid",amount_charge);
+        mainJsonObject.put("gateway_data",childJsonObject);
+        childJsonObject.put("id","pay_29QQoUBi66xm2f");
+        childJsonObject.put("amount",5000);
+        childJsonObject.put("status",200);
+        childJsonObject.put("message","captured");
+        return mainJsonObject.toString();
+    }
+    private class GeneratePaymentAsynctask extends AsyncTask<Void, Void, String> {
+        ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog = new ProgressDialog(activity);
+            progressDialog.show();
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            String parm = null;
+            try {
+                parm = createJsonData();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            WebServicePostCall webServicePostCal=new WebServicePostCall();
+            String response =  webServicePostCal.excutePost(WebServiceUrl.BASE_URL+WebServiceUrl.GENERATE_PAYMENT_DATA, parm,readPref.getAuthToken());
+            return response ;
+
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            progressDialog.dismiss();
+            if(isAdded()) {
+                //parseJson(result);
+                super.onPostExecute(result);
+            }
+        }
     }
     public void setUpData(){
         discountTv.setText(getActivity().getString(R.string.Rs) + String.valueOf(discount));

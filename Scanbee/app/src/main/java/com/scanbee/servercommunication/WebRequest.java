@@ -51,8 +51,8 @@ public class WebRequest {
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             if(token!=null)
                 conn.setRequestProperty("Authorization","Token token="+token);
-            conn.setReadTimeout(1500);
-            conn.setConnectTimeout(1500);
+            conn.setReadTimeout(15000);
+            conn.setConnectTimeout(15000);
 
             if (requestmethod == POST) {
                 conn.setRequestMethod("POST");
