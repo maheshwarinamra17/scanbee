@@ -115,7 +115,6 @@ public class CartItemFragment extends Fragment{
         }
     }
     public void setUpUi(){
-        final CheckoutFragment co = new CheckoutFragment();
         cartItemList=new ArrayList<>();
         discountTv=(TextView)viewMain.findViewById(R.id.discountTv);
         taxTv=(TextView)viewMain.findViewById(R.id.taxTv);

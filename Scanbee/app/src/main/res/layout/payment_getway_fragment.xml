@@ -129,6 +129,7 @@
             android:orientation="horizontal"
             android:gravity="center_horizontal">
             <ImageButton
+                android:id="@+id/tabButton1"
                 android:layout_width="@dimen/circle_icon"
                 android:layout_height="@dimen/circle_icon"
                 android:background="@drawable/solid_circle_app_color"
@@ -137,6 +138,7 @@
                 android:scaleType="fitCenter"
                 />
             <ImageButton
+                android:id="@+id/tabButton2"
                 android:layout_width="@dimen/circle_icon"
                 android:layout_height="@dimen/circle_icon"
                 android:background="@drawable/circle"
@@ -145,6 +147,7 @@
                 android:scaleType="fitCenter"
                 android:layout_marginLeft="@dimen/row_item_margin"/>
             <ImageButton
+                android:id="@+id/tabButton3"
                 android:layout_width="@dimen/circle_icon"
                 android:layout_height="@dimen/circle_icon"
                 android:background="@drawable/solid_circle_app_color"
@@ -154,7 +157,7 @@
                 android:layout_marginLeft="@dimen/row_item_margin"/>
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/tab2_view"
+            android:id="@+id/tab1_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -220,7 +223,7 @@
                     android:layout_height="wrap_content"
                     android:cursorVisible="true"
                     android:hint="@string/cust_name"
-                    android:inputType="number"
+                    android:inputType="text"
                     android:textSize="@dimen/body_caption"
                     app:met_textColorHint="@color/app_color"
                     android:layout_marginRight="@dimen/row_item_margin"
@@ -252,7 +255,6 @@
                     app:met_accentTypeface="fonts/NotoSans-Regular.ttf"
                     app:met_errorColor="@color/app_red"
                     app:met_floatingLabel="highlight" />
-
                 <Switch
                     android:id="@+id/save_switch"
                     android:layout_width="0dp"
@@ -261,7 +263,52 @@
                     android:textColor="@color/app_green"
                     android:textSize="@dimen/body_caption"
                     android:text="Save" />
-
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/tab2_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/line_margin"
+            android:layout_marginLeft="@dimen/side_margin"
+            android:layout_marginRight="@dimen/side_margin"
+            android:gravity="center"
+            android:visibility="gone">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:orientation="horizontal"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="second tab"
+                    android:textSize="25sp"/>
+                </LinearLayout>
+                </LinearLayout>
+        <LinearLayout
+            android:id="@+id/tab3_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/line_margin"
+            android:layout_marginLeft="@dimen/side_margin"
+            android:layout_marginRight="@dimen/side_margin"
+            android:gravity="center"
+            android:visibility="gone">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:orientation="horizontal"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Thirld tab"
+                    android:textSize="25sp"/>
             </LinearLayout>
         </LinearLayout>
         <Button

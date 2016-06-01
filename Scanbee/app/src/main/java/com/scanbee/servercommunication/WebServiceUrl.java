@@ -11,6 +11,7 @@ public class WebServiceUrl {
     public static final String GENERATE_ORDER_ID = "generate_order_id";
     public static final String GET_ORDER_DATA = "get_order_data";
     public static final String GET_USER_LOGIN = "user_login";
+    public static final String GET_USER_LOGOUT = "user_logout";
     public static final String GENERATE_PAYMENT_DATA = "generate_payment_data";
 
 }

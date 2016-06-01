@@ -61,13 +61,6 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
         progressDialog = new ProgressDialog(getActivity());
         setupActionBar();
         setUpUi();
-
-        if (NetworkAvailablity.chkStatus(getActivity())) {
-            new FetchData().execute();
-        } else {
-            new DialogCustom(activity,getString(R.string.no_internet_connection_play),activity.getDrawable(R.drawable.router),getString(R.string.try_again)).show();
-        }
-
         return viewMain;
     }
 
@@ -84,14 +77,14 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
             Toolbar toolbar = (Toolbar)activity.findViewById(R.id.toolbar);
             ImageView cancelButton = (ImageView) activity.findViewById(R.id.cancelorder);
             cancelButton.setVisibility(View.VISIBLE);
-            cancelButton.setOnClickListener(new View.OnClickListener() {
+            /*cancelButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     new DialogCustom(activity,getString(R.string.cancel_order),activity.getDrawable(R.drawable.cancel_order),getString(R.string.ok),getString(R.string.cancel)).show();
                     return;
 
                 }
-            });
+            });*/
             TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
             mTitle.setText(R.string.scanning);
         }
@@ -107,8 +100,8 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
             orderId = (TextView)viewMain.findViewById(R.id.orderId);
             itemScan = (TextView)viewMain.findViewById(R.id.itemScannedTxtTv);
             continue_btn = (Button) viewMain.findViewById(R.id.continue_btn);
-            continue_btn.setEnabled(false);
-            continue_btn.setBackgroundResource(R.drawable.button_gray_color);
+            continue_btn.setEnabled(true);
+           // continue_btn.setBackgroundResource(R.drawable.button_gray_color);
             continue_btn.setText(R.string.scanning_data);
             continue_btn.setOnClickListener(this);
 
@@ -135,15 +128,11 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
             new DialogCustom(activity,getString(R.string.no_internet_connection_play),activity.getDrawable(R.drawable.router),getString(R.string.try_again)).show();
             return;
         }
-            Fragment fragment = null;
-            fragment = new CartItemFragment();
-            if (fragment != null) {
-                // Insert the fragment by replacing any existing fragment
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.content_frame, fragment)
-                        .commit();
-            }
+        if (NetworkAvailablity.chkStatus(getActivity())) {
+            new FetchData().execute();
+        } else {
+            new DialogCustom(activity,getString(R.string.some_thing_went_wrong),activity.getDrawable(R.drawable.router),getString(R.string.try_again)).show();
+        }
     }
     private class FetchData extends AsyncTask<Void, Void, String> {
 
@@ -282,7 +271,15 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
                 idTv.setText("SBO"+String.valueOf(order_id));
                 totalIitemSelectedTv.setText(String.valueOf(quantity));
               }
-
+              Fragment fragment = null;
+              fragment = new CartItemFragment();
+              if (fragment != null) {
+                  // Insert the fragment by replacing any existing fragment
+                  FragmentManager fragmentManager = getFragmentManager();
+                  fragmentManager.beginTransaction()
+                          .replace(R.id.content_frame, fragment)
+                          .commit();
+              }
           } catch (JSONException e) {
               e.printStackTrace();
           }

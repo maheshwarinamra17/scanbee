@@ -4,8 +4,11 @@ package com.scanbee.scanbee;
  * Created by kshitij on 4/25/2016.
  */
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -20,28 +23,44 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.scanbee.dialog.DialogCustom;
 import com.scanbee.dialog.ToastCustom;
 import com.scanbee.fragment.AnalyticsFragment;
 import com.scanbee.fragment.GenerateOrderidFragment;
 import com.scanbee.fragment.PaymentGetWayFragment;
 import com.scanbee.fragment.SettingFragment;
+import com.scanbee.servercommunication.NetworkAvailablity;
+import com.scanbee.servercommunication.WebRequest;
+import com.scanbee.servercommunication.WebServiceUrl;
+import com.scanbee.sharedpref.ReadPref;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener  {
     DrawerLayout drawer;
+    ProgressDialog progressDialog;
+    Toolbar toolbar;
+    ImageView logout,cancelorder,neworder;
+    ReadPref readPref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        readPref = new ReadPref(MainActivity.this);
+        progressDialog = new ProgressDialog(MainActivity.this);
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction().replace(R.id.content_frame, new GenerateOrderidFragment()).commit();
         }
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        setUpToolBarItemHandle();
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -51,6 +70,7 @@ public class MainActivity extends AppCompatActivity
         drawerUI();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        //noinspection deprecation
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
@@ -59,7 +79,15 @@ public class MainActivity extends AppCompatActivity
         Menu navMenu = navigationView.getMenu();
         navigationView.setNavigationItemSelectedListener(this);
     }
-
+    //Set up toolBar Item Event
+      public void setUpToolBarItemHandle(){
+          logout = (ImageView)toolbar.findViewById(R.id.addmore);
+          cancelorder = (ImageView)toolbar.findViewById(R.id.cancelorder);
+          neworder = (ImageView)toolbar.findViewById(R.id.neworder);
+          logout.setOnClickListener(this);
+          cancelorder.setOnClickListener(this);
+          neworder.setOnClickListener(this);
+      }
     @Override
     public void onBackPressed() {
         ToastCustom customToast = new ToastCustom(getApplicationContext());
@@ -188,6 +216,66 @@ public class MainActivity extends AppCompatActivity
                     drawer.closeDrawer(GravityCompat.START);
                 }
                 break;
+            case R.id.addmore:
+                if (NetworkAvailablity.chkStatus(this)) {
+                //    openLogoutDiolouge();
+                    new GetUserLogOutAsynctask().execute();
+                } else {
+                    new DialogCustom(MainActivity.this, getString(R.string.no_internet_connection), MainActivity.this.getDrawable(R.drawable.router), getString(R.string.ok),getString(R.string.try_again)).show();
+                    return;
+                }
+                break;
+            case R.id.cancelorder:
+                new DialogCustom(MainActivity.this,getString(R.string.cancel_order),MainActivity.this.getDrawable(R.drawable.cancel_order),getString(R.string.ok),getString(R.string.cancel)).show();
+                break;
+            case R.id.neworder:
+                getFragmentManager().beginTransaction().replace(R.id.content_frame,new GenerateOrderidFragment()).commit();
+                break;
+            default:
+                break;
+        }
+    }
+    public void openLogoutDiolouge(){
+        new DialogCustom(MainActivity.this,getString(R.string.cancel_order),MainActivity.this.getDrawable(R.drawable.cancel_order),getString(R.string.ok),getString(R.string.cancel)).show();
+        return;
+    }
+    private class GetUserLogOutAsynctask extends AsyncTask<Void, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog.setMessage(getApplicationContext().getString(R.string.logout));
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            WebRequest webRequest=new WebRequest();
+            String response =  webRequest.makeWebServiceCall(WebServiceUrl.BASE_URL+WebServiceUrl.GET_USER_LOGOUT,WebRequest.POST,readPref.getAuthToken());
+            return response ;
+
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            progressDialog.dismiss();
+            try {
+                JSONObject jsonObject =new JSONObject(result);
+                int status = jsonObject.optInt("status");
+                String message =jsonObject.optString("message");
+                boolean logout_status = jsonObject.optBoolean("logout_status");
+                if (status==200 && message.equals("Success") && logout_status==true){
+                    Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                    startActivity(intent);
+                }else {
+                    new DialogCustom(MainActivity.this, getString(R.string.some_thing_went_wrong), MainActivity.this.getDrawable(R.drawable.router), getString(R.string.ok),getString(R.string.try_again)).show();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 }
