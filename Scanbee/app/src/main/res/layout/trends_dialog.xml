@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layoutAnimation="@anim/list_bounce_anim"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/custom_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:background="@drawable/custom_dialog_bg">
+
+        <ImageView
+            android:id="@+id/alert_icon"
+            android:layout_width="@dimen/circle_icon"
+            android:layout_height="@dimen/circle_icon"
+            android:layout_marginTop="@dimen/elem_margin"
+            android:layout_marginBottom="@dimen/row_margin"
+            android:layout_gravity="center_horizontal" />
+
+        <LinearLayout
+            android:id="@+id/speedLayout"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/speedTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="4.3 min"
+                android:layout_marginTop="@dimen/side_margin"
+                android:textSize="@dimen/head_title"
+                android:gravity="center_horizontal"
+                android:textColor="@color/app_color"/>
+
+            <TextView
+                android:id="@+id/speedId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/avg_order_time"
+                android:textAllCaps="true"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/body_title"
+                android:gravity="center_horizontal"/>
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/okTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ok"
+            android:layout_marginTop="@dimen/row_item_margin"
+            android:textAllCaps="true"
+            android:layout_gravity="center_horizontal"
+            android:textSize="@dimen/button_text"
+            android:background="@drawable/button_blue_color"
+            android:paddingLeft="@dimen/elem_margin"
+            android:paddingRight="@dimen/elem_margin"
+            android:layout_marginBottom="@dimen/elem_margin"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,19 +1,4 @@
-buildscript {
-    repositories {
-        maven { url 'https://maven.fabric.io/public' }
-    }
-
-    dependencies {
-        classpath 'io.fabric.tools:gradle:1.+'
-    }
-}
 apply plugin: 'com.android.application'
-apply plugin: 'io.fabric'
-
-repositories {
-    maven { url 'https://maven.fabric.io/public' }
-}
-
 
 android {
     compileSdkVersion 23
@@ -42,8 +27,4 @@ dependencies {
     compile 'com.diogobernardino:williamchart:2.2'
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
-    compile files('libs/razorpay-android.jar')
-    compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
-        transitive = true;
-    }
 }

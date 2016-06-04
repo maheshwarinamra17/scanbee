@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity
     DrawerLayout drawer;
     ProgressDialog progressDialog;
     Toolbar toolbar;
-    ImageView logout,cancelorder,neworder;
+    ImageView logout,cancelOrder,newOrder;
     ReadPref readPref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,26 +67,23 @@ public class MainActivity extends AppCompatActivity
             window.setStatusBarColor(Color.parseColor("#115292"));
         }
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        logout = (ImageView) drawer.findViewById(R.id.logoutBtn);
+        logout.setOnClickListener(this);
         drawerUI();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        //noinspection deprecation
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        Typeface NotoSans=Typeface.createFromAsset(getResources().getAssets(),getString(R.string.noto_sans));
-        Menu navMenu = navigationView.getMenu();
         navigationView.setNavigationItemSelectedListener(this);
     }
     //Set up toolBar Item Event
       public void setUpToolBarItemHandle(){
-          logout = (ImageView)toolbar.findViewById(R.id.addmore);
-          cancelorder = (ImageView)toolbar.findViewById(R.id.cancelorder);
-          neworder = (ImageView)toolbar.findViewById(R.id.neworder);
-          logout.setOnClickListener(this);
-          cancelorder.setOnClickListener(this);
-          neworder.setOnClickListener(this);
+          cancelOrder = (ImageView)toolbar.findViewById(R.id.cancelorder);
+          newOrder = (ImageView)toolbar.findViewById(R.id.neworder);
+          cancelOrder.setOnClickListener(this);
+          newOrder.setOnClickListener(this);
       }
     @Override
     public void onBackPressed() {
@@ -116,14 +113,6 @@ public class MainActivity extends AppCompatActivity
               //  fragment = new CartItemFragment();
                 break;
         }
-       /* if (fragment !=null) {
-            // Insert the fragment by replacing any existing fragment
-            FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.content_frame, fragment)
-                    .commit();
-        }*/
-
 
         return true;
     }
@@ -216,9 +205,8 @@ public class MainActivity extends AppCompatActivity
                     drawer.closeDrawer(GravityCompat.START);
                 }
                 break;
-            case R.id.addmore:
+            case R.id.logoutBtn:
                 if (NetworkAvailablity.chkStatus(this)) {
-                //    openLogoutDiolouge();
                     new GetUserLogOutAsynctask().execute();
                 } else {
                     new DialogCustom(MainActivity.this, getString(R.string.no_internet_connection), MainActivity.this.getDrawable(R.drawable.router), getString(R.string.ok),getString(R.string.try_again)).show();
@@ -234,10 +222,6 @@ public class MainActivity extends AppCompatActivity
             default:
                 break;
         }
-    }
-    public void openLogoutDiolouge(){
-        new DialogCustom(MainActivity.this,getString(R.string.cancel_order),MainActivity.this.getDrawable(R.drawable.cancel_order),getString(R.string.ok),getString(R.string.cancel)).show();
-        return;
     }
     private class GetUserLogOutAsynctask extends AsyncTask<Void, Void, String> {
 

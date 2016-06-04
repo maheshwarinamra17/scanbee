@@ -6,16 +6,239 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/orderCard"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/row_item_margin"
+                android:padding="@dimen/row_margin"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/body_margin">
+
+
+                <TextView
+                    android:id="@+id/orderNumtv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5000"
+                    android:textSize="@dimen/head_title"
+                    android:textColor="@color/app_color"
+                    android:gravity="center_vertical" />
+
+
+                    <TextView
+                        android:id="@+id/orderSubtext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/order"
+                        android:textAllCaps="true"
+                        android:textSize="@dimen/body_caption"
+                        android:textColor="@color/grey"
+                        android:gravity="center_vertical" />
+
+            </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/saleCard"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/row_item_margin"
+            android:padding="@dimen/row_margin"
+            android:layout_toRightOf="@id/orderCard"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:layout_marginRight="@dimen/body_margin"
+            android:layout_marginLeft="@dimen/body_margin">
+
+            <TextView
+                android:id="@+id/saleNumtv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12567"
+                android:textSize="@dimen/head_title"
+                android:textColor="@color/app_green"
+                android:gravity="center_vertical" />
+
+                <TextView
+                    android:id="@+id/salesSubtext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sales"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/body_caption"
+                    android:textColor="@color/grey"
+                    android:gravity="center_vertical" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/line_graph_layout"
+            android:layout_below="@id/orderCard"
+            android:layout_width="match_parent"
+            android:layout_marginRight="@dimen/row_item_margin"
+            android:layout_marginLeft="@dimen/row_item_margin"
+            android:layout_height="wrap_content">
+
+            <com.db.chart.view.LineChartView
+                android:id="@+id/orderLinechart"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/graph_height"/>
+
+            <com.db.chart.view.LineChartView
+                android:id="@+id/salesLinechart"
+                android:layout_below="@id/orderLinechart"
+                android:layout_marginTop="@dimen/line_margin"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/graph_height"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/customerCard"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@id/line_graph_layout"
+            android:layout_marginTop="@dimen/row_item_margin"
+            android:padding="@dimen/row_margin"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/body_margin">
+
+            <TextView
+                android:id="@+id/custNumtv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="534"
+                android:textSize="@dimen/head_title"
+                android:textColor="@color/app_red"
+                android:gravity="center_vertical" />
+
+                <TextView
+                    android:id="@+id/custSubtext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/customer"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/body_caption"
+                    android:textColor="@color/grey"
+                    android:gravity="center_vertical" />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/productsCard"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_toRightOf="@id/customerCard"
+            android:layout_below="@id/line_graph_layout"
+            android:layout_marginRight="@dimen/body_margin"
+            android:layout_marginTop="@dimen/row_item_margin"
+            android:padding="@dimen/row_margin"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/body_margin">
+
+            <TextView
+                android:id="@+id/prodNumtv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2534"
+                android:textSize="@dimen/head_title"
+                android:textColor="@color/app_ternary"
+                android:gravity="center_vertical" />
+
+                <TextView
+                    android:id="@+id/prodSubtext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sold_prod"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/body_caption"
+                    android:textColor="@color/grey"
+                    android:gravity="center_vertical" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:id="@+id/trendingLayout"
+        android:layout_marginTop="@dimen/row_margin"
+        android:layout_marginLeft="@dimen/row_item_margin"
+        android:layout_marginRight="@dimen/row_item_margin"
         android:orientation="vertical"
-        android:background="@drawable/photo_back">
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content">
 
-        <com.db.chart.view.LineChartView
-            android:id="@+id/linechart"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/trendText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/trending"
+            android:layout_marginBottom="@dimen/elem_margin"
+            android:textAllCaps="true"
+            android:textSize="@dimen/body_title"
+            android:textColor="@color/app_color"
+            android:layout_gravity="center_horizontal" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/speedBtn"
+                    android:layout_width="@dimen/circle_icon"
+                    android:layout_height="@dimen/circle_icon"
+                    android:background="@drawable/circle"
+                    android:padding="@dimen/row_margin"
+                    android:src="@drawable/timer"
+                    android:layout_marginRight="@dimen/row_item_margin"
+                    android:scaleType="fitCenter" />
+
+                <ImageButton
+                    android:id="@+id/payBtn"
+                    android:layout_width="@dimen/circle_icon"
+                    android:layout_height="@dimen/circle_icon"
+                    android:background="@drawable/circle_green"
+                    android:padding="@dimen/row_margin"
+                    android:src="@drawable/credit_w"
+                    android:scaleType="fitCenter"
+                    android:layout_marginRight="@dimen/row_item_margin"
+                    android:layout_marginLeft="@dimen/row_item_margin"/>
+
+                <ImageButton
+                    android:id="@+id/growthBtn"
+                    android:layout_width="@dimen/circle_icon"
+                    android:layout_height="@dimen/circle_icon"
+                    android:background="@drawable/circle_red"
+                    android:padding="@dimen/row_margin"
+                    android:src="@drawable/growth"
+                    android:scaleType="fitCenter"
+                    android:layout_marginRight="@dimen/row_item_margin"
+                    android:layout_marginLeft="@dimen/row_item_margin"/>
+
+                <ImageButton
+                    android:id="@+id/prodBtn"
+                    android:layout_width="@dimen/circle_icon"
+                    android:layout_height="@dimen/circle_icon"
+                    android:background="@drawable/circle_ternary"
+                    android:padding="@dimen/row_margin"
+                    android:src="@drawable/idea"
+                    android:scaleType="fitCenter"
+                    android:layout_marginRight="@dimen/row_item_margin"
+                    android:layout_marginLeft="@dimen/row_item_margin"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

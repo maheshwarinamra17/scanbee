@@ -2,10 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:id="@+id/payactivityRoot"
     android:layout_width="match_parent"
     android:background="@color/white"
     android:layout_height="match_parent">
     <LinearLayout
+        android:id="@+id/paymentData"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -132,18 +134,18 @@
                 android:id="@+id/tabButton1"
                 android:layout_width="@dimen/circle_icon"
                 android:layout_height="@dimen/circle_icon"
-                android:background="@drawable/solid_circle_app_color"
+                android:background="@drawable/circle"
                 android:padding="@dimen/row_margin"
-                android:src="@drawable/funds"
+                android:src="@drawable/funds_w"
                 android:scaleType="fitCenter"
                 />
             <ImageButton
                 android:id="@+id/tabButton2"
                 android:layout_width="@dimen/circle_icon"
                 android:layout_height="@dimen/circle_icon"
-                android:background="@drawable/circle"
+                android:background="@drawable/solid_circle_app_color"
                 android:padding="@dimen/row_margin"
-                android:src="@drawable/credit_w"
+                android:src="@drawable/credit"
                 android:scaleType="fitCenter"
                 android:layout_marginLeft="@dimen/row_item_margin"/>
             <ImageButton
@@ -161,9 +163,35 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layout_marginTop="@dimen/row_item_margin"
+            android:layout_marginLeft="@dimen/side_margin"
+            android:layout_marginRight="@dimen/side_margin"
+            android:layout_marginBottom="@dimen/row_item_margin"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/payCashbtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/pay_cash"
+                android:textAllCaps="true"
+                android:textSize="@dimen/button_text"
+                android:background="@drawable/button_blue_color"
+                android:layout_marginTop="@dimen/side_margin"
+                android:layout_marginLeft="@dimen/elem_margin"
+                android:layout_marginRight="@dimen/elem_margin"
+                android:textColor="@color/white"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/tab2_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:layout_marginTop="@dimen/line_margin"
             android:layout_marginLeft="@dimen/side_margin"
             android:layout_marginRight="@dimen/side_margin"
+            android:visibility="gone"
             android:gravity="center">
             <LinearLayout
                 android:layout_width="match_parent"
@@ -266,50 +294,30 @@
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/tab2_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="@dimen/line_margin"
-            android:layout_marginLeft="@dimen/side_margin"
-            android:layout_marginRight="@dimen/side_margin"
-            android:gravity="center"
-            android:visibility="gone">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.0"
-                android:orientation="horizontal"
-                android:gravity="center">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="second tab"
-                    android:textSize="25sp"/>
-                </LinearLayout>
-                </LinearLayout>
-        <LinearLayout
             android:id="@+id/tab3_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="@dimen/line_margin"
+            android:layout_marginTop="@dimen/row_item_margin"
             android:layout_marginLeft="@dimen/side_margin"
             android:layout_marginRight="@dimen/side_margin"
-            android:gravity="center"
-            android:visibility="gone">
-            <LinearLayout
+            android:layout_marginBottom="@dimen/row_item_margin"
+            android:visibility="gone"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/payCreditbtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.0"
-                android:orientation="horizontal"
-                android:gravity="center">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Thirld tab"
-                    android:textSize="25sp"/>
-            </LinearLayout>
+                android:text="@string/add_credit"
+                android:textAllCaps="true"
+                android:textSize="@dimen/button_text"
+                android:background="@drawable/button_blue_color"
+                android:layout_marginTop="@dimen/side_margin"
+                android:layout_marginLeft="@dimen/elem_margin"
+                android:layout_marginRight="@dimen/elem_margin"
+                android:textColor="@color/white"/>
+
         </LinearLayout>
         <Button
             android:id="@+id/continueToInvoiceBtn"

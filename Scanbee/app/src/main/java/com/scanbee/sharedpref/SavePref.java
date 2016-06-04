@@ -42,5 +42,11 @@ public class SavePref {
         editor.putString("auth_token", token);
         editor.commit();
     }
+
+    public void saveAmountPaid(String token){
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("amount_paid", token);
+        editor.commit();
+    }
 }
 

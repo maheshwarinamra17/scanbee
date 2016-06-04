@@ -77,14 +77,6 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
             Toolbar toolbar = (Toolbar)activity.findViewById(R.id.toolbar);
             ImageView cancelButton = (ImageView) activity.findViewById(R.id.cancelorder);
             cancelButton.setVisibility(View.VISIBLE);
-            /*cancelButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    new DialogCustom(activity,getString(R.string.cancel_order),activity.getDrawable(R.drawable.cancel_order),getString(R.string.ok),getString(R.string.cancel)).show();
-                    return;
-
-                }
-            });*/
             TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
             mTitle.setText(R.string.scanning);
         }
@@ -99,10 +91,14 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
             circleImgTv = (TextView) viewMain.findViewById(R.id.circleImgTv);
             orderId = (TextView)viewMain.findViewById(R.id.orderId);
             itemScan = (TextView)viewMain.findViewById(R.id.itemScannedTxtTv);
+            loader = (AVLoadingIndicatorView) viewMain.findViewById(R.id.orderLoader);
+            shopIcon = (ImageView) viewMain.findViewById(R.id.shopIcon);
+            loader.setVisibility(View.GONE);
+            shopIcon.setVisibility(View.VISIBLE);
             continue_btn = (Button) viewMain.findViewById(R.id.continue_btn);
             continue_btn.setEnabled(true);
-           // continue_btn.setBackgroundResource(R.drawable.button_gray_color);
-            continue_btn.setText(R.string.scanning_data);
+            continue_btn.setBackgroundResource(R.drawable.button_blue_color);
+            continue_btn.setText(R.string.start_scanning);
             continue_btn.setOnClickListener(this);
 
             Typeface Roboto=Typeface.createFromAsset(getResources().getAssets(),getString(R.string.roboto_font));
@@ -116,7 +112,7 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
             circleImgTv.setTypeface(RobotoMed);
             handlerNameTv.setTypeface(RobotoMed);
             orderId.setTypeface(NotoSans);
-            itemScan.setTypeface(Roboto);
+            itemScan.setTypeface(NotoSans);
             storeName.setTypeface(Roboto);
 
         }
@@ -129,6 +125,11 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
             return;
         }
         if (NetworkAvailablity.chkStatus(getActivity())) {
+            loader.setVisibility(View.VISIBLE);
+            shopIcon.setVisibility(View.GONE);
+            continue_btn.setBackgroundResource(R.drawable.button_gray_color);
+            continue_btn.setText(R.string.scanning_data);
+            continue_btn.setEnabled(false);
             new FetchData().execute();
         } else {
             new DialogCustom(activity,getString(R.string.some_thing_went_wrong),activity.getDrawable(R.drawable.router),getString(R.string.try_again)).show();
@@ -164,8 +165,7 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
         @Override
         protected void onPostExecute(String result) {
             if(isAdded()) {
-                loader = (AVLoadingIndicatorView) viewMain.findViewById(R.id.orderLoader);
-                shopIcon = (ImageView) viewMain.findViewById(R.id.shopIcon);
+
                 if (result.length() == 0) {
                     new DialogCustom(activity, getString(R.string.no_rasp_hub), activity.getDrawable(R.drawable.raspberry), getString(R.string.ok)).show();
                 }else {
@@ -249,6 +249,22 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
                 parseJson(result);
                 loader.setVisibility(View.GONE);
                 shopIcon.setVisibility(View.VISIBLE);
+                continue_btn.setEnabled(true);
+                continue_btn.setBackgroundResource(R.drawable.button_app_color);
+                continue_btn.setText(R.string.continue_btn);
+                continue_btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Fragment fragment = null;
+                        fragment = new CartItemFragment();
+                        if (fragment != null) {
+                            FragmentManager fragmentManager = getFragmentManager();
+                            fragmentManager.beginTransaction()
+                                    .replace(R.id.content_frame, fragment)
+                                    .commit();
+                        }
+                    }
+                });
                 super.onPostExecute(result);
             }
         }
@@ -271,15 +287,7 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
                 idTv.setText("SBO"+String.valueOf(order_id));
                 totalIitemSelectedTv.setText(String.valueOf(quantity));
               }
-              Fragment fragment = null;
-              fragment = new CartItemFragment();
-              if (fragment != null) {
-                  // Insert the fragment by replacing any existing fragment
-                  FragmentManager fragmentManager = getFragmentManager();
-                  fragmentManager.beginTransaction()
-                          .replace(R.id.content_frame, fragment)
-                          .commit();
-              }
+
           } catch (JSONException e) {
               e.printStackTrace();
           }

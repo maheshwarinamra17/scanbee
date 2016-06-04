@@ -27,7 +27,8 @@
     <dimen name="mid_icon">36dp</dimen>
     <dimen name="small_icon">26dp</dimen>
     <dimen name="nav_icon_size">16dp</dimen>
-    <dimen name="carret_icon_size">12dp</dimen>
+    <dimen name="carret_icon_size">50dp</dimen>
+    <dimen name="logout_padding">18dp</dimen>
     <dimen name="nav_head_icon_size">48dp</dimen>
 
 
@@ -37,5 +38,11 @@
     <dimen name="body_caption">12sp</dimen>
     <dimen name="button_text">14sp</dimen>
     <dimen name="icon_text">24sp</dimen>
+
+    <dimen name="graph_height">100dp</dimen>
+    <dimen name="lc_dot_radius">4dp</dimen>
+    <dimen name="lc_data_radius">2dp</dimen>
+
+
 
 </resources>

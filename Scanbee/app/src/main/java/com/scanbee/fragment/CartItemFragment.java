@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -19,11 +20,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.rengwuxian.materialedittext.MaterialEditText;
 import com.scanbee.adapter.CartItemAdapter;
 import com.scanbee.model.CartItemModelClass;
 import com.scanbee.scanbee.MainActivity;
@@ -39,8 +41,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
-//import android.app.Fragment;
 
 /**
  * Created by kshitij on 4/25/2016.
@@ -132,7 +132,7 @@ public class CartItemFragment extends Fragment{
         chargRsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openDialouge();
+                customerDialog();
             }
         });
 
@@ -149,19 +149,19 @@ public class CartItemFragment extends Fragment{
 
 
     }
-    public void openDialouge(){
+    public void customerDialog(){
         final Dialog dialog = new Dialog(activity);
-        dialog.setContentView(R.layout.dialog_layout);
-        dialog.setTitle(R.string.custInformation);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(
+                new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setContentView(R.layout.customer_dialog);
         dialog.show();
-       // MaterialEditText phoneNoEt = (MaterialEditText)dialog.findViewById(R.id.phoneNoET);
-        EditText phoneNoEt = (EditText)dialog.findViewById(R.id.phoneNoET);
+        MaterialEditText phoneNoEt = (MaterialEditText)dialog.findViewById(R.id.phoneNoET);
         Button skipBtn =(Button)dialog.findViewById(R.id.skipButton);
         Button okBtn =(Button)dialog.findViewById(R.id.okButton);
         okBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Close dialog
                 new GeneratePaymentAsynctask().execute();
                 dialog.dismiss();
                 getFragmentManager().beginTransaction().replace(R.id.content_frame, new com.scanbee.fragment.PaymentGetWayFragment()).commit();
@@ -170,7 +170,6 @@ public class CartItemFragment extends Fragment{
         skipBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Close dialog
                 new GeneratePaymentAsynctask().execute();
                 dialog.dismiss();
                 getFragmentManager().beginTransaction().replace(R.id.content_frame, new com.scanbee.fragment.PaymentGetWayFragment()).commit();
@@ -198,6 +197,7 @@ public class CartItemFragment extends Fragment{
         @Override
         protected void onPreExecute() {
             progressDialog = new ProgressDialog(activity);
+            progressDialog.setMessage(getActivity().getString(R.string.pay_prod));
             progressDialog.show();
             super.onPreExecute();
         }

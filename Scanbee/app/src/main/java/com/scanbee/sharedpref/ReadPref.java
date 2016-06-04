@@ -40,4 +40,8 @@ public class ReadPref {
 		res = prefs.getString("auth_token", "");
 		return res;
 	}
+	public String getAmountPaid(){
+		res = prefs.getString("amount_paid", "");
+		return res;
+	}
 }

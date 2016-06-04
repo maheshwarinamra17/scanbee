@@ -2,7 +2,6 @@
     <string name="app_name">Scanbee</string>
     <string name="action_settings">setting</string>
     <string name="duplicacy">DUPLICACY</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="scanbee">SCANBEE</string>
@@ -10,11 +9,11 @@
     <string name="scanning">Shop</string>
     <string name="cart_item">Cart</string>
     <string name="payment">Payment</string>
-    <string name="analytics">Analysis</string>
+    <string name="analytics">Daily Analysis</string>
     <string name="invoice">Invoice</string>
     <string name="tool_bar_item_title1">delete image</string>
     <string name="tool_bar_item_title">cart image</string>
-    <string name="toolbar_del_img"></string>
+    <string name="toolbar_del_img">delete</string>
     <string name="all_press_news">Item1</string>
     <string name="art_entertainment">Item2</string>
     <string name="automotive">AutoMotive</string>
@@ -32,15 +31,17 @@
     <string name="logout_avatar">Avatar</string>
     <string name="please_wait">Please Wait..</string>
     <string name="Rs">\u20B9</string>
+    <string name="sales">Sales</string>
     <string name="login">Login</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
-    <string name="phone_no">Phone No.</string>
+    <string name="phone_no">Customer Phone Number</string>
     <string name="custInformation">Customer Information</string>
-
+    <string name="avg_order_time">Average order time</string>
     <string name="order_id">ORDER ID</string>
     <string name="items_scanned">ITEMS SCANNED</string>
     <string name="scanning_data">Scanning Items...</string>
+    <string name="start_scanning">Start Scanning</string>
     <string name="continue_btn">CONTINUE</string>
     <string name="amount_paid">Amount to be Paid</string>
     <string name="amount_paid_post">Amount Paid</string>
@@ -49,6 +50,8 @@
     <string name="cust_expiry">Expiry (MM/YYYY)</string>
     <string name="cust_name">Customer Name</string>
     <string name="cust_cvv">CVV</string>
+    <string name="pay_cash">Pay Cash</string>
+    <string name="add_credit">Add to credits</string>
     <string name="cont_invoice">Continue to invoice</string>
     <string name="print_invoice">SMS invoice</string>
     <string name="share_invoice">Share invoice</string>
@@ -60,13 +63,15 @@
     <string name="try_again">Try again</string>
     <string name="cancel_order">Do you want to cancel current order ?</string>
     <string name="load_prod">Fetching product data</string>
+    <string name="pay_prod">Fetching payment details</string>
+    <string name="sold_prod">Products Sold</string>
     <string name="load_logging">Logging in</string>
     <string name="logout">Logout</string>
     <string name="not_allowed">Operation not allowed</string>
     <string name="rasp_ip">Enter Raspberry IP</string>
     <string name="order_type_hint">Order Type</string>
     <string name="helpline">9391734766</string>
-
+    <string name="trending">#Trends</string>
     <string name="shop">Shop</string>
     <string name="order">Orders</string>
     <string name="customer">Customers</string>
@@ -75,15 +80,12 @@
     <string name="settings">Settings</string>
     <string name="help">Ask Scanbee</string>
     <string name="helphash">#AskScanbee</string>
-
     <string name="roboto_font">fonts/Roboto-Regular.ttf</string>
     <string name="roboto_thin">fonts/Roboto-Thin.ttf</string>
     <string name="roboto_med">fonts/Roboto-Medium.ttf</string>
     <string name="roboto_light">fonts/Roboto-Light.ttf</string>
     <string name="noto_serif">fonts/NotoSerif-Regular.ttf</string>
     <string name="noto_sans">fonts/NotoSans-Regular.ttf</string>
-
-<!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 

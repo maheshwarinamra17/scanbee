@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -30,7 +31,7 @@ public class PaymentGetWayFragment extends Fragment implements View.OnClickListe
     TextView amountPaid, amountPaidTxt, storeCredit, storeCreditTxt, itemsBought, itemsBoughtTxt,custName,custInfo;
     Switch saveSwitch;
     Activity activity;
-    LinearLayout tabLinearLayout1,tabLinearLayout2,tabLinearLayout3;
+    LinearLayout tabLinearLayout1,tabLinearLayout2,tabLinearLayout3,paymentData;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -55,6 +56,8 @@ public class PaymentGetWayFragment extends Fragment implements View.OnClickListe
         tabLinearLayout1 = (LinearLayout) viewMain.findViewById(R.id.tab1_view);
         tabLinearLayout2 = (LinearLayout) viewMain.findViewById(R.id.tab2_view);
         tabLinearLayout3 = (LinearLayout) viewMain.findViewById(R.id.tab3_view);
+        paymentData = (LinearLayout) viewMain.findViewById(R.id.paymentData);
+
         tabButton1 = (ImageButton)viewMain.findViewById(R.id.tabButton1);
         tabButton2 = (ImageButton)viewMain.findViewById(R.id.tabButton2);
         tabButton3 = (ImageButton)viewMain.findViewById(R.id.tabButton3);
@@ -76,9 +79,26 @@ public class PaymentGetWayFragment extends Fragment implements View.OnClickListe
         custInfo.setTypeface(NotoSans);
         saveSwitch.setTypeface(RobotoMed);
 
-        amountPaid.setText(getActivity().getString(R.string.Rs)+"54,321");
+        amountPaid.setText(getActivity().getString(R.string.Rs) + "54,321");
+        softKeyboardAdjustments();
         setupActionBar();
         return viewMain;
+    }
+
+    public void softKeyboardAdjustments(){
+        final LinearLayout activityRootView = (LinearLayout) viewMain.findViewById(R.id.payactivityRoot);
+        activityRootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                int heightDiff = activityRootView.getRootView().getHeight() - activityRootView.getHeight();
+                if (heightDiff > 500) {
+                    paymentData.setVisibility(View.GONE);
+                }else {
+                    paymentData.setVisibility(View.VISIBLE);
+                }
+
+            }
+        });
     }
 
     private void setupActionBar() {
@@ -107,16 +127,34 @@ public class PaymentGetWayFragment extends Fragment implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.tabButton1 :
+                tabButton1.setBackground(getActivity().getDrawable(R.drawable.circle));
+                tabButton2.setBackground(getActivity().getDrawable(R.drawable.solid_circle_app_color));
+                tabButton3.setBackground(getActivity().getDrawable(R.drawable.solid_circle_app_color));
+                tabButton1.setImageDrawable(getActivity().getDrawable(R.drawable.funds_w));
+                tabButton2.setImageDrawable(getActivity().getDrawable(R.drawable.credit));
+                tabButton3.setImageDrawable(getActivity().getDrawable(R.drawable.wallet));
                 tabLinearLayout1.setVisibility(View.VISIBLE);
                 tabLinearLayout2.setVisibility(View.GONE);
                 tabLinearLayout3.setVisibility(View.GONE);
                 break;
             case R.id.tabButton2 :
+                tabButton1.setBackground(getActivity().getDrawable(R.drawable.solid_circle_app_color));
+                tabButton2.setBackground(getActivity().getDrawable(R.drawable.circle));
+                tabButton3.setBackground(getActivity().getDrawable(R.drawable.solid_circle_app_color));
+                tabButton1.setImageDrawable(getActivity().getDrawable(R.drawable.funds));
+                tabButton2.setImageDrawable(getActivity().getDrawable(R.drawable.credit_w));
+                tabButton3.setImageDrawable(getActivity().getDrawable(R.drawable.wallet));
                 tabLinearLayout2.setVisibility(View.VISIBLE);
                 tabLinearLayout1.setVisibility(View.GONE);
                 tabLinearLayout3.setVisibility(View.GONE);
                 break;
             case R.id.tabButton3 :
+                tabButton1.setBackground(getActivity().getDrawable(R.drawable.solid_circle_app_color));
+                tabButton2.setBackground(getActivity().getDrawable(R.drawable.solid_circle_app_color));
+                tabButton3.setBackground(getActivity().getDrawable(R.drawable.circle));
+                tabButton1.setImageDrawable(getActivity().getDrawable(R.drawable.funds));
+                tabButton2.setImageDrawable(getActivity().getDrawable(R.drawable.credit));
+                tabButton3.setImageDrawable(getActivity().getDrawable(R.drawable.wallet_w));
                 tabLinearLayout3.setVisibility(View.VISIBLE);
                 tabLinearLayout2.setVisibility(View.GONE);
                 tabLinearLayout1.setVisibility(View.GONE);

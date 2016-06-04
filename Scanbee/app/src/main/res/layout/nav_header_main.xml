@@ -53,8 +53,8 @@
         android:layout_width="@dimen/carret_icon_size"
         android:layout_height="@dimen/carret_icon_size"
         android:layout_marginTop="@dimen/nav_header_icon_spacing"
-        android:layout_marginLeft="@dimen/elem_margin"
+        android:padding="@dimen/logout_padding"
         android:src="@drawable/caret"
-        android:id="@+id/navMoreIcon" />
+        android:id="@+id/logoutBtn" />
 
 </LinearLayout>
