@@ -16,6 +16,7 @@
     <dimen name="row_margin">12dp</dimen>
     <dimen name="line_margin">8dp</dimen>
     <dimen name="row_item_margin">16dp</dimen>
+    <dimen name="row_item_border">1dp</dimen>
     <dimen name="rectbox_radius">2dp</dimen>
     <dimen name="dialog_radius">5dp</dimen>
 
@@ -37,6 +38,7 @@
     <dimen name="body_title">14sp</dimen>
     <dimen name="body_caption">12sp</dimen>
     <dimen name="button_text">14sp</dimen>
+    <dimen name="row_item_text">18sp</dimen>
     <dimen name="icon_text">24sp</dimen>
 
     <dimen name="graph_height">100dp</dimen>

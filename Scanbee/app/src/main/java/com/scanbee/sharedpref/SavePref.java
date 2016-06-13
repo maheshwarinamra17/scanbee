@@ -20,6 +20,17 @@ public class SavePref {
         editor.putInt("order_id",orderId);
         editor.commit();
     }
+    //dsrods - dash-seperated-products-string
+    public void saveOrderProducts(String dsprods){
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("dsprods", dsprods);
+        editor.commit();
+    }
+    public void saveOrderQuants(String dsquants){
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("dsquants", dsquants);
+        editor.commit();
+    }
     public void saveIpAddress(String ipAddress){
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("ip_address", ipAddress);
@@ -43,10 +54,23 @@ public class SavePref {
         editor.commit();
     }
 
-    public void saveAmountPaid(String token){
+    public void saveAmountPaid(String amount){
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("amount_paid", token);
+        editor.putString("amount_paid", amount);
         editor.commit();
     }
+
+    public void saveUserInfo(String token){
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("user_info", token);
+        editor.commit();
+    }
+    public void saveItemsScanned(int items){
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt("items_scanned", items);
+        editor.commit();
+    }
+
+
 }
 

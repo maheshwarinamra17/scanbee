@@ -140,10 +140,11 @@ public class MainActivity extends AppCompatActivity
         linearLayout5.setOnClickListener(this);
         linearLayout6.setOnClickListener(this);
         linearLayout7.setOnClickListener(this);
-
+        String[] userInfo =  readPref.getUserInfo().split(";");
         TextView navHeaderText = (TextView) drawer.findViewById(R.id.storenametv);
         TextView nvHeaderCaption = (TextView) drawer.findViewById(R.id.userstoretv);
-
+        navHeaderText.setText(userInfo[0]);
+        nvHeaderCaption.setText(userInfo[1]);
         Typeface Roboto=Typeface.createFromAsset(getResources().getAssets(),getString(R.string.roboto_font));
         Typeface RobotoMed=Typeface.createFromAsset(getResources().getAssets(),getString(R.string.roboto_med));
         Typeface NotoSans=Typeface.createFromAsset(getResources().getAssets(),getString(R.string.noto_sans));

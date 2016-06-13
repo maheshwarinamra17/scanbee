@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.graphics.Rect;
 import android.graphics.Typeface;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
@@ -29,7 +28,7 @@ public class AnalyticsFragment extends Fragment {
     View viewMain, tooltipView;
     TextView orderNumtv,orderSubtext,saleNumtv,salesSubtext,custNumtv,custSubtext,prodNumtv,prodSubtext,tredProd1,tredProd2,tredProd3,tredProd4,trendText;
     Typeface RobotoMed,Roboto,NotoSans;
-    ImageButton speedBtn;
+    ImageButton speedBtn,payBtn,growthBtn,prodBtn;
     Tooltip tooltip;
 
     @Nullable
@@ -38,9 +37,7 @@ public class AnalyticsFragment extends Fragment {
         viewMain=inflater.inflate(R.layout.analytics_fragment,null,false);
         tooltipView = inflater.inflate(R.layout.tooltip,null,false);
 
-
         setupUi();
-
         LineChartView orderLinechart = (LineChartView) viewMain.findViewById(R.id.orderLinechart);
         String[] labels =  {"8","9","10","12","13","14","15","16","17","18","19","20"};
         float[] values = {(float)1.0,(float)2.0,(float)4.0,(float)8.5,(float)6.0,(float)3.0,(float)1.0,(float)2.0,(float)4.0,(float)8.5,(float)6.0,(float)3.0};
@@ -98,17 +95,37 @@ public class AnalyticsFragment extends Fragment {
         trendText = (TextView)viewMain.findViewById(R.id.trendText);
 
         speedBtn = (ImageButton)viewMain.findViewById(R.id.speedBtn);
-
         speedBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GradientDrawable icon = (GradientDrawable) getActivity().getDrawable(R.drawable.timer);
-                icon.setColor(getResources().getColor(R.color.app_color));
-                new DialogTrend(getActivity(),"SPEED",icon).show();
+                new DialogTrend(getActivity(),"SPEED",getActivity().getDrawable(R.drawable.timer_big)).show();
                 return;
             }
         });
-
+        payBtn = (ImageButton)viewMain.findViewById(R.id.payBtn);
+        payBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DialogTrend(getActivity(),"PAYMENT",getActivity().getDrawable(R.drawable.credit_g)).show();
+                return;
+            }
+        });
+        growthBtn = (ImageButton)viewMain.findViewById(R.id.growthBtn);
+        growthBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DialogTrend(getActivity(),"GROWTH",getActivity().getDrawable(R.drawable.growth_big)).show();
+                return;
+            }
+        });
+        prodBtn = (ImageButton)viewMain.findViewById(R.id.prodBtn);
+        prodBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DialogTrend(getActivity(),"PRODUCT",getActivity().getDrawable(R.drawable.idea_big)).show();
+                return;
+            }
+        });
         orderNumtv.setTypeface(NotoSans);
         orderSubtext.setTypeface(NotoSans);
         saleNumtv.setTypeface(NotoSans);

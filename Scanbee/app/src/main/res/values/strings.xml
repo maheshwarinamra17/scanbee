@@ -24,9 +24,11 @@
     <string name="design">Design</string>
     <string name="no_internet_connection">No Internet Connection</string>
     <string name="no_internet_connection_play">There is no network connection available. Please try again.</string>
-    <string name="some_thing_went_wrong">Some went wrong or There is no network connection available. Please try again.</string>
+    <string name="some_thing_went_wrong">Some went wrong. Please restart your app again</string>
     <string name="no_rasp_hub">Please check Raspberry Hub Power and internet connectivity</string>
     <string name="dup_order">Oops! sounds like a duplicate order scan and try again</string>
+    <string name="empty_cart">Seems like your cart is empty. Would you like to add more products ?</string>
+    <string name="new_order">New Order</string>
     <string name="unp_error">Enter Username and Password</string>
     <string name="logout_avatar">Avatar</string>
     <string name="please_wait">Please Wait..</string>
@@ -51,6 +53,9 @@
     <string name="cust_name">Customer Name</string>
     <string name="cust_cvv">CVV</string>
     <string name="pay_cash">Pay Cash</string>
+    <string name="p_cash">Cash</string>
+    <string name="p_credit">Credit</string>
+    <string name="p_card">Card</string>
     <string name="add_credit">Add to credits</string>
     <string name="cont_invoice">Continue to invoice</string>
     <string name="print_invoice">SMS invoice</string>
@@ -66,8 +71,9 @@
     <string name="pay_prod">Fetching payment details</string>
     <string name="sold_prod">Products Sold</string>
     <string name="load_logging">Logging in</string>
-    <string name="logout">Logout</string>
+    <string name="logout">Logging out..</string>
     <string name="not_allowed">Operation not allowed</string>
+    <string name="item_removed">removed</string>
     <string name="rasp_ip">Enter Raspberry IP</string>
     <string name="order_type_hint">Order Type</string>
     <string name="helpline">9391734766</string>

@@ -210,10 +210,17 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
             }
             JSONArray newBarcodeData = new JSONArray();
             JSONArray quantArray = new JSONArray();
+            String dashedProducts = "";
+            String dashedQuantity = "";
+
             for(HashMap.Entry<String, Integer> entry : prodHash.entrySet())
             {   newBarcodeData.put(entry.getKey());
                 quantArray.put(entry.getValue());
+                dashedProducts = dashedProducts + "-" + entry.getKey();
+                dashedQuantity = dashedQuantity + "-" + entry.getValue();
             }
+            savePref.saveOrderProducts(dashedProducts);
+            savePref.saveOrderQuants(dashedQuantity);
             newData.put("timestamp",timeStamp);
             newData.put("barcode_data", newBarcodeData);
             newData.put("quant_array",quantArray);

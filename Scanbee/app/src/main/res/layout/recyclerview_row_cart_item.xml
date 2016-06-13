@@ -1,58 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_marginTop="@dimen/row_margin"
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <RelativeLayout
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/row_item_border"
+        card_view:cardElevation="4dp">
 
-        <TextView
-            android:id="@+id/circleTv"
-            android:layout_width="@dimen/circle_icon"
-            android:layout_height="@dimen/circle_icon"
-            android:text="B"
-            android:textSize="@dimen/icon_text"
-            android:textColor="@color/white"
-            android:gravity="center"
-            android:background="@drawable/circle"/>
+        <RelativeLayout
+            android:id="@+id/basic_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/row_item_margin"
+            android:layout_gravity="center_vertical"
+            android:paddingBottom="@dimen/row_margin"
+            android:paddingTop="@dimen/row_margin">
 
-        <TextView
-            android:id="@+id/titleTv"
-            android:layout_width="180dp"
+            <TextView
+                android:id="@+id/circleTv"
+                android:layout_width="@dimen/circle_icon"
+                android:layout_height="@dimen/circle_icon"
+                android:text="-"
+                android:textSize="@dimen/icon_text"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:background="@drawable/circle"/>
+
+            <TextView
+                android:id="@+id/titleTv"
+                android:layout_width="180dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:layout_height="wrap_content"
+                android:text="Product Name"
+                android:layout_toRightOf="@+id/circleTv"
+                android:textSize="@dimen/body_title"
+                android:textColor="@color/app_color"
+                android:layout_marginTop="@dimen/body_margin"
+                android:layout_marginLeft="@dimen/elem_margin"
+                />
+            <TextView
+                android:id="@+id/itemQuantityTv"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="item quantity"
+                android:layout_below="@+id/titleTv"
+                android:layout_toRightOf="@+id/circleTv"
+                android:textAllCaps="true"
+                android:textSize="@dimen/body_caption"
+                android:layout_marginTop="@dimen/body_margin"
+                android:layout_marginLeft="@dimen/elem_margin"
+                />
+            <TextView
+                android:id="@+id/prizeTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.0"
+                android:layout_toRightOf="@+id/titleTv"
+                android:textSize="@dimen/row_item_text"
+                android:layout_marginTop="@dimen/row_margin"
+                android:textColor="@color/app_color"
+                />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/click_view"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Product Name"
-            android:layout_toRightOf="@+id/circleTv"
-            android:textSize="@dimen/body_title"
-            android:textColor="@color/app_color"
-            android:layout_marginTop="@dimen/body_margin"
-            android:layout_marginLeft="@dimen/elem_margin"
-            />
-        <TextView
-            android:id="@+id/itemQuantityTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="item quantity"
-            android:layout_below="@+id/titleTv"
-            android:layout_toRightOf="@+id/circleTv"
-            android:textAllCaps="true"
-            android:textSize="@dimen/body_caption"
-            android:layout_marginTop="@dimen/body_margin"
-            android:layout_marginLeft="@dimen/elem_margin"
-            />
-        <TextView
-            android:id="@+id/prizeTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0.0"
-            android:layout_toRightOf="@+id/titleTv"
-            android:textSize="@dimen/icon_text"
-            android:layout_marginTop="@dimen/body_margin"
-            android:textColor="@color/app_color"
-            android:gravity="center_vertical"
-            />
-    </RelativeLayout>
+            android:paddingLeft="@dimen/row_item_margin"
+            android:paddingBottom="@dimen/row_margin"
+            android:visibility="gone"
+            android:paddingTop="@dimen/row_margin">
+
+            <ImageView
+                android:id="@+id/crossBtn"
+                android:layout_width="@dimen/circle_icon"
+                android:layout_height="@dimen/circle_icon"
+                android:padding="@dimen/row_item_margin"
+                android:src="@drawable/done"
+               />
+
+            <LinearLayout
+                android:id="@+id/prodContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/crossBtn"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/top_margin"
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/prodNameTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:textSize="@dimen/body_title"
+                    android:layout_marginBottom="@dimen/line_margin"
+                    android:textColor="@color/white" />
+
+                <include
+                    layout="@layout/number_picker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/delete_prod"
+                android:layout_width="@dimen/small_icon"
+                android:layout_height="@dimen/small_icon"
+                android:layout_marginRight="@dimen/side_margin"
+                android:layout_centerInParent="true"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/delete"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
 </LinearLayout>

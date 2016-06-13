@@ -15,13 +15,15 @@ import android.widget.TextView;
 
 import com.scanbee.scanbee.MainActivity;
 import com.scanbee.scanbee.R;
+import com.scanbee.sharedpref.ReadPref;
 
 /**
  * Created by kshitij on 5/5/2016.
  */
 public class InvoiceFragment extends Fragment {
     View viewMain;
-    TextView amountPaid,amountPaidTxt,orderId,orderIdTxt,custName,custInfo;
+    TextView amountPaid,amountPaidTxt,orderId,orderIdTxt,custName,custInfo,circleImgTv;
+    ReadPref readPref;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -33,19 +35,23 @@ public class InvoiceFragment extends Fragment {
         orderIdTxt = (TextView)viewMain.findViewById(R.id.OrderIdInTxt);
         custName = (TextView)viewMain.findViewById(R.id.cust_nameTv);
         custInfo = (TextView)viewMain.findViewById(R.id.typeTv);
+        circleImgTv = (TextView)viewMain.findViewById(R.id.circleImgTv);
 
+        readPref = new ReadPref(getActivity());
 
         Typeface RobotoMed=Typeface.createFromAsset(getResources().getAssets(),getString(R.string.roboto_med));
         Typeface NotoSans=Typeface.createFromAsset(getResources().getAssets(),getString(R.string.noto_sans));
         Typeface Roboto=Typeface.createFromAsset(getResources().getAssets(),getString(R.string.roboto_font));
+        Typeface RobotoThin=Typeface.createFromAsset(getResources().getAssets(), getString(R.string.roboto_thin));
         amountPaid.setTypeface(NotoSans);
         amountPaidTxt.setTypeface(NotoSans);
         orderId.setTypeface(NotoSans);
         orderIdTxt.setTypeface(NotoSans);
         custName.setTypeface(RobotoMed);
         custInfo.setTypeface(NotoSans);
-
-        amountPaid.setText(getActivity().getString(R.string.Rs)+"54,321");
+        circleImgTv.setTypeface(RobotoThin);
+        amountPaid.setText(getActivity().getString(R.string.Rs) + readPref.getAmountPaid());
+        orderId.setText("SBO"+readPref.getOrderId());
         setupActionBar();
 
         return viewMain;

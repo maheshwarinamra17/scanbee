@@ -1,11 +1,8 @@
 package com.scanbee.fragment;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.app.Fragment;
 import android.app.ProgressDialog;
-import android.graphics.Typeface;
-import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,26 +17,25 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.rengwuxian.materialedittext.MaterialEditText;
 import com.scanbee.adapter.CartItemAdapter;
 import com.scanbee.model.CartItemModelClass;
+import com.scanbee.model.HeaderItemModelClass;
 import com.scanbee.scanbee.MainActivity;
 import com.scanbee.scanbee.R;
 import com.scanbee.servercommunication.WebRequest;
-import com.scanbee.servercommunication.WebServicePostCall;
 import com.scanbee.servercommunication.WebServiceUrl;
 import com.scanbee.sharedpref.ReadPref;
+import com.scanbee.sharedpref.SavePref;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -49,17 +45,18 @@ public class CartItemFragment extends Fragment{
     View viewMain;
     Activity activity;
     ReadPref readPref;
+    SavePref savePref;
+    ArrayList<String>  currentProdArray,currentQuantArray;
     ProgressDialog progressDialog;
     RecyclerView recyclerView;
     int orderId;
-    TextView discountTv,taxTv,cartValueTv,discountTvTxt,taxTvTxt,cartValueTvTxt;
-    Button chargRsBtn;
     ArrayList<CartItemModelClass> cartItemList;
     CartItemAdapter cartItemAdapter;
     Double amount_charge;
     Double cart_value;
     Double discount;
     Double tax;
+    int ItemsScanned;
 
     public CartItemFragment() {
     }
@@ -72,7 +69,8 @@ public class CartItemFragment extends Fragment{
         activity=getActivity();
         setHasOptionsMenu(true);
         readPref=new ReadPref(getActivity());
-        progressDialog=new ProgressDialog(getActivity());
+        savePref=new SavePref(getActivity());
+        progressDialog = new ProgressDialog(getActivity());
         orderId=readPref.getOrderId();
         setupActionBar();
         setUpUi();
@@ -82,15 +80,6 @@ public class CartItemFragment extends Fragment{
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//        inflater.inflate(R.menu.main,menu);
-//       // menu.setGroupVisible(R.id.group2,true);
-//
-////        if (menu != null) {
-////
-////            menu.findItem(R.id.cart).setVisible(true);
-////            menu.findItem(R.id.delete).setVisible(true);
-////        }
-//        super.onCreateOptionsMenu(menu, inflater);
     }
 
     private void setupActionBar() {
@@ -116,123 +105,28 @@ public class CartItemFragment extends Fragment{
     }
     public void setUpUi(){
         cartItemList=new ArrayList<>();
-        discountTv=(TextView)viewMain.findViewById(R.id.discountTv);
-        taxTv=(TextView)viewMain.findViewById(R.id.taxTv);
-        cartValueTv=(TextView)viewMain.findViewById(R.id.cartValueTv);
-
-        discountTvTxt=(TextView)viewMain.findViewById(R.id.discountTxtTv);
-        taxTvTxt=(TextView)viewMain.findViewById(R.id.taxTxtTv);
-        cartValueTvTxt=(TextView)viewMain.findViewById(R.id.cartValueTxtTv);
-
-        chargRsBtn=(Button)viewMain.findViewById(R.id.chargBtn);
         recyclerView=(RecyclerView)viewMain.findViewById(R.id.recyclerView);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(activity);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        chargRsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                customerDialog();
-            }
-        });
-
-        Typeface Roboto=Typeface.createFromAsset(getResources().getAssets(),getString(R.string.roboto_font));
-        Typeface NotoSans=Typeface.createFromAsset(getResources().getAssets(),getString(R.string.noto_sans));
-
-        chargRsBtn.setTypeface(Roboto);
-        discountTv.setTypeface(NotoSans);
-        taxTv.setTypeface(NotoSans);
-        cartValueTv.setTypeface(NotoSans);
-        discountTvTxt.setTypeface(NotoSans);
-        cartValueTvTxt.setTypeface(NotoSans);
-        discountTvTxt.setTypeface(NotoSans);
-
-
     }
-    public void customerDialog(){
-        final Dialog dialog = new Dialog(activity);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setBackgroundDrawable(
-                new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        dialog.setContentView(R.layout.customer_dialog);
-        dialog.show();
-        MaterialEditText phoneNoEt = (MaterialEditText)dialog.findViewById(R.id.phoneNoET);
-        Button skipBtn =(Button)dialog.findViewById(R.id.skipButton);
-        Button okBtn =(Button)dialog.findViewById(R.id.okButton);
-        okBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new GeneratePaymentAsynctask().execute();
-                dialog.dismiss();
-                getFragmentManager().beginTransaction().replace(R.id.content_frame, new com.scanbee.fragment.PaymentGetWayFragment()).commit();
-            }
-        });
-        skipBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new GeneratePaymentAsynctask().execute();
-                dialog.dismiss();
-                getFragmentManager().beginTransaction().replace(R.id.content_frame, new com.scanbee.fragment.PaymentGetWayFragment()).commit();
-            }
-        });
+
+    public HeaderItemModelClass getHeaderValues()
+    {
+        HeaderItemModelClass header = new HeaderItemModelClass(amount_charge,tax,cart_value,discount);
+        return header;
     }
-    public String createJsonData() throws JSONException {
-        JSONObject mainJsonObject = new JSONObject();
-        JSONObject childJsonObject = new JSONObject();
 
-        mainJsonObject.put("payment_type",1);
-        mainJsonObject.put("cust_id",1);
-        mainJsonObject.put("order_id",readPref.getOrderId());
-        mainJsonObject.put("amount_paid",amount_charge);
-        mainJsonObject.put("gateway_data",childJsonObject);
-        childJsonObject.put("id","pay_29QQoUBi66xm2f");
-        childJsonObject.put("amount",5000);
-        childJsonObject.put("status",200);
-        childJsonObject.put("message","captured");
-        return mainJsonObject.toString();
-    }
-    private class GeneratePaymentAsynctask extends AsyncTask<Void, Void, String> {
-        ProgressDialog progressDialog;
-
-        @Override
-        protected void onPreExecute() {
-            progressDialog = new ProgressDialog(activity);
-            progressDialog.setMessage(getActivity().getString(R.string.pay_prod));
-            progressDialog.show();
-            super.onPreExecute();
-        }
-
-        @Override
-        protected String doInBackground(Void... params) {
-            String parm = null;
-            try {
-                parm = createJsonData();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            WebServicePostCall webServicePostCal=new WebServicePostCall();
-            String response =  webServicePostCal.excutePost(WebServiceUrl.BASE_URL+WebServiceUrl.GENERATE_PAYMENT_DATA, parm,readPref.getAuthToken());
-            return response ;
-
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            progressDialog.dismiss();
-            if(isAdded()) {
-                //parseJson(result);
-                super.onPostExecute(result);
-            }
-        }
-    }
     public void setUpData(){
-        discountTv.setText(getActivity().getString(R.string.Rs) + String.valueOf(discount));
-        taxTv.setText(getActivity().getString(R.string.Rs) + String.valueOf(tax));
-        cartValueTv.setText(getActivity().getString(R.string.Rs) + String.valueOf(cart_value));
-        chargRsBtn.setText("Charge  "+ getActivity().getString(R.string.Rs) + String.valueOf(amount_charge));
-        cartItemAdapter=new CartItemAdapter(cartItemList,getActivity());
+        currentProdArray = new ArrayList<String>(Arrays.asList(readPref.getOrderProds().split("-")));
+        currentQuantArray =  new ArrayList<String>( Arrays.asList(readPref.getOrderQuants().split("-")));
+        currentProdArray.remove(0);
+        currentQuantArray.remove(0);
+        cartItemAdapter = new CartItemAdapter(getHeaderValues(),cartItemList,getActivity(),currentProdArray,currentQuantArray);
         recyclerView.setAdapter(cartItemAdapter);
+        cartItemAdapter.getItemCount();
     }
+
     private class FetchData extends AsyncTask<Void, Void, String> {
         @Override
         protected void onPreExecute() {
@@ -272,7 +166,7 @@ public class CartItemFragment extends Fragment{
                  discount=cartData.optDouble("discount");
                  tax=cartData.optDouble("tax");
                 JSONArray prodDataArray=orderDataObj.optJSONArray("prod_data");
-
+                ItemsScanned = 0;
                 for (int i=0;i<prodDataArray.length();i++){
                     JSONObject prodDataObj= prodDataArray.getJSONObject(i);
                     int id=prodDataObj.optInt("id");
@@ -288,10 +182,11 @@ public class CartItemFragment extends Fragment{
                     String created_at=prodDataObj.optString("created_at");
                     String updated_at=prodDataObj.optString("updated_at");
                     int quantity=prodDataObj.optInt("quantity");
-
+                    ItemsScanned = ItemsScanned + quantity;
                     CartItemModelClass cartItemModelClass = new CartItemModelClass(id,brand,title,content,content_unit,cat_name,cat_id,item_id,mrp,cp,created_at,updated_at,quantity);
                     cartItemList.add(cartItemModelClass);
                 }
+                savePref.saveItemsScanned(ItemsScanned);
             }
             setUpData();
         } catch (JSONException e) {

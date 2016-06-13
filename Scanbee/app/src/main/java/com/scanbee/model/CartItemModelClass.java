@@ -85,4 +85,56 @@ public class CartItemModelClass {
     public int getQuantity() {
         return quantity;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setContent(float content) {
+        this.content = content;
+    }
+
+    public void setContentItem(String contentItem) {
+        this.contentItem = contentItem;
+    }
+
+    public void setCatName(String catName) {
+        this.catName = catName;
+    }
+
+    public void setCarId(int carId) {
+        this.carId = carId;
+    }
+
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
+    }
+
+    public void setMrp(Double mrp) {
+        this.mrp = mrp;
+    }
+
+    public void setCp(Double cp) {
+        this.cp = cp;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 }

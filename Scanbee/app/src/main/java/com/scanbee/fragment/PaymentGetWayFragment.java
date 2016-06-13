@@ -20,6 +20,8 @@ import android.widget.TextView;
 
 import com.scanbee.scanbee.MainActivity;
 import com.scanbee.scanbee.R;
+import com.scanbee.sharedpref.ReadPref;
+import com.scanbee.sharedpref.SavePref;
 
 /**
  * Created by kshitij on 5/5/2016.
@@ -32,10 +34,13 @@ public class PaymentGetWayFragment extends Fragment implements View.OnClickListe
     Switch saveSwitch;
     Activity activity;
     LinearLayout tabLinearLayout1,tabLinearLayout2,tabLinearLayout3,paymentData;
+    ReadPref readPref;
+    SavePref savePref;
+    Bundle bundle;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        viewMain=inflater.inflate(R.layout.payment_getway_fragment,null,false);
+        viewMain=inflater.inflate(R.layout.payment_getway_fragment, null, false);
         activity = getActivity();
         continueToInvoiceBtn=(Button)viewMain.findViewById(R.id.continueToInvoiceBtn);
         continueToInvoiceBtn.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +63,10 @@ public class PaymentGetWayFragment extends Fragment implements View.OnClickListe
         tabLinearLayout3 = (LinearLayout) viewMain.findViewById(R.id.tab3_view);
         paymentData = (LinearLayout) viewMain.findViewById(R.id.paymentData);
 
+        readPref = new ReadPref(getActivity());
+        savePref = new SavePref(getActivity());
+        int itemsScanned = getArguments().getInt("items_scanned");
+
         tabButton1 = (ImageButton)viewMain.findViewById(R.id.tabButton1);
         tabButton2 = (ImageButton)viewMain.findViewById(R.id.tabButton2);
         tabButton3 = (ImageButton)viewMain.findViewById(R.id.tabButton3);
@@ -78,8 +87,8 @@ public class PaymentGetWayFragment extends Fragment implements View.OnClickListe
         custName.setTypeface(RobotoMed);
         custInfo.setTypeface(NotoSans);
         saveSwitch.setTypeface(RobotoMed);
-
-        amountPaid.setText(getActivity().getString(R.string.Rs) + "54,321");
+        amountPaid.setText(getActivity().getString(R.string.Rs) + readPref.getAmountPaid());
+        itemsBought.setText(String.valueOf(itemsScanned));
         softKeyboardAdjustments();
         setupActionBar();
         return viewMain;

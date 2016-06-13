@@ -69,12 +69,12 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                user_name=userName.getText().toString().trim();
-                user_password=userPassword.getText().toString().trim();
-                if (user_name.isEmpty() || user_password.isEmpty()){
+                user_name = userName.getText().toString().trim();
+                user_password = userPassword.getText().toString().trim();
+                if (user_name.isEmpty() || user_password.isEmpty()) {
                     customToast = new ToastCustom(getApplicationContext());
                     customToast.show(getApplicationContext().getString(R.string.unp_error));
-                }else {
+                } else {
                     new GetOrderIdAsynctask().execute();
                 }
             }
@@ -217,6 +217,7 @@ public class LoginActivity extends AppCompatActivity {
             if (status==200){
                 String authToken = userData.optString("auth_token");
                 savePref.saveAuthToken(authToken);
+                savePref.saveUserInfo(userData.optString("name")+";"+userData.optString("email"));
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
             }else{
