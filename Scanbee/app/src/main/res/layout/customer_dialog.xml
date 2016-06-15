@@ -33,7 +33,7 @@
             app:met_floatingLabelTextColor="@color/gray_light"
             app:met_typeface="fonts/NotoSans-Regular.ttf"
             app:met_accentTypeface="fonts/NotoSans-Regular.ttf"
-            app:met_errorColor="@color/app_red"
+            app:met_helperTextColor="@color/app_red"
             app:met_floatingLabel="highlight" />
 
         <LinearLayout

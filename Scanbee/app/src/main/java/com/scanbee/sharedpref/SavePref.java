@@ -60,11 +60,18 @@ public class SavePref {
         editor.commit();
     }
 
-    public void saveUserInfo(String token){
+    public void saveUserInfo(String info){
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("user_info", token);
+        editor.putString("user_info", info);
         editor.commit();
     }
+
+    public void saveCustInfo(String info){
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("cust_info", info);
+        editor.commit();
+    }
+
     public void saveItemsScanned(int items){
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt("items_scanned", items);

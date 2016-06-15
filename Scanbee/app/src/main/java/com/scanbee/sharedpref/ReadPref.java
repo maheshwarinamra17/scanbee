@@ -55,6 +55,11 @@ public class ReadPref {
 		return res;
 	}
 
+    public String getCustInfo() {
+        res = prefs.getString("cust_info", "");
+        return res;
+    }
+
 	public String getOrderProds() {
 		res = prefs.getString("dsprods", "");
 		return res;
@@ -68,4 +73,5 @@ public class ReadPref {
         val = prefs.getInt("items_scanned", 0);
         return val;
     }
+
 }

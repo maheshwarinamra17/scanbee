@@ -76,7 +76,12 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
         if(activity != null){
             Toolbar toolbar = (Toolbar)activity.findViewById(R.id.toolbar);
             ImageView cancelButton = (ImageView) activity.findViewById(R.id.cancelorder);
-            cancelButton.setVisibility(View.VISIBLE);
+            ImageView newOrder = (ImageView) activity.findViewById(R.id.neworder);
+            ImageView addMore = (ImageView) activity.findViewById(R.id.addmore);
+            cancelButton.setVisibility(View.GONE);
+            newOrder.setVisibility(View.GONE);
+            addMore.setVisibility(View.GONE);
+
             TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
             mTitle.setText(R.string.scanning);
         }

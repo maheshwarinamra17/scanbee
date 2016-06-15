@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -29,16 +30,21 @@ import com.scanbee.fragment.PaymentGetWayFragment;
 import com.scanbee.model.CartItemModelClass;
 import com.scanbee.model.HeaderItemModelClass;
 import com.scanbee.scanbee.R;
+import com.scanbee.servercommunication.WebRequest;
 import com.scanbee.servercommunication.WebServicePostCall;
 import com.scanbee.servercommunication.WebServiceUrl;
 import com.scanbee.sharedpref.ReadPref;
 import com.scanbee.sharedpref.SavePref;
 import com.scanbee.util.NumberPicker;
+import com.scanbee.util.Utils;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 
 /**
  * Created by kshitij on 4/28/2016.
@@ -54,26 +60,30 @@ public class CartItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     ReadPref readPref;
     SavePref savePref;
     Double amount_charge;
+    JSONObject cartData;
+    Utils utilLib;
+    MaterialEditText phoneNoEt;
+    Fragment fragment;
 
-    public CartItemAdapter(HeaderItemModelClass header, ArrayList<CartItemModelClass> cartItemDataList, Context mCtx, ArrayList<String> currentProdArray,ArrayList<String>  currentQuantArray) {
+    public CartItemAdapter(HeaderItemModelClass header, ArrayList<CartItemModelClass> cartItemDataList, Context mCtx, ArrayList<String> currentProdArray,ArrayList<String>  currentQuantArray, JSONObject cartData) {
         this.cartItemDataList=cartItemDataList;
         this.currentProdArray = currentProdArray;
         this.currentQuantArray = currentQuantArray;
         this.header = header;
         this.mCtx = mCtx;
+        this.cartData = cartData;
         this.amount_charge = header.getAmount();
         this.readPref=new ReadPref(mCtx);
         this.savePref=new SavePref(mCtx);
+        this.utilLib = new Utils(mCtx);
     }
 
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            if(viewType == TYPE_HEADER)
-            {
+            if(viewType == TYPE_HEADER) {
                 View headerView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_header_item,parent,false);
                 return new VHHeader(headerView);
             }
-            else if(viewType == TYPE_ITEM)
-            {
+            else if(viewType == TYPE_ITEM) {
                 View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_row_cart_item,parent,false);
                 return new VHItem(itemView);
             }
@@ -94,6 +104,10 @@ public class CartItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     customerDialog();
                 }
             });
+            if (currentProdArray.size() == 0) {
+                VHheader.chargRsBtn.setEnabled(false);
+                VHheader.chargRsBtn.setBackgroundResource(R.drawable.button_gray_color);
+            }
 
         }
         else if (holder instanceof VHItem) {
@@ -125,6 +139,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                                                        VHItem.clickView.setVisibility(View.GONE);
                                                        VHItem.cardView.setBackgroundColor(mCtx.getResources().getColor(R.color.white));
                                                        int oldQuant = modelClass.getQuantity();
+                                                       adjustHeaderValues(modelClass.getMrp(),modelClass.getTandD(),oldQuant,numberPicker.getCount());
                                                        modelClass.setQuantity(numberPicker.getCount());
                                                        savePref.saveItemsScanned(readPref.getItemsScanned() + numberPicker.getCount() - oldQuant);
                                                        currentQuantArray.add(currentProdArray.indexOf(modelClass.getItemId()), String.valueOf(numberPicker.getCount()));
@@ -132,6 +147,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                                                        String itemInfoText = String.valueOf(modelClass.getQuantity()) + " x " + mCtx.getString(R.string.Rs) + modelClass.getMrp() + ", " +
                                                                modelClass.getContent() + " " + modelClass.getContentItem();
                                                        VHItem.itemInfo.setText(itemInfoText);
+                                                       notifyItemChanged(0);
                                                    }
                                                }
             );
@@ -142,19 +158,21 @@ public class CartItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                                                           VHItem.cardView.setVisibility(View.GONE);
                                                           int index = currentProdArray.indexOf(modelClass.getItemId());
                                                           int oldQuant = modelClass.getQuantity();
+                                                          adjustHeaderValues(modelClass.getMrp(),modelClass.getTandD(),oldQuant,0);
                                                           savePref.saveItemsScanned(readPref.getItemsScanned() - oldQuant);
                                                           currentQuantArray.remove(index);
                                                           currentProdArray.remove(index);
                                                           if (currentProdArray.size() == 0) {
                                                               new DialogCustom(mCtx, mCtx.getString(R.string.empty_cart), mCtx.getDrawable(R.drawable.fishy),
                                                                       mCtx.getString(R.string.ok), mCtx.getString(R.string.new_order)).show();
-
                                                           }
                                                           ToastCustom customToast = new ToastCustom(mCtx);
                                                           customToast.show(VHItem.title.getText() + " " + mCtx.getString(R.string.item_removed));
+                                                          notifyItemChanged(0);
                                                       }
                                                   }
             );
+
         }
 
     }
@@ -179,7 +197,6 @@ public class CartItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         public Button chargRsBtn;
         public VHHeader(View headerView) {
             super(headerView);
-
             discountTv=(TextView)headerView.findViewById(R.id.discountTv);
             taxTv=(TextView)headerView.findViewById(R.id.taxTv);
             cartValueTv=(TextView)headerView.findViewById(R.id.cartValueTv);
@@ -187,7 +204,6 @@ public class CartItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             taxTvTxt=(TextView)headerView.findViewById(R.id.taxTxtTv);
             cartValueTvTxt=(TextView)headerView.findViewById(R.id.cartValueTxtTv);
             chargRsBtn=(Button)headerView.findViewById(R.id.chargBtn);
-
             Typeface Roboto=Typeface.createFromAsset(mCtx.getResources().getAssets(),mCtx.getString(R.string.roboto_font));
             Typeface NotoSans=Typeface.createFromAsset(mCtx.getResources().getAssets(),mCtx.getString(R.string.noto_sans));
             chargRsBtn.setTypeface(Roboto);
@@ -199,7 +215,41 @@ public class CartItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             discountTvTxt.setTypeface(NotoSans);
         }
     }
+    public void adjustHeaderValues(Double mrp, String TnD, int oldQuant, int newQuant){
 
+        Double cartValue = header.getCartValue();
+        Double tax = header.getTax();
+        Double discount  =  header.getDiscount();
+        String[] TandDArray =  TnD.split(";");
+        int factor =  newQuant - oldQuant;
+        Double taxPerProd = 0.0, discPerProd= 0.0;
+        try {
+            JSONObject taxData = cartData.optJSONObject("tax_array");
+            for (int i = 0; i < TandDArray.length; i++) {
+                if (taxData.getJSONObject(TandDArray[i]).optInt("value_type")==1){
+                    taxPerProd = taxPerProd + (taxData.getJSONObject(TandDArray[i]).optDouble("percent")* mrp / 100.0);
+                }else if(taxData.getJSONObject(TandDArray[i]).optInt("value_type")==2){
+                    discPerProd = discPerProd + (taxData.getJSONObject(TandDArray[i]).optDouble("percent")* mrp / 100.0);
+                }
+            }
+        }catch (JSONException e) {
+            e.printStackTrace();
+        }
+        cartValue =  cartValue + factor * mrp;
+        tax =  tax +  factor *  taxPerProd;
+        discount =  discount + factor * discPerProd;
+        amount_charge = utilLib.doublePrecision(cartValue + tax - discount,2);
+        if(cartValue<1.0){
+            amount_charge = 0.0;
+            cartValue = 0.0;
+            tax = 0.0;
+            discount = 0.0;
+        }
+        header.setCartValue(utilLib.doublePrecision(cartValue, 1));
+        header.setDiscount(utilLib.doublePrecision(discount, 1));
+        header.setTax(utilLib.doublePrecision(tax, 1));
+        header.setAmount(amount_charge);
+    }
     public void customerDialog(){
         final Dialog dialog = new Dialog(mCtx);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -207,87 +257,204 @@ public class CartItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.setContentView(R.layout.customer_dialog);
         dialog.show();
-        MaterialEditText phoneNoEt = (MaterialEditText)dialog.findViewById(R.id.phoneNoET);
+        savePref.saveAmountPaid(amount_charge.toString());
+        phoneNoEt = (MaterialEditText)dialog.findViewById(R.id.phoneNoET);
         Button skipBtn =(Button)dialog.findViewById(R.id.skipButton);
         Button okBtn =(Button)dialog.findViewById(R.id.okButton);
-        savePref.saveAmountPaid(amount_charge.toString());
-        final Fragment fragment = new PaymentGetWayFragment();
+        fragment = new PaymentGetWayFragment();
         Bundle bundle=new Bundle();
         bundle.putInt("items_scanned", readPref.getItemsScanned());
         fragment.setArguments(bundle);
         okBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new GeneratePaymentAsynctask().execute();
-                dialog.dismiss();
-                if (fragment != null) {
-                    FragmentManager fragmentManager = ((Activity) mCtx).getFragmentManager();
-                    fragmentManager.beginTransaction()
-                            .replace(R.id.content_frame, fragment)
-                            .commit();
-                }            }
+                InputMethodManager imm = (InputMethodManager) mCtx.getSystemService(Context.
+                        INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                //Put phone number check
+                if (phoneNoEt.getText().toString().trim().length() > 0) {
+                    if(isOrderDataChange()){
+                        new UpdateOrderData(true).execute();
+                    } else{
+                        new GetCustomerData().execute();
+                    }
+                    dialog.dismiss();
+                } else {
+                    phoneNoEt.setHelperText(mCtx.getString(R.string.valid_ph));
+                }
+
+            }
         });
         skipBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new GeneratePaymentAsynctask().execute();
+                InputMethodManager imm = (InputMethodManager) mCtx.getSystemService(Context.
+                        INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                if(isOrderDataChange()){
+                    new UpdateOrderData(false).execute();
+                } else {
+                    if (fragment != null) {
+                        FragmentManager fragmentManager = ((Activity) mCtx).getFragmentManager();
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.content_frame, fragment)
+                                .commit();
+                    }
+                }
                 dialog.dismiss();
-                if (fragment != null) {
-                    FragmentManager fragmentManager = ((Activity) mCtx).getFragmentManager();
-                    fragmentManager.beginTransaction()
-                            .replace(R.id.content_frame, fragment)
-                            .commit();
-                }            }
+                savePref.saveCustInfo("No Customer Found;XXXXXXXXXX");
+            }
         });
     }
 
-    public String createJsonData() throws JSONException {
-        JSONObject mainJsonObject = new JSONObject();
-        JSONObject childJsonObject = new JSONObject();
+    public Boolean isOrderDataChange(){
 
-        mainJsonObject.put("payment_type",1);
-        mainJsonObject.put("cust_id",1);
-        mainJsonObject.put("order_id", readPref.getOrderId());
-        mainJsonObject.put("amount_paid",amount_charge);
-        mainJsonObject.put("gateway_data",childJsonObject);
-        childJsonObject.put("id", "pay_29QQoUBi66xm2f");
-        childJsonObject.put("amount", 5000);
-        childJsonObject.put("status", 200);
-        childJsonObject.put("message", "captured");
-        return mainJsonObject.toString();
-    }
-    private class GeneratePaymentAsynctask extends AsyncTask<Void, Void, String> {
+        Boolean result = false;
+        ArrayList<String> oldQuantArray =  new ArrayList<String>(Arrays.asList(readPref.getOrderQuants().split("-")));
+        oldQuantArray.remove(0);
+        if(oldQuantArray.size()!=currentQuantArray.size()){
+            result = true;
+        }else if(!Arrays.equals(oldQuantArray.toArray(),currentQuantArray.toArray())){
+            result = true;
+        };
+        return result;
+    };
+
+    private class GetCustomerData extends AsyncTask<Void, Void, String> {
         ProgressDialog progressDialog;
 
         @Override
         protected void onPreExecute() {
             progressDialog = new ProgressDialog(mCtx);
-            progressDialog.setMessage(mCtx.getString(R.string.pay_prod));
+            progressDialog.setMessage(mCtx.getString(R.string.cust_info));
+            progressDialog.setCancelable(false);
             progressDialog.show();
             super.onPreExecute();
         }
 
         @Override
         protected String doInBackground(Void... params) {
-            String parm = null;
-            try {
-                parm = createJsonData();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            WebServicePostCall webServicePostCal=new WebServicePostCall();
-            String response =  webServicePostCal.excutePost(WebServiceUrl.BASE_URL+WebServiceUrl.GENERATE_PAYMENT_DATA, parm,readPref.getAuthToken());
+            HashMap<String,String> param = new HashMap<>();
+            param.put("custph", phoneNoEt.getText().toString());
+            WebRequest webRequest= new WebRequest();
+            String response =  webRequest.makeWebServiceCall(WebServiceUrl.BASE_URL + WebServiceUrl.GET_CUSTOMER_DATA, webRequest.GET, param, readPref.getAuthToken());
             return response ;
 
         }
 
         @Override
         protected void onPostExecute(String result) {
+            parseJson(result);
             progressDialog.dismiss();
-            Fragment pFragment = new PaymentGetWayFragment();
-            if(pFragment.isAdded()) {
-                super.onPostExecute(result);
+            super.onPostExecute(result);
+            if (fragment != null) {
+                FragmentManager fragmentManager = ((Activity) mCtx).getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.content_frame, fragment)
+                        .commit();
             }
+
+        }
+    }
+    private class UpdateOrderData extends AsyncTask<Void, Void, String> {
+        ProgressDialog progressDialog;
+        boolean custFlag = false;
+
+        public UpdateOrderData(boolean custFlag) {
+            super();
+            this.custFlag = custFlag;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog = new ProgressDialog(mCtx);
+            progressDialog.setMessage(mCtx.getString(R.string.update_cart));
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            String updatedParams = updatedData();
+            WebServicePostCall webServicePostCal=new WebServicePostCall();
+            String response =  webServicePostCal.excutePost(WebServiceUrl.BASE_URL + WebServiceUrl.UPDATE_ORDER_DATA, updatedParams, readPref.getAuthToken());
+            return response ;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            progressDialog.dismiss();
+            parseUpdatedOrderJson(result);
+            if(custFlag) {
+                new GetCustomerData().execute();
+            }else {
+                if (fragment != null) {
+                    FragmentManager fragmentManager = ((Activity) mCtx).getFragmentManager();
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.content_frame, fragment)
+                            .commit();
+                }
+            }
+            super.onPostExecute(result);
+        }
+    }
+
+    public String updatedData() {
+        // We should also save prod and quant data in shared pref as done in generateOrderid fragment
+        JSONObject newData = new JSONObject();
+        JSONObject orderData =  new JSONObject();
+        JSONArray mProdJSONArray = new JSONArray(currentProdArray);
+        JSONArray mQuantJSONArray = new JSONArray(currentQuantArray);
+        try {
+            orderData.put("timestamp",utilLib.getCurrentTimeStamp());
+            orderData.put("barcode_data", mProdJSONArray);
+            orderData.put("quant_array",mQuantJSONArray);
+            orderData.put("machine_id", 999);
+            newData.put("orderid",readPref.getOrderId());
+            newData.put("order_data",orderData);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return newData.toString();
+    }
+
+    public void parseJson(String result){
+        try {
+            JSONObject newObj=new JSONObject(result);
+            int status=newObj.optInt("status");
+            String cust_name = "";
+            String cust_ph = "";
+            if (status==200){
+               JSONArray customerDataArray =  newObj.optJSONArray("customer_data");
+                if(customerDataArray.length() > 0) {
+                    JSONObject customerData = customerDataArray.getJSONObject(0);
+                    cust_name = customerData.optString("name");
+                    cust_ph = customerData.optString("phone");
+                    savePref.saveCustInfo(cust_name + ";CUSTOMER, " + cust_ph);
+                }else {
+                    cust_name = "New Customer";
+                    cust_ph = phoneNoEt.getText().toString();
+                    savePref.saveCustInfo(cust_name + ";CUSTOMER, " + cust_ph);
+                }
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+    public void parseUpdatedOrderJson(String json){
+        try {
+            JSONObject parentObj = new JSONObject(json);
+            JSONObject updateCartData;
+            int status=parentObj.optInt("status");
+            if (status==200){
+                updateCartData = parentObj.optJSONObject("order_data").optJSONObject("cart_data");
+                Double update_amount = updateCartData.optDouble("amount_charge");
+                savePref.saveAmountPaid(update_amount.toString());
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
     public class VHItem extends RecyclerView.ViewHolder{

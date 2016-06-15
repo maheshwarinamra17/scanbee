@@ -115,9 +115,10 @@
 
             <ImageView
                 android:id="@+id/delete_prod"
-                android:layout_width="@dimen/small_icon"
-                android:layout_height="@dimen/small_icon"
+                android:layout_width="@dimen/carret_icon_size"
+                android:layout_height="@dimen/carret_icon_size"
                 android:layout_marginRight="@dimen/side_margin"
+                android:padding="@dimen/row_margin"
                 android:layout_centerInParent="true"
                 android:layout_alignParentEnd="true"
                 android:src="@drawable/delete"/>

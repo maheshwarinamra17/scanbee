@@ -57,6 +57,7 @@ public class CartItemFragment extends Fragment{
     Double discount;
     Double tax;
     int ItemsScanned;
+    JSONObject cartData;
 
     public CartItemFragment() {
     }
@@ -96,10 +97,12 @@ public class CartItemFragment extends Fragment{
             Toolbar toolbar = (Toolbar)activity.findViewById(R.id.toolbar);
             TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
             ImageView cancelButton = (ImageView) activity.findViewById(R.id.cancelorder);
-            ImageView addMoreButton = (ImageView) activity.findViewById(R.id.addmore);
-
+            ImageView newOrder = (ImageView) activity.findViewById(R.id.neworder);
+            ImageView addMore = (ImageView) activity.findViewById(R.id.addmore);
             cancelButton.setVisibility(View.VISIBLE);
-            addMoreButton.setVisibility(View.VISIBLE);
+            newOrder.setVisibility(View.GONE);
+            addMore.setVisibility(View.VISIBLE);
+
             mTitle.setText(R.string.cart_item);
         }
     }
@@ -122,7 +125,7 @@ public class CartItemFragment extends Fragment{
         currentQuantArray =  new ArrayList<String>( Arrays.asList(readPref.getOrderQuants().split("-")));
         currentProdArray.remove(0);
         currentQuantArray.remove(0);
-        cartItemAdapter = new CartItemAdapter(getHeaderValues(),cartItemList,getActivity(),currentProdArray,currentQuantArray);
+        cartItemAdapter = new CartItemAdapter(getHeaderValues(),cartItemList,getActivity(),currentProdArray,currentQuantArray,cartData);
         recyclerView.setAdapter(cartItemAdapter);
         cartItemAdapter.getItemCount();
     }
@@ -160,7 +163,7 @@ public class CartItemFragment extends Fragment{
             if (status==200){
                 String message=parentObj.optString("Success");
                 JSONObject orderDataObj=parentObj.optJSONObject("order_data");
-                JSONObject cartData=orderDataObj.optJSONObject("cart_data");
+                 cartData=orderDataObj.optJSONObject("cart_data");
                  amount_charge=cartData.optDouble("amount_charge");
                  cart_value=cartData.optDouble("cart_value");
                  discount=cartData.optDouble("discount");
@@ -182,8 +185,9 @@ public class CartItemFragment extends Fragment{
                     String created_at=prodDataObj.optString("created_at");
                     String updated_at=prodDataObj.optString("updated_at");
                     int quantity=prodDataObj.optInt("quantity");
+                    String tax_n_disc =  prodDataObj.optString("tax_n_disc");
                     ItemsScanned = ItemsScanned + quantity;
-                    CartItemModelClass cartItemModelClass = new CartItemModelClass(id,brand,title,content,content_unit,cat_name,cat_id,item_id,mrp,cp,created_at,updated_at,quantity);
+                    CartItemModelClass cartItemModelClass = new CartItemModelClass(id,brand,title,content,content_unit,cat_name,cat_id,item_id,mrp,cp,created_at,updated_at,quantity,tax_n_disc);
                     cartItemList.add(cartItemModelClass);
                 }
                 savePref.saveItemsScanned(ItemsScanned);

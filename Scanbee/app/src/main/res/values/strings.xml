@@ -28,6 +28,7 @@
     <string name="no_rasp_hub">Please check Raspberry Hub Power and internet connectivity</string>
     <string name="dup_order">Oops! sounds like a duplicate order scan and try again</string>
     <string name="empty_cart">Seems like your cart is empty. Would you like to add more products ?</string>
+    <string name="valid_ph">Provide a valid Mobile number</string>
     <string name="new_order">New Order</string>
     <string name="unp_error">Enter Username and Password</string>
     <string name="logout_avatar">Avatar</string>
@@ -52,12 +53,12 @@
     <string name="cust_expiry">Expiry (MM/YYYY)</string>
     <string name="cust_name">Customer Name</string>
     <string name="cust_cvv">CVV</string>
-    <string name="pay_cash">Pay Cash</string>
+    <string name="pay_cash">Take cash from buyer</string>
     <string name="p_cash">Cash</string>
     <string name="p_credit">Credit</string>
     <string name="p_card">Card</string>
-    <string name="add_credit">Add to credits</string>
-    <string name="cont_invoice">Continue to invoice</string>
+    <string name="add_credit">Add to buyer credits</string>
+    <string name="cont_invoice">Pay Now</string>
     <string name="print_invoice">SMS invoice</string>
     <string name="share_invoice">Share invoice</string>
     <string name="ok">ok</string>
@@ -69,6 +70,8 @@
     <string name="cancel_order">Do you want to cancel current order ?</string>
     <string name="load_prod">Fetching product data</string>
     <string name="pay_prod">Fetching payment details</string>
+    <string name="cust_info">Fetching Customer details</string>
+    <string name="update_cart">Fetching Updated Cart</string>
     <string name="sold_prod">Products Sold</string>
     <string name="load_logging">Logging in</string>
     <string name="logout">Logging out..</string>

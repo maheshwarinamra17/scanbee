@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.scanbee.scanbee.MainActivity;
 import com.scanbee.scanbee.R;
 import com.scanbee.sharedpref.ReadPref;
+import com.scanbee.util.Utils;
 
 /**
  * Created by kshitij on 5/5/2016.
@@ -24,11 +25,13 @@ public class InvoiceFragment extends Fragment {
     View viewMain;
     TextView amountPaid,amountPaidTxt,orderId,orderIdTxt,custName,custInfo,circleImgTv;
     ReadPref readPref;
+    Utils utilLib;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         viewMain=inflater.inflate(R.layout.invoice_frgment,null,false);
-
+        utilLib = new Utils(getActivity());
+        utilLib.hideKeyboard();
         amountPaid = (TextView)viewMain.findViewById(R.id.amount_paidin);
         amountPaidTxt = (TextView)viewMain.findViewById(R.id.amountPaidInTxt);
         orderId = (TextView)viewMain.findViewById(R.id.orderIdIn);
@@ -49,6 +52,10 @@ public class InvoiceFragment extends Fragment {
         orderIdTxt.setTypeface(NotoSans);
         custName.setTypeface(RobotoMed);
         custInfo.setTypeface(NotoSans);
+        String[] customer_info = readPref.getCustInfo().split(";");
+        custName.setText(customer_info[0]);
+        custInfo.setText(customer_info[1]);
+        circleImgTv.setText(String.valueOf(customer_info[0].toString().charAt(0)));
         circleImgTv.setTypeface(RobotoThin);
         amountPaid.setText(getActivity().getString(R.string.Rs) + readPref.getAmountPaid());
         orderId.setText("SBO"+readPref.getOrderId());
@@ -71,12 +78,11 @@ public class InvoiceFragment extends Fragment {
             Toolbar toolbar = (Toolbar)activity.findViewById(R.id.toolbar);
             TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
             ImageView cancelButton = (ImageView) activity.findViewById(R.id.cancelorder);
-            ImageView addMoreButton = (ImageView) activity.findViewById(R.id.addmore);
             ImageView newOrder = (ImageView) activity.findViewById(R.id.neworder);
+            ImageView addMore = (ImageView) activity.findViewById(R.id.addmore);
             cancelButton.setVisibility(View.GONE);
-            addMoreButton.setVisibility(View.GONE);
             newOrder.setVisibility(View.VISIBLE);
-
+            addMore.setVisibility(View.GONE);
             mTitle.setText(R.string.invoice);
         }
     }

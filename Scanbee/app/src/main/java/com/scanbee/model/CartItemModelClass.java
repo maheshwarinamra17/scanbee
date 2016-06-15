@@ -17,9 +17,9 @@ public class CartItemModelClass {
     String createdAt;
     String updatedAt;
     int quantity;
+    String tandD;
 
-
-    public CartItemModelClass(int id, String brand, String title, float content, String contentItem, String catName, int carId, String itemId, Double mrp, Double cp, String createdAt, String updatedAt,int quantity) {
+    public CartItemModelClass(int id, String brand, String title, float content, String contentItem, String catName, int carId, String itemId, Double mrp, Double cp, String createdAt, String updatedAt,int quantity,String tandD) {
         this.id = id;
         this.brand = brand;
         this.title = title;
@@ -33,6 +33,11 @@ public class CartItemModelClass {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.quantity = quantity;
+        this.tandD = tandD;
+
+    }
+    public String getTandD() {
+        return tandD;
     }
 
     public int getId() {
@@ -137,4 +142,9 @@ public class CartItemModelClass {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    public void setTandD(String tandD) {
+        this.tandD = tandD;
+    }
+
 }

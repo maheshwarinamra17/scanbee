@@ -31,7 +31,6 @@ import com.scanbee.dialog.DialogCustom;
 import com.scanbee.dialog.ToastCustom;
 import com.scanbee.fragment.AnalyticsFragment;
 import com.scanbee.fragment.GenerateOrderidFragment;
-import com.scanbee.fragment.PaymentGetWayFragment;
 import com.scanbee.fragment.SettingFragment;
 import com.scanbee.servercommunication.NetworkAvailablity;
 import com.scanbee.servercommunication.WebRequest;
@@ -171,19 +170,19 @@ public class MainActivity extends AppCompatActivity
                 }
                 break;
             case R.id.orderLinearLayout:
-                getFragmentManager().beginTransaction().replace(R.id.content_frame,new PaymentGetWayFragment()).commit();
+                getFragmentManager().beginTransaction().replace(R.id.content_frame,new GenerateOrderidFragment()).commit();
                 if (drawer.isDrawerOpen(GravityCompat.START)) {
                     drawer.closeDrawer(GravityCompat.START);
                 }
                 break;
             case R.id.custLinearLayout:
-                getFragmentManager().beginTransaction().replace(R.id.content_frame,new PaymentGetWayFragment()).commit();
+                getFragmentManager().beginTransaction().replace(R.id.content_frame,new GenerateOrderidFragment()).commit();
                 if (drawer.isDrawerOpen(GravityCompat.START)) {
                     drawer.closeDrawer(GravityCompat.START);
                 }
                 break;
             case R.id.iventryLinearLayout:
-                getFragmentManager().beginTransaction().replace(R.id.content_frame,new PaymentGetWayFragment()).commit();
+                getFragmentManager().beginTransaction().replace(R.id.content_frame,new GenerateOrderidFragment()).commit();
                 if (drawer.isDrawerOpen(GravityCompat.START)) {
                     drawer.closeDrawer(GravityCompat.START);
                 }
@@ -195,7 +194,7 @@ public class MainActivity extends AppCompatActivity
                 }
                 break;
             case R.id.askScanBeeLinearLayout:
-                getFragmentManager().beginTransaction().replace(R.id.content_frame,new PaymentGetWayFragment()).commit();
+                getFragmentManager().beginTransaction().replace(R.id.content_frame,new GenerateOrderidFragment()).commit();
                 if (drawer.isDrawerOpen(GravityCompat.START)) {
                     drawer.closeDrawer(GravityCompat.START);
                 }
