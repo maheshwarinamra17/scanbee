@@ -27,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.crashlytics.android.Crashlytics;
 import com.scanbee.dialog.DialogCustom;
 import com.scanbee.dialog.ToastCustom;
 import com.scanbee.fragment.AnalyticsFragment;
@@ -40,6 +41,8 @@ import com.scanbee.sharedpref.ReadPref;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import io.fabric.sdk.android.Fabric;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener  {
     DrawerLayout drawer;
@@ -51,6 +54,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Fabric.with(this, new Crashlytics());
         readPref = new ReadPref(MainActivity.this);
         progressDialog = new ProgressDialog(MainActivity.this);
         if (savedInstanceState == null) {

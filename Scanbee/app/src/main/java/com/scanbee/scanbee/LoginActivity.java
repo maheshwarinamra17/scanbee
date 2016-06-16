@@ -25,6 +25,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.crashlytics.android.Crashlytics;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.scanbee.dialog.ToastCustom;
 import com.scanbee.servercommunication.WebRequest;
@@ -36,6 +38,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+
+import io.fabric.sdk.android.Fabric;
 
 /**
  * Created by kshitij on 5/5/2016.
@@ -55,6 +59,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.login_activity);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
