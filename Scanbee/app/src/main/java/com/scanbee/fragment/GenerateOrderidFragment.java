@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -33,6 +34,8 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.net.HttpURLConnection;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -50,6 +53,8 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
     String raspberryData;
     AVLoadingIndicatorView loader;
     ImageView shopIcon;
+    Boolean addMoreFlag;
+    int newDataLength;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,6 +64,10 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
         savePref=new SavePref(getActivity());
         readPref=new ReadPref(getActivity());
         progressDialog = new ProgressDialog(getActivity());
+        addMoreFlag = false;
+        if(getArguments()!=null) {
+            addMoreFlag = getArguments().getBoolean("add_more");
+        }
         setupActionBar();
         setUpUi();
         return viewMain;
@@ -120,6 +129,11 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
             itemScan.setTypeface(NotoSans);
             storeName.setTypeface(Roboto);
 
+            if(addMoreFlag){
+                idTv.setText("SBO"+readPref.getOrderId());
+                totalIitemSelectedTv.setText(readPref.getItemsScanned()+" + X");
+            }
+
         }
 
 
@@ -159,9 +173,9 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
             WebRequest webRequest= new WebRequest();
             readPref = new ReadPref(getActivity());
             if(readPref.getOrderType().equals("1")){
-                forecastJsonStr=webRequest.makeWebServiceCall("http://"+readPref.getIpAddress()+ WebServiceUrl.GET_RASPBERRY_DATA,webRequest.GET,readPref.getAuthToken());
+                forecastJsonStr=webRequest.makeWebServiceCall("http://" + readPref.getIpAddress() + WebServiceUrl.GET_RASPBERRY_DATA, webRequest.GET, readPref.getAuthToken());
             }else{
-                forecastJsonStr=webRequest.makeWebServiceCall(WebServiceUrl.BASE_URL + WebServiceUrl.GENERATE_DUMMY_ORDER ,webRequest.GET,readPref.getAuthToken());
+                forecastJsonStr=webRequest.makeWebServiceCall(WebServiceUrl.BASE_URL + WebServiceUrl.GENERATE_DUMMY_ORDER, webRequest.GET, readPref.getAuthToken());
             }
             return forecastJsonStr;
 
@@ -174,7 +188,7 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
                 if (result.length() == 0) {
                     new DialogCustom(activity, getString(R.string.no_rasp_hub), activity.getDrawable(R.drawable.raspberry), getString(R.string.ok)).show();
                 }else {
-                    raspberryData = RaspToOrderIDData(result);
+                    raspberryData = result;
                     if(raspberryData.equals(getString(R.string.duplicacy))){
                         new DialogCustom(activity, getString(R.string.dup_order), activity.getDrawable(R.drawable.fishy), getString(R.string.ok),getString(R.string.try_again)).show();
                         return;
@@ -236,7 +250,55 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
         return newData.toString();
     }
 
+    public String UpdatedProductsData(){
+        JSONObject updatedData = new JSONObject();
+        ArrayList<String> currentProdArray,currentQuantArray;
+        try {
+            JSONObject newOrderData= new JSONObject(raspberryData);
+            JSONObject updatedOrderData = new JSONObject();
+            updatedOrderData.put("timestamp",newOrderData.optString("timestamp"));
+            updatedOrderData.put("machine_id",newOrderData.optInt("machine_id"));
+                currentProdArray = new ArrayList<String>(Arrays.asList(readPref.getOrderProds().split("-")));
+                currentQuantArray =  new ArrayList<String>( Arrays.asList(readPref.getOrderQuants().split("-")));
+                currentProdArray.remove(0);
+                currentQuantArray.remove(0);
+            JSONArray newBarcodeData = newOrderData.optJSONArray("barcode_data");
+            newDataLength =  newBarcodeData.length();
+            for(int i=0; i < newDataLength; i++){
+               if(currentProdArray.contains(newBarcodeData.getString(i))) {
+                   int index = currentProdArray.indexOf(newBarcodeData.getString(i));
+                   currentQuantArray.set(index,String.valueOf(Integer.valueOf(currentQuantArray.get(index))+1));
+               } else{
+                   currentProdArray.add(newBarcodeData.getString(i));
+                   currentQuantArray.add("1");
+               }
+            }
+            updateSharedPrefProd(currentProdArray);
+            updateSharedPrefQuant(currentQuantArray);
+            updatedOrderData.put("barcode_data",new JSONArray(currentProdArray));
+            updatedOrderData.put("quant_array",new JSONArray(currentQuantArray));
+            updatedData.put("orderid",readPref.getOrderId());
+            updatedData.put("order_data",updatedOrderData);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return updatedData.toString();
+    }
 
+    public void updateSharedPrefProd(ArrayList<String> currentProdArray){
+        String dspProd ="";
+        for(String p: currentProdArray){
+            dspProd += "-" + p;
+        }
+        savePref.saveOrderProducts(dspProd);
+    }
+    public void updateSharedPrefQuant(ArrayList<String> currentQuantArray){
+        String dspQuant ="";
+        for(String q: currentQuantArray){
+            dspQuant += "-" + q;
+        }
+        savePref.saveOrderQuants(dspQuant);
+    }
 
     private class GetOrderIdAsynctask extends AsyncTask<Void, Void, String> {
 
@@ -247,10 +309,16 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
 
         @Override
         protected String doInBackground(Void... params) {
-            String param;
-            param = raspberryData;
-            WebServicePostCall webServicePostCal=new WebServicePostCall();
-            String response =  webServicePostCal.excutePost(WebServiceUrl.BASE_URL+WebServiceUrl.GENERATE_ORDER_ID, param,readPref.getAuthToken());
+            String param, response =  null;
+            if(addMoreFlag){
+                param = UpdatedProductsData();
+                WebServicePostCall webServicePostCal = new WebServicePostCall();
+                response = webServicePostCal.excutePost(WebServiceUrl.BASE_URL + WebServiceUrl.UPDATE_ORDER_DATA, param, readPref.getAuthToken());
+            } else {
+                param = RaspToOrderIDData(raspberryData);
+                WebServicePostCall webServicePostCal = new WebServicePostCall();
+                response = webServicePostCal.excutePost(WebServiceUrl.BASE_URL + WebServiceUrl.GENERATE_ORDER_ID, param, readPref.getAuthToken());
+            }
             return response ;
 
         }
@@ -258,12 +326,18 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
         @Override
         protected void onPostExecute(String result) {
             if(isAdded()) {
-                parseJson(result);
+                if(addMoreFlag) {
+                    parseUpdatedJson(result);
+                }else{
+                    parseJson(result);
+                }
                 loader.setVisibility(View.GONE);
                 shopIcon.setVisibility(View.VISIBLE);
                 continue_btn.setEnabled(true);
                 continue_btn.setBackgroundResource(R.drawable.button_app_color);
                 continue_btn.setText(R.string.continue_btn);
+                MediaPlayer mp = MediaPlayer.create(activity, R.raw.order);
+                mp.start();
                 continue_btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -290,7 +364,6 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
                   continue_btn.setText(R.string.continue_btn);
                   continue_btn.setBackgroundResource(R.drawable.button_app_color);
               }
-              String message=newObj.optString("message");
               JSONObject orderdata  = newObj.optJSONObject("order_data");
               int order_id=orderdata.optInt("orderid");
               int quantity=orderdata.optInt("quantity");
@@ -304,4 +377,29 @@ public class GenerateOrderidFragment extends Fragment implements View.OnClickLis
               e.printStackTrace();
           }
       }
+
+    public void parseUpdatedJson(String result){
+        try {
+            JSONObject newObj=new JSONObject(result);
+            int status=newObj.optInt("status");
+            if (status==200) {
+                continue_btn.setEnabled(true);
+                continue_btn.setText(R.string.continue_btn);
+                continue_btn.setBackgroundResource(R.drawable.button_app_color);
+
+                JSONObject orderdata = newObj.optJSONObject("order_data");
+                JSONArray prodData = orderdata.optJSONArray("prod_data");
+                int order_id = readPref.getOrderId();
+                int quantity = readPref.getItemsScanned();
+                if (order_id != 0) {
+                    idTv.setText("SBO" + String.valueOf(order_id));
+                    totalIitemSelectedTv.setText(quantity + " + " +String.valueOf(newDataLength));
+                }
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

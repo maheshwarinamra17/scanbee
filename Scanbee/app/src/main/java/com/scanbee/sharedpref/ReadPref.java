@@ -73,5 +73,8 @@ public class ReadPref {
         val = prefs.getInt("items_scanned", 0);
         return val;
     }
-
+    public String getLangPref() {
+        res = prefs.getString("lang", "");
+        return res;
+    }
 }

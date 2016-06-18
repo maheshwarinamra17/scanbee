@@ -157,8 +157,8 @@ public class PaymentGetWayFragment extends Fragment implements View.OnClickListe
         mainJsonObject.put("order_id", readPref.getOrderId());
         mainJsonObject.put("amount_paid",readPref.getAmountPaid());
         mainJsonObject.put("gateway_data",childJsonObject);
-            childJsonObject.put("id", "pay_29QQoUBi66xm2f");
-            childJsonObject.put("amount", 5000);
+            childJsonObject.put("id", "dummy_pay_"+readPref.getOrderId());
+            childJsonObject.put("amount", readPref.getAmountPaid());
             childJsonObject.put("status", 200);
             childJsonObject.put("message", "captured");
         return mainJsonObject.toString();

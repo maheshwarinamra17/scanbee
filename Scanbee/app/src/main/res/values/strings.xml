@@ -1,6 +1,10 @@
 <resources>
+    <string name="roboto_font">fonts/Roboto-Regular.ttf</string>
+    <string name="roboto_thin">fonts/Roboto-Thin.ttf</string>
+    <string name="roboto_med">fonts/Roboto-Medium.ttf</string>
+    <string name="roboto_light">fonts/Roboto-Light.ttf</string>
+    <string name="noto_sans">fonts/NotoSans-Regular.ttf</string>
     <string name="app_name">Scanbee</string>
-    <string name="action_settings">setting</string>
     <string name="duplicacy">DUPLICACY</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -20,8 +24,6 @@
     <string name="cart_value">CART VALUE</string>
     <string name="tax">TAX</string>
     <string name="discount">DISCOUNT</string>
-    <string name="computer">Computer</string>
-    <string name="design">Design</string>
     <string name="no_internet_connection">No Internet Connection</string>
     <string name="no_internet_connection_play">There is no network connection available. Please try again.</string>
     <string name="some_thing_went_wrong">Some went wrong. Please restart your app again</string>
@@ -31,7 +33,6 @@
     <string name="valid_ph">Provide a valid Mobile number</string>
     <string name="new_order">New Order</string>
     <string name="unp_error">Enter Username and Password</string>
-    <string name="logout_avatar">Avatar</string>
     <string name="please_wait">Please Wait..</string>
     <string name="Rs">\u20B9</string>
     <string name="sales">Sales</string>
@@ -39,7 +40,6 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="phone_no">Customer Phone Number</string>
-    <string name="custInformation">Customer Information</string>
     <string name="avg_order_time">Average order time</string>
     <string name="order_id">ORDER ID</string>
     <string name="items_scanned">ITEMS SCANNED</string>
@@ -72,6 +72,9 @@
     <string name="pay_prod">Fetching payment details</string>
     <string name="cust_info">Fetching Customer details</string>
     <string name="update_cart">Fetching Updated Cart</string>
+    <string name="cancel_order_toast">Cancelling order</string>
+    <string name="cancelled_order">Order Cancelled</string>
+    <string name="lang_change">Language Changed to</string>
     <string name="sold_prod">Products Sold</string>
     <string name="load_logging">Logging in</string>
     <string name="logout">Logging out..</string>
@@ -89,13 +92,13 @@
     <string name="settings">Settings</string>
     <string name="help">Ask Scanbee</string>
     <string name="helphash">#AskScanbee</string>
-    <string name="roboto_font">fonts/Roboto-Regular.ttf</string>
-    <string name="roboto_thin">fonts/Roboto-Thin.ttf</string>
-    <string name="roboto_med">fonts/Roboto-Medium.ttf</string>
-    <string name="roboto_light">fonts/Roboto-Light.ttf</string>
-    <string name="noto_serif">fonts/NotoSerif-Regular.ttf</string>
-    <string name="noto_sans">fonts/NotoSans-Regular.ttf</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
-
+    <string name="lang">Language</string>
+    <string name="hindi">हिंदी</string>
+    <string name="english">English</string>
+    <string name="pending_shop">Pending in shop</string>
+    <string name="pay_in_cash">Pay in cash</string>
+    <string name="pay_in_credit">Pay in cash</string>
+    <string name="need_help">Need help? call us at</string>
+    <string name="charge">Charge</string>
+    <string name="no_cust">No customer found</string>
 </resources>

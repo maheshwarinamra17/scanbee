@@ -4,6 +4,7 @@ package com.scanbee.scanbee;
  * Created by kshitij on 4/25/2016.
  */
 
+import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -35,6 +36,7 @@ import com.scanbee.fragment.GenerateOrderidFragment;
 import com.scanbee.fragment.SettingFragment;
 import com.scanbee.servercommunication.NetworkAvailablity;
 import com.scanbee.servercommunication.WebRequest;
+import com.scanbee.servercommunication.WebServicePostCall;
 import com.scanbee.servercommunication.WebServiceUrl;
 import com.scanbee.sharedpref.ReadPref;
 
@@ -48,8 +50,9 @@ public class MainActivity extends AppCompatActivity
     DrawerLayout drawer;
     ProgressDialog progressDialog;
     Toolbar toolbar;
-    ImageView logout,cancelOrder,newOrder;
+    ImageView logout,cancelOrder,newOrder,addMore;
     ReadPref readPref;
+    ToastCustom customToast;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,8 +88,10 @@ public class MainActivity extends AppCompatActivity
       public void setUpToolBarItemHandle(){
           cancelOrder = (ImageView)toolbar.findViewById(R.id.cancelorder);
           newOrder = (ImageView)toolbar.findViewById(R.id.neworder);
+          addMore = (ImageView)toolbar.findViewById(R.id.addmore);
           cancelOrder.setOnClickListener(this);
           newOrder.setOnClickListener(this);
+          addMore.setOnClickListener(this);
       }
     @Override
     public void onBackPressed() {
@@ -218,15 +223,73 @@ public class MainActivity extends AppCompatActivity
                 }
                 break;
             case R.id.cancelorder:
-                new DialogCustom(MainActivity.this,getString(R.string.cancel_order),MainActivity.this.getDrawable(R.drawable.cancel_order),getString(R.string.ok),getString(R.string.cancel)).show();
+//              new DialogCustom(MainActivity.this,getString(R.string.cancel_order),MainActivity.this.getDrawable(R.drawable.cancel_order),getString(R.string.ok),getString(R.string.cancel)).show();
+                new DoCancelOrder().execute();
                 break;
             case R.id.neworder:
                 getFragmentManager().beginTransaction().replace(R.id.content_frame,new GenerateOrderidFragment()).commit();
+                break;
+            case R.id.addmore:
+                android.app.Fragment fragment;
+                fragment = new GenerateOrderidFragment();
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("add_more", true);
+                fragment.setArguments(bundle);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.content_frame, fragment)
+                        .commit();
                 break;
             default:
                 break;
         }
     }
+
+    private class DoCancelOrder extends AsyncTask<Void, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog.setMessage(getApplicationContext().getString(R.string.cancel_order_toast));
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            JSONObject param = new JSONObject();
+            try {
+                param.put("orderid", String.valueOf(readPref.getOrderId()));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            WebServicePostCall webServicePostCal=new WebServicePostCall();
+            String response =  webServicePostCal.excutePost(WebServiceUrl.BASE_URL + WebServiceUrl.CANCEL_ORDER, param.toString(), readPref.getAuthToken());
+            return response;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            progressDialog.dismiss();
+            try {
+                JSONObject jsonObject = new JSONObject(result);
+                int status = jsonObject.optInt("status");
+                boolean logout_status = jsonObject.optBoolean("update_status");
+                if (status==200 && logout_status==true){
+                    customToast = new ToastCustom(getApplicationContext());
+                    customToast.show(getString(R.string.cancelled_order)+": SBO"+readPref.getOrderId());
+                    getFragmentManager().beginTransaction().replace(R.id.content_frame,new GenerateOrderidFragment()).commit();
+                }else {
+                    new DialogCustom(MainActivity.this, getString(R.string.some_thing_went_wrong), MainActivity.this.getDrawable(R.drawable.fishy), getString(R.string.ok),getString(R.string.try_again)).show();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
     private class GetUserLogOutAsynctask extends AsyncTask<Void, Void, String> {
 
         @Override
@@ -258,7 +321,7 @@ public class MainActivity extends AppCompatActivity
                     Intent intent = new Intent(MainActivity.this,LoginActivity.class);
                     startActivity(intent);
                 }else {
-                    new DialogCustom(MainActivity.this, getString(R.string.some_thing_went_wrong), MainActivity.this.getDrawable(R.drawable.router), getString(R.string.ok),getString(R.string.try_again)).show();
+                    new DialogCustom(MainActivity.this, getString(R.string.some_thing_went_wrong), MainActivity.this.getDrawable(R.drawable.fishy), getString(R.string.ok),getString(R.string.try_again)).show();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

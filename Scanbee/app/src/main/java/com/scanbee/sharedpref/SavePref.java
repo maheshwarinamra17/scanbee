@@ -77,6 +77,11 @@ public class SavePref {
         editor.putInt("items_scanned", items);
         editor.commit();
     }
+    public void saveLangPref(String lang){
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("lang", lang);
+        editor.commit();
+    }
 
 
 }

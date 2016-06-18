@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/ipAddressET"
@@ -37,7 +42,7 @@
         android:layout_marginTop="@dimen/row_item_margin"
         android:layout_marginLeft="@dimen/top_margin"
         android:layout_marginRight="@dimen/top_margin"
-        android:layout_marginBottom="@dimen/top_margin"
+        android:layout_marginBottom="@dimen/row_item_margin"
         app:met_textColorHint="@color/app_color"
         app:met_underlineColor="@color/gray_light"
         app:met_primaryColor="@color/app_color"
@@ -48,6 +53,47 @@
         app:met_errorColor="@color/app_red"
         app:met_floatingLabel="highlight"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/row_item_margin"
+        android:layout_marginBottom="@dimen/top_margin"
+        android:gravity="center"
+        android:layout_below="@id/order_type">
+
+        <ImageView
+            android:layout_width="@dimen/small_icon"
+            android:layout_height="@dimen/small_icon"
+            android:layout_marginRight="@dimen/top_margin"
+            android:src="@drawable/flag" />
+
+        <TextView
+            android:id="@+id/HindiBtnBtn"
+            android:text="@string/hindi"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/button_text"
+            android:padding="@dimen/row_margin"
+            android:paddingLeft="@dimen/elem_margin"
+            android:paddingRight="@dimen/elem_margin"
+            android:background="@drawable/button_gray_color"
+            android:layout_marginRight="@dimen/side_margin"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:id="@+id/EnglishBtnBtn"
+            android:text="@string/english"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/row_margin"
+            android:background="@drawable/button_gray_color"
+            android:textSize="@dimen/button_text"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
     <Button
         android:id="@+id/saveBtn"
         android:text="@string/save"
@@ -61,4 +107,6 @@
         android:layout_marginRight="@dimen/side_margin"
         android:layout_marginBottom="@dimen/side_margin"
         android:textColor="@color/white"/>
-</RelativeLayout>
+
+</LinearLayout>
+</ScrollView>

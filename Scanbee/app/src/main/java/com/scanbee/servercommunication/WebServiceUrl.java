@@ -15,5 +15,6 @@ public class WebServiceUrl {
     public static final String GET_USER_LOGOUT = "user_logout";
     public static final String GET_CUSTOMER_DATA = "get_customer_data";
     public static final String GENERATE_PAYMENT_DATA = "generate_payment_data";
+    public static final String CANCEL_ORDER = "cancel_order";
 
 }

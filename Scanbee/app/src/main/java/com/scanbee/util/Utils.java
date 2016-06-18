@@ -2,13 +2,17 @@ package com.scanbee.util;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.provider.Settings.Secure;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by kshitij on 5/27/2016.
@@ -49,5 +53,13 @@ public class Utils {
             e.printStackTrace();
             return null;
         }
+    }
+    public void activitySetLocale(String lang) {
+        Locale myLocale = new Locale(lang);
+        Resources res = mContext.getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
     }
 }

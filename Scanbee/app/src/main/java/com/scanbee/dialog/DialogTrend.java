@@ -97,7 +97,7 @@ public class DialogTrend {
                 dialog.dismiss();
             }
             dialog.show();
-            Button okTv = (Button) dialog.findViewById(R.id.okTv);
+            Button okTv = (Button) dialog.findViewById(R.id.okTrendsTv);
             okTv.setText(btnText);
             okTv.setTypeface(Roboto);
             okTv.setOnClickListener(new OnClickListener() {

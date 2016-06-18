@@ -97,7 +97,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             VHheader.discountTv.setText(mCtx.getString(R.string.Rs) + String.valueOf(header.getDiscount()));
             VHheader.taxTv.setText(mCtx.getString(R.string.Rs) + String.valueOf(header.getTax()));
             VHheader.cartValueTv.setText(mCtx.getString(R.string.Rs) + String.valueOf(header.getCartValue()));
-            VHheader.chargRsBtn.setText("Charge  "+ mCtx.getString(R.string.Rs) + String.valueOf(header.getAmount()));
+            VHheader.chargRsBtn.setText(mCtx.getString(R.string.charge)+ " " + mCtx.getString(R.string.Rs) + String.valueOf(header.getAmount()));
             VHheader.chargRsBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -142,7 +142,8 @@ public class CartItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                                                        adjustHeaderValues(modelClass.getMrp(),modelClass.getTandD(),oldQuant,numberPicker.getCount());
                                                        modelClass.setQuantity(numberPicker.getCount());
                                                        savePref.saveItemsScanned(readPref.getItemsScanned() + numberPicker.getCount() - oldQuant);
-                                                       currentQuantArray.add(currentProdArray.indexOf(modelClass.getItemId()), String.valueOf(numberPicker.getCount()));
+                                                       currentQuantArray.set(currentProdArray.indexOf(modelClass.getItemId()), String.valueOf(numberPicker.getCount()));
+                                                       updateSharedPrefQuant();
                                                        VHItem.mrp.setText(mCtx.getString(R.string.Rs) + String.valueOf(modelClass.getMrp() * modelClass.getQuantity()));
                                                        String itemInfoText = String.valueOf(modelClass.getQuantity()) + " x " + mCtx.getString(R.string.Rs) + modelClass.getMrp() + ", " +
                                                                modelClass.getContent() + " " + modelClass.getContentItem();
@@ -162,6 +163,8 @@ public class CartItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                                                           savePref.saveItemsScanned(readPref.getItemsScanned() - oldQuant);
                                                           currentQuantArray.remove(index);
                                                           currentProdArray.remove(index);
+                                                          updateSharedPrefProd();
+                                                          updateSharedPrefQuant();
                                                           if (currentProdArray.size() == 0) {
                                                               new DialogCustom(mCtx, mCtx.getString(R.string.empty_cart), mCtx.getDrawable(R.drawable.fishy),
                                                                       mCtx.getString(R.string.ok), mCtx.getString(R.string.new_order)).show();
@@ -215,6 +218,22 @@ public class CartItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             discountTvTxt.setTypeface(NotoSans);
         }
     }
+
+    public void updateSharedPrefProd(){
+        String dspProd ="";
+        for(String p: currentProdArray){
+            dspProd += "-" + p;
+        }
+        savePref.saveOrderProducts(dspProd);
+    }
+    public void updateSharedPrefQuant(){
+        String dspQuant ="";
+        for(String q: currentQuantArray){
+            dspQuant += "-" + q;
+        }
+        savePref.saveOrderQuants(dspQuant);
+    }
+
     public void adjustHeaderValues(Double mrp, String TnD, int oldQuant, int newQuant){
 
         Double cartValue = header.getCartValue();
@@ -302,7 +321,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     }
                 }
                 dialog.dismiss();
-                savePref.saveCustInfo("No Customer Found;XXXXXXXXXX");
+                savePref.saveCustInfo(mCtx.getString(R.string.no_cust)+";XXXXXXXXXX");
             }
         });
     }

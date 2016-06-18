@@ -33,6 +33,7 @@ import com.scanbee.servercommunication.WebRequest;
 import com.scanbee.servercommunication.WebServiceUrl;
 import com.scanbee.sharedpref.ReadPref;
 import com.scanbee.sharedpref.SavePref;
+import com.scanbee.util.Utils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -55,20 +56,22 @@ public class LoginActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     SavePref savePref;
     ReadPref readPref;
+    Utils utilLib;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());
-        setContentView(R.layout.login_activity);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.parseColor("#212121"));
         }
-
+        utilLib =  new Utils(getApplicationContext());
         readPref = new ReadPref(getApplicationContext());
         savePref = new SavePref(getApplicationContext());
+        utilLib.activitySetLocale(readPref.getLangPref());
+        setContentView(R.layout.login_activity);
         setupUI();
         softKeyboardAdjustments();
         loginBtn.setOnClickListener(new View.OnClickListener() {
@@ -87,13 +90,12 @@ public class LoginActivity extends AppCompatActivity {
         loginHelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                helpDialog(LoginActivity.this, "Need help? call us at " + getString(R.string.helpline));
+                helpDialog(LoginActivity.this, getString(R.string.need_help)+ " " + getString(R.string.helpline));
             }
         });
     }
 
-    public void setupUI()
-    {
+    public void setupUI() {
         progressDialog=new ProgressDialog(LoginActivity.this);
         loginBtn = (Button) findViewById(R.id.loginBtn);
         scanbeeName = (TextView) findViewById(R.id.scanbeeName);
@@ -107,8 +109,6 @@ public class LoginActivity extends AppCompatActivity {
         scanbeeName.setTypeface(RobotoThin);
         scanbeeSubtext.setTypeface(NotoSans);
         loginHelp.setTypeface(NotoSans);
-
-
     }
 
     public void softKeyboardAdjustments(){
