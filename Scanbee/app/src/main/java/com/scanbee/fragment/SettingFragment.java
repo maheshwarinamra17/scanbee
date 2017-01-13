@@ -144,12 +144,6 @@ public class SettingFragment extends Fragment {
         if(activity != null){
             Toolbar toolbar = (Toolbar)activity.findViewById(R.id.toolbar);
             TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-            ImageView cancelButton = (ImageView) activity.findViewById(R.id.cancelorder);
-            ImageView addMoreButton = (ImageView) activity.findViewById(R.id.addmore);
-            ImageView newOrder = (ImageView) activity.findViewById(R.id.neworder);
-            cancelButton.setVisibility(View.GONE);
-            addMoreButton.setVisibility(View.GONE);
-            newOrder.setVisibility(View.GONE);
 
             mTitle.setText(R.string.settings);
         }

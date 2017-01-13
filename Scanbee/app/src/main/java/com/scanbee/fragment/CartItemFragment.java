@@ -96,12 +96,9 @@ public class CartItemFragment extends Fragment{
         if(activity != null){
             Toolbar toolbar = (Toolbar)activity.findViewById(R.id.toolbar);
             TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-            ImageView cancelButton = (ImageView) activity.findViewById(R.id.cancelorder);
-            ImageView newOrder = (ImageView) activity.findViewById(R.id.neworder);
-            ImageView addMore = (ImageView) activity.findViewById(R.id.addmore);
-            cancelButton.setVisibility(View.VISIBLE);
-            newOrder.setVisibility(View.GONE);
-            addMore.setVisibility(View.VISIBLE);
+//            cancelButton.setVisibility(View.VISIBLE);
+//            newOrder.setVisibility(View.GONE);
+//            addMore.setVisibility(View.VISIBLE);
 
             mTitle.setText(R.string.cart_item);
         }

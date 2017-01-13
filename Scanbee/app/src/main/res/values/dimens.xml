@@ -45,6 +45,36 @@
     <dimen name="lc_dot_radius">4dp</dimen>
     <dimen name="lc_data_radius">2dp</dimen>
 
+    <!-- new dimens -->
+    <dimen name="space_0_5x">2dp</dimen>
+    <dimen name="space_1x">8dp</dimen>
+    <dimen name="space_1_5x">10dp</dimen>
+    <dimen name="space_2x">16dp</dimen>
+    <dimen name="space_3x">24dp</dimen>
+    <dimen name="space_4x">32dp</dimen>
+    <dimen name="space_5x">64dp</dimen>
+
+    <dimen name="button_large">52dp</dimen>
+    <dimen name="icon_size">48dp</dimen>
+    <dimen name="icon_size_error_corrected">42dp</dimen>
+    <dimen name="icon_padding">12dp</dimen>
+    <dimen name="keyboard_height">280dp</dimen>
+    <dimen name="key_width">48dp</dimen>
+    <dimen name="key_height">54dp</dimen>
+    <dimen name="big_key_height">124dp</dimen>
+    <dimen name="big_key_width">56dp</dimen>
+
+
+
+
+
+
+
+
+    <!-- new fonts_size -->
+    <dimen name="font_key">20sp</dimen>
+    <dimen name="font_button">10sp</dimen>
+    <dimen name="font_notif">8sp</dimen>
 
 
 </resources>

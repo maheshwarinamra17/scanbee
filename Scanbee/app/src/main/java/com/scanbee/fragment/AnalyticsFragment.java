@@ -150,10 +150,6 @@ public class AnalyticsFragment extends Fragment {
         if(activity != null){
             Toolbar toolbar = (Toolbar)activity.findViewById(R.id.toolbar);
             TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-            ImageView cancelButton = (ImageView) activity.findViewById(R.id.cancelorder);
-            ImageView addMoreButton = (ImageView) activity.findViewById(R.id.addmore);
-            cancelButton.setVisibility(View.GONE);
-            addMoreButton.setVisibility(View.VISIBLE);
             mTitle.setText(R.string.analytics);
         }
     }

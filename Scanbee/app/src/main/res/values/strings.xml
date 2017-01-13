@@ -4,6 +4,8 @@
     <string name="roboto_med">fonts/Roboto-Medium.ttf</string>
     <string name="roboto_light">fonts/Roboto-Light.ttf</string>
     <string name="noto_sans">fonts/NotoSans-Regular.ttf</string>
+
+
     <string name="app_name">Scanbee</string>
     <string name="duplicacy">DUPLICACY</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -101,4 +103,16 @@
     <string name="need_help">Need help? call us at</string>
     <string name="charge">Charge</string>
     <string name="no_cust">No customer found</string>
+
+
+    <string name="nunito_regular">fonts/Nunito-Regular.ttf</string>
+    <string name="nunito_medium">fonts/Nunito-Medium.ttf</string>
+    <string name="nunito_semibold">fonts/Nunito-SemiBold.ttf</string>
+    <string name="nunito_light">fonts/Nunito-Light.ttf</string>
+    <string name="nunito_extralight">fonts/Nunito-ExtraLight.ttf</string>
+    <string name="mont_light">fonts/Montserrat-Light.otf</string>
+
+
+
+    <string name="proceed_payment">Proceed to payment</string>
 </resources>

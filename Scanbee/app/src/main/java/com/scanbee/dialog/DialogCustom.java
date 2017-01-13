@@ -67,48 +67,9 @@ public class DialogCustom {
     }
 
     public void show() {
-        if (dialog != null) {
-            Typeface RobotoMed=Typeface.createFromAsset(context.getResources().getAssets(),context.getString(R.string.roboto_med));
-            Typeface Roboto=Typeface.createFromAsset(context.getResources().getAssets(),context.getString(R.string.roboto_font));
-            TextView textTitle = (TextView) dialog.findViewById(R.id.title);
-            ImageView iconImage = (ImageView) dialog.findViewById(R.id.alert_icon);
-            textTitle.setText(message);
-            iconImage.setImageDrawable(alertIcon);
-            textTitle.setTypeface(RobotoMed);
-            if (dialog.isShowing()) {
-                dialog.dismiss();
-            }
-            dialog.show();
-            Button okTv = (Button) dialog.findViewById(R.id.okTv);
-            okTv.setText(btnText);
-            okTv.setTypeface(Roboto);
-            okTv.setOnClickListener(new OnClickListener() {
 
-                @Override
-                public void onClick(View v) {
 
-                    dialog.dismiss();
 
-                }
-            });
-
-            if(btnAux != null){
-                Button auxBtn = (Button) dialog.findViewById(R.id.auxBtn);
-                auxBtn.setVisibility(View.VISIBLE);
-                auxBtn.setText(btnAux);
-                auxBtn.setTypeface(Roboto);
-                auxBtn.setOnClickListener(new OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-
-                        dialog.dismiss();
-
-                    }
-                });
-            }
-
-        }
     }
 
 }

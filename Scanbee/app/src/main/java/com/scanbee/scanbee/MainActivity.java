@@ -86,12 +86,7 @@ public class MainActivity extends AppCompatActivity
     }
     //Set up toolBar Item Event
       public void setUpToolBarItemHandle(){
-          cancelOrder = (ImageView)toolbar.findViewById(R.id.cancelorder);
-          newOrder = (ImageView)toolbar.findViewById(R.id.neworder);
-          addMore = (ImageView)toolbar.findViewById(R.id.addmore);
-          cancelOrder.setOnClickListener(this);
-          newOrder.setOnClickListener(this);
-          addMore.setOnClickListener(this);
+
       }
     @Override
     public void onBackPressed() {
@@ -151,8 +146,8 @@ public class MainActivity extends AppCompatActivity
         String[] userInfo =  readPref.getUserInfo().split(";");
         TextView navHeaderText = (TextView) drawer.findViewById(R.id.storenametv);
         TextView nvHeaderCaption = (TextView) drawer.findViewById(R.id.userstoretv);
-        navHeaderText.setText(userInfo[0]);
-        nvHeaderCaption.setText(userInfo[1]);
+        navHeaderText.setText("dsdjsjhd");
+        nvHeaderCaption.setText("namra");
         Typeface Roboto=Typeface.createFromAsset(getResources().getAssets(),getString(R.string.roboto_font));
         Typeface RobotoMed=Typeface.createFromAsset(getResources().getAssets(),getString(R.string.roboto_med));
         Typeface NotoSans=Typeface.createFromAsset(getResources().getAssets(),getString(R.string.noto_sans));
@@ -221,24 +216,6 @@ public class MainActivity extends AppCompatActivity
                     new DialogCustom(MainActivity.this, getString(R.string.no_internet_connection), MainActivity.this.getDrawable(R.drawable.router), getString(R.string.ok),getString(R.string.try_again)).show();
                     return;
                 }
-                break;
-            case R.id.cancelorder:
-//              new DialogCustom(MainActivity.this,getString(R.string.cancel_order),MainActivity.this.getDrawable(R.drawable.cancel_order),getString(R.string.ok),getString(R.string.cancel)).show();
-                new DoCancelOrder().execute();
-                break;
-            case R.id.neworder:
-                getFragmentManager().beginTransaction().replace(R.id.content_frame,new GenerateOrderidFragment()).commit();
-                break;
-            case R.id.addmore:
-                android.app.Fragment fragment;
-                fragment = new GenerateOrderidFragment();
-                Bundle bundle = new Bundle();
-                bundle.putBoolean("add_more", true);
-                fragment.setArguments(bundle);
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.content_frame, fragment)
-                        .commit();
                 break;
             default:
                 break;
