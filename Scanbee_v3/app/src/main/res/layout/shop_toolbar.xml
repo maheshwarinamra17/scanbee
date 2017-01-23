@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/sb_white"
+    android:id="@+id/order_toolbar"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/shop_toolbar_height"
+    android:gravity="center"
+    android:padding="16dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space_3x"
+            android:layout_marginRight="@dimen/space_3x">
+
+            <ImageView
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                app:srcCompat="@drawable/img_shopping_cart"
+                android:padding="@dimen/icon_padding"
+                android:id="@+id/shopping_cart" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="42"
+                android:layout_marginTop="@dimen/space_1_5x"
+                android:layout_marginRight="@dimen/space_1x"
+                android:layout_alignRight="@+id/shopping_cart"
+                android:textColor="@color/sb_white"
+                android:textSize="@dimen/font_notif"
+                android:padding="@dimen/space_0_5x"
+                android:background="@drawable/sb_red_circle"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space_3x"
+            android:layout_marginRight="@dimen/space_3x">
+
+            <ImageView
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:padding="@dimen/icon_padding"
+                app:srcCompat="@drawable/img_orders"
+                android:id="@+id/orders" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="42"
+                android:layout_marginTop="@dimen/space_1_5x"
+                android:layout_marginRight="@dimen/space_1x"
+                android:layout_alignRight="@+id/orders"
+                android:textColor="@color/sb_white"
+                android:textSize="@dimen/font_notif"
+                android:padding="@dimen/space_0_5x"
+                android:background="@drawable/sb_green_circle"/>
+
+        </RelativeLayout>
+
+
+        <ImageView
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:layout_marginLeft="@dimen/space_3x"
+            android:layout_marginRight="@dimen/space_3x"
+            android:padding="@dimen/icon_padding"
+            app:srcCompat="@drawable/img_new_order"
+            android:id="@+id/new_order" />
+        <ImageView
+            android:layout_width="@dimen/icon_size_error_corrected"
+            android:layout_height="@dimen/icon_size_error_corrected"
+            android:layout_marginLeft="@dimen/space_3x"
+            android:layout_marginRight="@dimen/space_3x"
+            android:padding="@dimen/icon_padding"
+            app:srcCompat="@drawable/img_cancel_order"
+            android:id="@+id/cancel_order" />
+
+</LinearLayout>

@@ -1,0 +1,12 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorControlNormal">@color/sb_black_20</item>
+        <item name="colorControlActivated">@color/sb_black_20</item>
+        <item name="colorControlHighlight">@color/sb_black_20</item>
+    </style>
+
+</resources>

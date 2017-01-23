@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/sb_white"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cart_item_card"
+        android:layout_marginLeft="@dimen/space_2x"
+        android:layout_marginRight="@dimen/space_2x"
+        android:layout_marginTop="@dimen/space_1x"
+        android:layout_marginBottom="@dimen/space_1x"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardCornerRadius="@dimen/corner_radius"
+        card_view:cardBackgroundColor="@color/sb_white">
+
+        <RelativeLayout
+            android:id="@+id/cart_item_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/card_height_small">
+
+
+            <RelativeLayout
+                android:id="@+id/inner_cart_view"
+                android:layout_width="match_parent"
+                android:background="@color/sb_white"
+                android:paddingLeft="@dimen/space_2x"
+                android:paddingRight="@dimen/space_2x"
+                android:layout_height="64dp">
+
+                    <TextView
+                        android:id="@+id/prod_code"
+                        android:layout_alignParentEnd="true"
+                        android:text="CXXX"
+                        android:layout_marginTop="@dimen/neg_2x"
+                        android:textColor="@color/sb_black_20"
+                        android:textSize="@dimen/font_5x"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+
+                    <TextView
+                        android:id="@+id/prod_price"
+                        android:textColor="@color/sb_white"
+                        android:layout_centerVertical="true"
+                        android:text="Content"
+                        android:letterSpacing="0.1"
+                        android:background="@drawable/sb_black_transperent_round_button"
+                        android:textSize="@dimen/font_1_5x"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/extend_prod_info"
+                android:layout_below="@id/inner_cart_view"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:padding="@dimen/space_2x"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/hide_extend_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="x"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/sb_black_transperent_round_button" />
+
+                <ImageView
+                    android:id="@+id/sub_qty"
+                    android:layout_width="@dimen/icon_size_error_corrected"
+                    android:layout_height="@dimen/icon_size_error_corrected"
+                    android:padding="@dimen/icon_padding"
+                    android:src="@drawable/img_subtract"
+                    android:background="@drawable/sb_ripple_circle_button"
+                    />
+
+                <ImageView
+                    android:layout_toRightOf="@id/sub_qty"
+                    android:id="@+id/delete"
+                    android:layout_width="@dimen/icon_size_error_corrected"
+                    android:layout_height="@dimen/icon_size_error_corrected"
+                    android:padding="@dimen/icon_padding"
+                    android:layout_marginLeft="@dimen/space_3x"
+                    android:layout_marginRight="@dimen/space_3x"
+                    android:src="@drawable/img_trash"
+                    android:background="@drawable/sb_ripple_circle_button"
+                    />
+
+                <ImageView
+                    android:layout_toRightOf="@id/delete"
+                    android:id="@+id/add_qty"
+                    android:layout_width="@dimen/icon_size_error_corrected"
+                    android:layout_height="@dimen/icon_size_error_corrected"
+                    android:padding="@dimen/icon_padding"
+                    android:src="@drawable/img_add"
+                    android:background="@drawable/sb_ripple_circle_button"
+                    />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/prod_info"
+                android:layout_width="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:letterSpacing="0.2"
+                android:padding="@dimen/space_1x"
+                android:textSize="@dimen/font_1x"
+                android:text="Content"
+                android:textColor="@color/sb_black"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/prod_name"
+                android:layout_width="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:padding="@dimen/space_1x"
+                android:textAllCaps="true"
+                android:letterSpacing="0.2"
+                android:text="Product Name"
+                android:textSize="@dimen/font_1x"
+                android:textColor="@color/sb_black"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

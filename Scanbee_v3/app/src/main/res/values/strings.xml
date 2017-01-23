@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Scanbee_v3</string>
+    <string name="add_product">Add a Product</string>
+    <string name="order_cart">Order cart</string>
+    <string name="quantity">qty</string>
+    <string name="prod_code">product code</string>
+    <string name="proceed_cart">proceed to order cart</string>
+    <string name="proceed_payment">proceed to payment</string>
+    <string name="proceed_invoice">proceed to invoice</string>
+    <string name="rupee_symbol">\u20B9</string>
+    <string name="cust_phone">Customer Mobile</string>
+    <string name="payment_option">Choose Payment mode</string>
+    <string name="total_items">Total Items</string>
+    <string name="sub_total">Sub Total [\u20B9]</string>
+    <string name="discount">Discount [\u20B9]</string>
+    <string name="tax">Tax [\u20B9]</string>
+    <string name="amt_pay">Amount to be paid [\u20B9]</string>
+
+
+
+
+
+
+</resources>

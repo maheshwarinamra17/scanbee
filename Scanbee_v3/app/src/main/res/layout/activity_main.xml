@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/sb_white"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/custom_actionbar"/>
+
+    <include layout="@layout/shop_toolbar"/>
+
+    <RelativeLayout
+        android:id="@+id/edit_panel"
+        android:background="@drawable/sb_numpad_button"
+        android:layout_width="match_parent"
+        android:paddingLeft="@dimen/space_2x"
+        android:paddingTop="@dimen/space_2x"
+        android:paddingBottom="@dimen/space_2x"
+        android:paddingRight="0dp"
+        android:gravity="center"
+        android:layout_marginLeft="@dimen/space_3x"
+        android:layout_marginRight="@dimen/space_3x"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="@string/quantity"
+            android:letterSpacing="0.2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/sb_black"
+            android:textSize="@dimen/font_1x"
+            android:textAllCaps="true"
+            android:id="@+id/head_qty" />
+
+        <EditText
+            android:hint="01"
+            android:textColorHint="@color/sb_dark_grey"
+            android:inputType="number"
+            android:padding="0dp"
+            android:maxLength="2"
+            android:background="@android:color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/sb_black"
+            android:textSize="@dimen/font_3x"
+            android:layout_below="@id/head_qty"
+            android:textAllCaps="true"
+            android:id="@+id/text_qty" />
+
+        <TextView
+            android:text="X"
+            android:layout_toRightOf="@id/text_qty"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/space_4x"
+            android:layout_marginRight="@dimen/space_4x"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/sb_black"
+            android:textAllCaps="true"
+            android:textSize="@dimen/font_2x"
+            android:id="@+id/head_multiplier" />
+
+        <TextView
+            android:text="@string/prod_code"
+            android:letterSpacing="0.2"
+            android:layout_toRightOf="@id/head_multiplier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/sb_black"
+            android:textAllCaps="true"
+            android:textSize="@dimen/font_1x"
+            android:id="@+id/head_prod_code" />
+
+        <EditText
+            android:hint="XXXX"
+            android:textColorHint="@color/sb_dark_grey"
+            android:inputType="textNoSuggestions"
+            android:padding="0dp"
+            android:maxLength="4"
+            android:background="@android:color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/sb_black"
+            android:layout_below="@id/head_prod_code"
+            android:layout_toEndOf="@id/head_multiplier"
+            android:textAllCaps="true"
+            android:textSize="@dimen/font_3x"
+            android:id="@+id/text_prod_code" />
+
+        <ImageView
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:padding="@dimen/icon_padding"
+            app:srcCompat="@drawable/img_erase"
+            android:background="@drawable/sb_ripple_numpad_button"
+            android:id="@+id/erase_btn"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true" />
+
+
+    </RelativeLayout>
+
+    <include layout="@layout/keyboard_layout"/>
+
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:layout_width="match_parent"
+            android:id="@+id/proceed_button"
+            android:textAllCaps="true"
+            android:layout_margin="@dimen/space_2x"
+            android:letterSpacing="0.2"
+            android:layout_height="@dimen/button_large"
+            android:background="@drawable/sb_ripple_black_button"
+            android:layout_alignParentBottom="true"
+            android:textColor="@color/sb_white"
+            android:textSize="@dimen/font_button"
+            android:text="@string/proceed_cart" />
+
+    </RelativeLayout>
+</LinearLayout>
