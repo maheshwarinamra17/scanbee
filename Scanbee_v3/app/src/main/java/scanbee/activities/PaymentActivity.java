@@ -20,6 +20,7 @@ import org.json.JSONObject;
 
 import scanbee.utils.BasicSetup;
 import scanbee.utils.TestingData;
+import scanbee.utils.ToastCustom;
 
 public class PaymentActivity extends AppCompatActivity {
 
@@ -33,7 +34,7 @@ public class PaymentActivity extends AppCompatActivity {
     TextView headCustomerMobile;
     CardView keyboardLayout;
     RelativeLayout paymentDetails;
-    TextView headTotalItems, headSubTotal, headDiscount, headTax;
+    TextView headTotalItems, headSubTotal, headDiscount, headTax, payHintText;
     TextView txtTotalItems, txtSubTotal, txtDiscount, txtTax, txtAmtPay, headAmtPay;
 
 
@@ -69,6 +70,7 @@ public class PaymentActivity extends AppCompatActivity {
         txtTax = (TextView) findViewById(R.id.txt_tax);
         txtAmtPay = (TextView) findViewById(R.id.txt_amt_pay);
         headAmtPay = (TextView) findViewById(R.id.head_amt_pay);
+        payHintText = (TextView) findViewById(R.id.pay_hint_text);
 
         headCustomerMobile.setTypeface(basicSetup.getNuniR());
         textCustomerMobile.setTypeface(basicSetup.getNuniL());
@@ -83,6 +85,7 @@ public class PaymentActivity extends AppCompatActivity {
         txtTax.setTypeface(basicSetup.getNuniR());
         txtAmtPay.setTypeface(basicSetup.getNuniL());
         headAmtPay.setTypeface(basicSetup.getNuniR());
+        payHintText.setTypeface(basicSetup.getNuniR());
 
         textCustomerMobile.requestFocus();
         focusEditText =  textCustomerMobile;
@@ -155,6 +158,7 @@ public class PaymentActivity extends AppCompatActivity {
                 hideSoftKeyboard(textCustomerMobile);
                 keyboardLayout.setVisibility(View.VISIBLE);
                 paymentDetails.setVisibility(View.GONE);
+                proceedButton.setVisibility(View.GONE);
                 return true;
             }
         });
@@ -178,10 +182,11 @@ public class PaymentActivity extends AppCompatActivity {
     public void setKeyboardActionEnter(View v){
         v.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-                Toast toast = Toast.makeText(activity, "Keyboard Shown", Toast.LENGTH_SHORT);
-                toast.show();
+                ToastCustom customToast = new ToastCustom(activity);
+                customToast.show("Keyboard close");
                 keyboardLayout.setVisibility(View.GONE);
                 paymentDetails.setVisibility(View.VISIBLE);
+                proceedButton.setVisibility(View.VISIBLE);
             }
         });
     }

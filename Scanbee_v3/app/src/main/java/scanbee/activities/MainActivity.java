@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     BasicSetup basicSetup;
     TextView headQty;
     EditText textQty;
+    TextView emptyCart;
     TextView headProdCode;
     EditText textProdCode;
     TextView headMultipler;
@@ -52,12 +53,15 @@ public class MainActivity extends AppCompatActivity {
         headMultipler = (TextView) findViewById(R.id.head_multiplier);
         proceedButton = (Button) findViewById(R.id.proceed_button);
         eraseBtn = (ImageView) findViewById(R.id.erase_btn);
+        emptyCart = (TextView) findViewById(R.id.empty_cart);
         headQty.setTypeface(basicSetup.getNuniR());
         textQty.setTypeface(basicSetup.getNuniL());
         headProdCode.setTypeface(basicSetup.getNuniR());
         textProdCode.setTypeface(basicSetup.getNuniL());
         headMultipler.setTypeface(basicSetup.getNuniEL());
+        emptyCart.setTypeface(basicSetup.getNuniR());
         proceedButton.setTypeface(basicSetup.getNuniR());
+
         textProdCode.requestFocus();
         focusEditText =  textProdCode;
 

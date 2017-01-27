@@ -32,6 +32,8 @@
     <dimen name="key_height">54dp</dimen>
     <dimen name="big_key_height">124dp</dimen>
     <dimen name="big_key_width">52dp</dimen>
+    <dimen name="qrcode">100dp</dimen>
+    <dimen name="custom_status_height">8dp</dimen>
 
     <!-- new fonts_size -->
     <dimen name="font_key">18sp</dimen>

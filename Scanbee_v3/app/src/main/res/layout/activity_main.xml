@@ -8,8 +8,6 @@
 
     <include layout="@layout/custom_actionbar"/>
 
-    <include layout="@layout/shop_toolbar"/>
-
     <RelativeLayout
         android:id="@+id/edit_panel"
         android:background="@drawable/sb_numpad_button"
@@ -19,6 +17,7 @@
         android:paddingBottom="@dimen/space_2x"
         android:paddingRight="0dp"
         android:gravity="center"
+        android:layout_marginTop="@dimen/space_2x"
         android:layout_marginLeft="@dimen/space_3x"
         android:layout_marginRight="@dimen/space_3x"
         android:layout_height="wrap_content">
@@ -102,6 +101,17 @@
     </RelativeLayout>
 
     <include layout="@layout/keyboard_layout"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/empty_cart"
+        android:lineSpacingExtra="2dp"
+        android:text="@string/empty_cart"
+        android:textColor="@color/sb_dark_grey"
+        android:textAlignment="center"
+        android:textSize="@dimen/font_1x"
+        />
 
     <RelativeLayout
         android:orientation="vertical"

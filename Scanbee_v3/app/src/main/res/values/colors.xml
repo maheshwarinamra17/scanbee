@@ -4,6 +4,9 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+    <color name="sb_dark_black">#CC000000</color>
+    <color name="sb_toast_red">#CCF44336</color>
+    <color name="sb_toast_green">#CC4CAF50</color>
     <color name="sb_black">#4A4A4A</color>
     <color name="sb_white">#ffffff</color>
     <color name="sb_black_20">#324A4A4A</color>
