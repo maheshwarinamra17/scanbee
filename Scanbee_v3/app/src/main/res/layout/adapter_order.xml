@@ -23,8 +23,6 @@
 
             <TextView
                 android:id="@+id/circle_symbol_text"
-                android:paddingBottom="@dimen/space_0_5x"
-                android:paddingLeft="@dimen/space_0_5x"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -64,7 +62,7 @@
             android:layout_centerVertical="true"
             android:textColor="@color/sb_black"
             android:text="4223.40"
-            android:textSize="@dimen/font_1_5x"
+            android:textSize="@dimen/font_1_7x"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

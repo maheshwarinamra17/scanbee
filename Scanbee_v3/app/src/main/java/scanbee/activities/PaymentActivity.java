@@ -1,6 +1,7 @@
 package scanbee.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -14,7 +15,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -51,6 +51,7 @@ public class PaymentActivity extends AppCompatActivity {
         setupKeyboard();
         focusedEditText();
         preparePaymentDetails();
+        setProceedButton();
     }
 
     public void setupView(){
@@ -118,16 +119,16 @@ public class PaymentActivity extends AppCompatActivity {
         final ImageView keyY = (ImageView) findViewById(R.id.textViewYellow);
         final ImageView keyEnter = (ImageView) findViewById(R.id.btn_enter);
 
-        key0.setTypeface(basicSetup.getNuniL());
-        key1.setTypeface(basicSetup.getNuniL());
-        key2.setTypeface(basicSetup.getNuniL());
-        key3.setTypeface(basicSetup.getNuniL());
-        key4.setTypeface(basicSetup.getNuniL());
-        key5.setTypeface(basicSetup.getNuniL());
-        key6.setTypeface(basicSetup.getNuniL());
-        key7.setTypeface(basicSetup.getNuniL());
-        key8.setTypeface(basicSetup.getNuniL());
-        key9.setTypeface(basicSetup.getNuniL());
+        key0.setTypeface(basicSetup.getNuniEL());
+        key1.setTypeface(basicSetup.getNuniEL());
+        key2.setTypeface(basicSetup.getNuniEL());
+        key3.setTypeface(basicSetup.getNuniEL());
+        key4.setTypeface(basicSetup.getNuniEL());
+        key5.setTypeface(basicSetup.getNuniEL());
+        key6.setTypeface(basicSetup.getNuniEL());
+        key7.setTypeface(basicSetup.getNuniEL());
+        key8.setTypeface(basicSetup.getNuniEL());
+        key9.setTypeface(basicSetup.getNuniEL());
 
         setKeyboardActionAdd(key0,"0");
         setKeyboardActionAdd(key1,"1");
@@ -201,5 +202,18 @@ public class PaymentActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void setProceedButton(){
+
+        proceedButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PaymentActivity.this, InvoiceActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
     }
 }

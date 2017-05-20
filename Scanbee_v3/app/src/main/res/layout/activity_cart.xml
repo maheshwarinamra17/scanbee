@@ -8,7 +8,7 @@
 
     <include layout="@layout/custom_actionbar"/>
 
-    <include layout="@layout/shop_toolbar"/>
+    <!--<include layout="@layout/shop_toolbar"/>-->
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/cart_recycler_view"
@@ -17,13 +17,11 @@
         android:layout_height="wrap_content"/>
 
     <RelativeLayout
+        android:elevation="@dimen/top_shadow_height"
+        android:background="@color/sb_white"
         android:orientation="vertical"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent">
-
-        <View android:layout_width="match_parent"
-            android:layout_height="@dimen/shadow_height"
-            android:background="@drawable/sb_drop_shadow"/>
 
         <Button
             android:layout_width="match_parent"

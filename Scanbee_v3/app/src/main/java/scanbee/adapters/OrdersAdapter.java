@@ -10,18 +10,21 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
 import scanbee.activities.R;
 import scanbee.models.CartModel;
 import scanbee.utils.BasicSetup;
+import scanbee.utils.TestingData;
 
 
-public class CartAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class OrdersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    TestingData testingData;
     ArrayList<CartModel> mCartDataList;
     Context mContext;
     BasicSetup basicSetup;
 
-    public CartAdapter(Context ctx, ArrayList<CartModel> cartDataList){
+    public OrdersAdapter(Context ctx, ArrayList<CartModel> cartDataList){
         this.mContext = ctx;
         this.mCartDataList = cartDataList;
         basicSetup = new BasicSetup((Activity) ctx);
@@ -37,14 +40,12 @@ public class CartAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
-
         final CartModel cartModel = mCartDataList.get(position);
         final CartItem cartItem = (CartItem) viewHolder;
         cartItem.prodName.setText(cartModel.getmProductName());
         cartItem.prodPrice.setText(cartModel.getmProductPrice());
         cartItem.prodInfo.setText(cartModel.getmProductQty() + " x " +cartModel.getmProductContent());
         cartItem.circleSymbolText.setText(cartModel.getmProductCode().substring(0, 1));
-        setCardStyle(cartModel.getmProductCode().substring(0, 1),cartItem);
     }
 
     @Override
@@ -68,28 +69,12 @@ public class CartAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             prodName.setTypeface(basicSetup.getNuniR());
             prodInfo.setTypeface(basicSetup.getNuniSb());
-            prodPrice.setTypeface(basicSetup.getNuniR());
+            prodPrice.setTypeface(basicSetup.getNuniSb());
             circleSymbolText.setTypeface(basicSetup.getMontEL());
         }
     }
 
 
-    public void setCardStyle(String color, CartItem cartItem){
-        switch (color) {
-            case "R":
-                cartItem.circleSymbol.setBackground(mContext.getDrawable(R.drawable.sb_ripple_red_gradient));
-                break;
-            case "G":
-                cartItem.circleSymbol.setBackground(mContext.getDrawable(R.drawable.sb_ripple_green_gradient));
-                break;
-            case "B":
-                cartItem.circleSymbol.setBackground(mContext.getDrawable(R.drawable.sb_ripple_blue_gradient));
-                break;
-            case "Y":
-                cartItem.circleSymbol.setBackground(mContext.getDrawable(R.drawable.sb_ripple_yellow_gradient));
-                break;
-        }
-    }
 
 }
 

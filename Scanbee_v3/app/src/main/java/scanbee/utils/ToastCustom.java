@@ -34,7 +34,7 @@ public class ToastCustom {
         toastText.setTypeface(basicSetup.getNuniR());
         toast = new Toast(context);
         toast.setDuration(Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.TOP | Gravity.FILL_HORIZONTAL, 0, 0);
+        toast.setGravity(Gravity.TOP, 0, (int) context.getResources().getDimension(R.dimen.space_2x));
         toast.setView(layout);
     }
 

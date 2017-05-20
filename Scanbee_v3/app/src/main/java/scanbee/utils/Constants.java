@@ -13,6 +13,8 @@ public class Constants {
     public static final String NUNI_SB = "fonts/Nunito-SemiBold.ttf";
     public static final String NUNI_L = "fonts/Montserrat-Light.otf";
     public static final String NUNI_R = "fonts/Montserrat-Regular.otf";
+    public static final int COMPLETED_ORDER = 1;
+    public static final int PENDING_ORDER = 0;
 
 
 }

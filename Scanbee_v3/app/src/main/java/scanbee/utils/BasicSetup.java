@@ -23,6 +23,7 @@ public class BasicSetup {
     Typeface NuniL;
     Typeface NuniR;
     Typeface NuniSb;
+    Typeface Rupee;
 
 
     public BasicSetup(Activity activity){
@@ -35,6 +36,7 @@ public class BasicSetup {
         this.NuniL = Typeface.createFromAsset(mActivity.getAssets(), Constants.NUNI_L);
         this.NuniR = Typeface.createFromAsset(mActivity.getAssets(), Constants.NUNI_R);
         this.NuniSb = Typeface.createFromAsset(mActivity.getAssets(), Constants.NUNI_SB);
+
     }
 
     public Typeface getMontEL() {
@@ -81,5 +83,25 @@ public class BasicSetup {
         mActivity.getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
         int height = displaymetrics.heightPixels;
         return height;
+    }
+
+    public void setCustomMenu(View v){
+        v.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                MenuCustom menuCustom = new MenuCustom(mActivity);
+                menuCustom.show();
+            }
+        });
+
+    }
+
+    public void setBarcodeDailog(View v){
+        v.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                BarcodeMachineDialog barcodeMachineDialog = new BarcodeMachineDialog(mActivity);
+                barcodeMachineDialog.show();
+            }
+        });
+
     }
 }

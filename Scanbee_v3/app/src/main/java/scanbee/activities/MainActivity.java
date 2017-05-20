@@ -1,6 +1,7 @@
 package scanbee.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -17,6 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import scanbee.utils.BasicSetup;
+import scanbee.utils.MenuCustom;
+import scanbee.utils.ToastCustom;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     EditText textProdCode;
     TextView headMultipler;
     Button proceedButton;
-    ImageView eraseBtn;
+    ImageView eraseBtn, customMenu, barcodeBtn;
     EditText focusEditText;
     Activity activity;
 
@@ -43,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         setupView();
         setupKeyboard();
         focusedEditText();
+        setProceedButton();
     }
 
     public void setupView(){
@@ -54,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
         proceedButton = (Button) findViewById(R.id.proceed_button);
         eraseBtn = (ImageView) findViewById(R.id.erase_btn);
         emptyCart = (TextView) findViewById(R.id.empty_cart);
+        customMenu = (ImageView) findViewById(R.id.custom_menu_btn);
+        barcodeBtn = (ImageView) findViewById(R.id.breader_btn);
         headQty.setTypeface(basicSetup.getNuniR());
         textQty.setTypeface(basicSetup.getNuniL());
         headProdCode.setTypeface(basicSetup.getNuniR());
@@ -122,16 +128,16 @@ public class MainActivity extends AppCompatActivity {
         final ImageView keyY = (ImageView) findViewById(R.id.textViewYellow);
         final ImageView keyEnter = (ImageView) findViewById(R.id.btn_enter);
 
-        key0.setTypeface(basicSetup.getNuniL());
-        key1.setTypeface(basicSetup.getNuniL());
-        key2.setTypeface(basicSetup.getNuniL());
-        key3.setTypeface(basicSetup.getNuniL());
-        key4.setTypeface(basicSetup.getNuniL());
-        key5.setTypeface(basicSetup.getNuniL());
-        key6.setTypeface(basicSetup.getNuniL());
-        key7.setTypeface(basicSetup.getNuniL());
-        key8.setTypeface(basicSetup.getNuniL());
-        key9.setTypeface(basicSetup.getNuniL());
+        key0.setTypeface(basicSetup.getNuniEL());
+        key1.setTypeface(basicSetup.getNuniEL());
+        key2.setTypeface(basicSetup.getNuniEL());
+        key3.setTypeface(basicSetup.getNuniEL());
+        key4.setTypeface(basicSetup.getNuniEL());
+        key5.setTypeface(basicSetup.getNuniEL());
+        key6.setTypeface(basicSetup.getNuniEL());
+        key7.setTypeface(basicSetup.getNuniEL());
+        key8.setTypeface(basicSetup.getNuniEL());
+        key9.setTypeface(basicSetup.getNuniEL());
 
         setKeyboardActionAdd(key0,"0");
         setKeyboardActionAdd(key1,"1");
@@ -149,6 +155,8 @@ public class MainActivity extends AppCompatActivity {
         setKeyboardActionAdd(keyY,"Y");
         setKeyboardActionDelete(eraseBtn);
         setKeyboardActionEnter(keyEnter);
+        basicSetup.setCustomMenu(customMenu);
+        basicSetup.setBarcodeDailog(barcodeBtn);
 
     }
 
@@ -171,8 +179,8 @@ public class MainActivity extends AppCompatActivity {
     public void setKeyboardActionEnter(View v){
         v.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-                Toast toast = Toast.makeText(activity, "Click played", Toast.LENGTH_SHORT);
-                toast.show();
+                ToastCustom customToast = new ToastCustom(activity);
+                customToast.show(getString(R.string.product_added));
             }
         });
     }
@@ -187,6 +195,19 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void setProceedButton(){
+
+        proceedButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CartActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
     }
 
 

@@ -6,8 +6,7 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="@dimen/shop_toolbar_height"
-    android:gravity="center"
-    android:padding="16dp">
+    android:gravity="center">
 
         <RelativeLayout
             android:layout_width="wrap_content"

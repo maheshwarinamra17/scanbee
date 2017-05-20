@@ -20,11 +20,14 @@ public class TestingData {
 
         for (int i=0; i<length; i++){
             JSONObject cartItem = new JSONObject();
+            Random generator = new Random();
+            double number = generator.nextDouble() * 200;
+            String formatted = String.format("%.2f", number);
             try {
-                cartItem.put("prod_name", "Dummy Product "+i);
+                cartItem.put("prod_name", "#WHACK Product "+i+1);
                 cartItem.put("prod_code", getRandom(colorArray)+"42"+i);
-                cartItem.put("prod_qty", i);
-                cartItem.put("prod_price", 4242.42);
+                cartItem.put("prod_qty", 1);
+                cartItem.put("prod_price", formatted);
                 cartItem.put("prod_content", "50ml");
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -32,6 +35,26 @@ public class TestingData {
             dummyCart.add(cartItem);
         }
         return dummyCart;
+    }
+
+    public static ArrayList<JSONObject> getDummyOrders(int length){
+
+        ArrayList<JSONObject> dummyOrder = new ArrayList<JSONObject>();
+        String[] statusArray = {"1","0"};
+
+        for (int i=0; i<length; i++){
+            JSONObject orderItem = new JSONObject();
+            try {
+                orderItem.put("order_id", "ORD3456"+i);
+                orderItem.put("order_price", 1442.42);
+                orderItem.put("order_info", "Bought by Alfred Nobel at London Museum");
+                orderItem.put("order_status", getRandom(statusArray));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            dummyOrder.add(orderItem);
+        }
+        return dummyOrder;
     }
 
     public static JSONObject getDummyPayment(){

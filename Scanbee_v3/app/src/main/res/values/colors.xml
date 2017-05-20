@@ -9,6 +9,7 @@
     <color name="sb_toast_green">#CC4CAF50</color>
     <color name="sb_black">#4A4A4A</color>
     <color name="sb_white">#ffffff</color>
+    <color name="sb_white_20">#64ffffff</color>
     <color name="sb_black_20">#324A4A4A</color>
     <color name="sb_black_40">#644A4A4A</color>
     <color name="sb_grey">#F5F5F5</color>

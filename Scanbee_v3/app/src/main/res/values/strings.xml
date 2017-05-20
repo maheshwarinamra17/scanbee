@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Scanbee_v3</string>
+    <string name="app_name">Scanbee</string>
     <string name="add_product">Add a Product</string>
     <string name="order_cart">Order cart</string>
     <string name="quantity">qty</string>
@@ -7,10 +7,14 @@
     <string name="proceed_cart">proceed to order cart</string>
     <string name="proceed_payment">proceed to payment</string>
     <string name="proceed_invoice">proceed to invoice</string>
+    <string name="proceed_shop">Login into shop</string>
     <string name="new_order">Start a new Order</string>
     <string name="rupee_symbol">\u20B9</string>
     <string name="cust_phone">Customer Mobile</string>
     <string name="payment_option">Choose Payment mode</string>
+    <string name="completed_orders">Completed</string>
+    <string name="pending_orders">Pending</string>
+    <string name="orders">Orders</string>
     <string name="invoice">Order Invoice</string>
     <string name="total_items">Total Items</string>
     <string name="sub_total">Sub Total [\u20B9]</string>
@@ -18,9 +22,25 @@
     <string name="tax">Tax [\u20B9]</string>
     <string name="amt_pay">Amount to be paid [\u20B9]</string>
     <string name="order_id">Order Id</string>
-    <string name="empty_cart"><u>Empty this cart (0)?</u></string>
+    <string name="empty_cart"><u>Empty this cart? (0)</u></string>
     <string name="pay_hint_text">Click on chain icon to send a payment link on customer\'s mobile or else click wallet to accept payment in cash</string>
-    <string name="order_status_4">[PAYMENT RECIEVED] A payment of \u20B9 4242.84 has been recieved from Mr. Alan Watts at 12:36 PM</string>
+    <string name="order_status_4">[PAYMENT RECIEVED] A payment of \u20B9 4242.42 has been recieved from Mr. Alan Watts at 12:36 PM</string>
+    <string name="forgot_credentials"><u>Forgot something?</u></string>
+    <string name="signup">Signup</string>
+    <string name="title_text">Scanbee</string>
+    <string name="sub_title_text">Intellifying retail shops</string>
+    <string name="product_added">Product added</string>
+    <string name="barcode_msg">Barcode machine is ON ...</string>
+
+    <string name="title_text_1">Shop</string>
+    <string name="title_text_2">Orders</string>
+    <string name="title_text_3">Inventory</string>
+    <string name="title_text_4">Analysis</string>
+    <string name="title_text_5">Help</string>
+    <string name="title_text_6">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
