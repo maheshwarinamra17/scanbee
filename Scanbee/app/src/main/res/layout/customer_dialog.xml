@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layoutAnimation="@anim/layout_bounce_anim"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/customer_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialog_height"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:background="@drawable/custom_dialog_bg">
+
+       <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/phoneNoET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:cursorVisible="true"
+            android:hint="@string/phone_no"
+            android:inputType="phone"
+            android:textSize="@dimen/body_caption"
+            android:paddingLeft="10dp"
+            android:layout_marginLeft="@dimen/side_margin"
+            android:layout_marginRight="@dimen/side_margin"
+            android:layout_marginBottom="@dimen/elem_margin"
+            app:met_textColorHint="@color/app_color"
+            app:met_underlineColor="@color/gray_light"
+            app:met_primaryColor="@color/app_color"
+            app:met_textColor="@color/black"
+            app:met_floatingLabelTextColor="@color/gray_light"
+            app:met_typeface="fonts/NotoSans-Regular.ttf"
+            app:met_accentTypeface="fonts/NotoSans-Regular.ttf"
+            app:met_helperTextColor="@color/app_red"
+            app:met_floatingLabel="highlight" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/okButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ok"
+                android:layout_marginTop="@dimen/row_item_margin"
+                android:textAllCaps="true"
+                android:textSize="@dimen/button_text"
+                android:background="@drawable/button_blue_color"
+                android:paddingLeft="@dimen/elem_margin"
+                android:paddingRight="@dimen/elem_margin"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/skipButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/skip"
+                android:layout_marginLeft="@dimen/elem_margin"
+                android:layout_marginTop="@dimen/row_item_margin"
+                android:textAllCaps="true"
+                android:textSize="@dimen/button_text"
+                android:background="@drawable/button_app_color"
+                android:paddingLeft="@dimen/elem_margin"
+                android:paddingRight="@dimen/elem_margin"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

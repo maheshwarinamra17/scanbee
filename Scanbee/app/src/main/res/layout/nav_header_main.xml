@@ -15,7 +15,7 @@
         android:id="@+id/navImageView" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:orientation="vertical"
         android:layout_marginLeft="@dimen/row_item_margin"
         android:layout_marginTop="@dimen/nav_header_icon_spacing"
@@ -27,14 +27,18 @@
                 android:id="@+id/storenametv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="2"
                 android:textColor="@color/white"
                 android:textSize="@dimen/body_title"
-                android:text="Axe Product Store" />
+                android:text="-" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="bobby@axelrod.com"
+                android:text="-"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:layout_marginTop="@dimen/body_margin"
                 android:textColor="@color/app_green"
                 android:textSize="@dimen/body_caption"
@@ -53,8 +57,8 @@
         android:layout_width="@dimen/carret_icon_size"
         android:layout_height="@dimen/carret_icon_size"
         android:layout_marginTop="@dimen/nav_header_icon_spacing"
-        android:layout_marginLeft="@dimen/elem_margin"
+        android:padding="@dimen/logout_padding"
         android:src="@drawable/caret"
-        android:id="@+id/navMoreIcon" />
+        android:id="@+id/logoutBtn" />
 
 </LinearLayout>

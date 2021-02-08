@@ -33,12 +33,14 @@ import com.scanbee.servercommunication.WebRequest;
 import com.scanbee.servercommunication.WebServiceUrl;
 import com.scanbee.sharedpref.ReadPref;
 import com.scanbee.sharedpref.SavePref;
+import com.scanbee.util.Utils;
 
-import io.fabric.sdk.android.Fabric;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+
+import io.fabric.sdk.android.Fabric;
 
 /**
  * Created by kshitij on 5/5/2016.
@@ -54,45 +56,35 @@ public class LoginActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     SavePref savePref;
     ReadPref readPref;
+    Utils utilLib;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());
-        setContentView(R.layout.login_activity);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.parseColor("#212121"));
         }
-
+        utilLib =  new Utils(getApplicationContext());
         readPref = new ReadPref(getApplicationContext());
         savePref = new SavePref(getApplicationContext());
+        utilLib.activitySetLocale(readPref.getLangPref());
+        setContentView(R.layout.login_activity);
         setupUI();
         softKeyboardAdjustments();
-        loginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                user_name=userName.getText().toString().trim();
-                user_password=userPassword.getText().toString().trim();
-                if (user_name.isEmpty() || user_password.isEmpty()){
-                    customToast = new ToastCustom(getApplicationContext());
-                    customToast.show(getApplicationContext().getString(R.string.unp_error));
-                }else {
-                    new GetOrderIdAsynctask().execute();
-                }
-            }
-        });
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(intent);
         loginHelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                helpDialog(LoginActivity.this, "Need help? call us at " + getString(R.string.helpline));
+                helpDialog(LoginActivity.this, getString(R.string.need_help)+ " " + getString(R.string.helpline));
             }
         });
     }
 
-    public void setupUI()
-    {
+    public void setupUI() {
         progressDialog=new ProgressDialog(LoginActivity.this);
         loginBtn = (Button) findViewById(R.id.loginBtn);
         scanbeeName = (TextView) findViewById(R.id.scanbeeName);
@@ -106,8 +98,6 @@ public class LoginActivity extends AppCompatActivity {
         scanbeeName.setTypeface(RobotoThin);
         scanbeeSubtext.setTypeface(NotoSans);
         loginHelp.setTypeface(NotoSans);
-
-
     }
 
     public void softKeyboardAdjustments(){
@@ -134,55 +124,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void helpDialog(Activity activity, String msg) {
-        final Dialog dialog = new Dialog(activity);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCancelable(false);
-        dialog.getWindow().setBackgroundDrawable(
-                new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        dialog.setContentView(R.layout.custom_dialog);
 
-        Typeface RobotoMed = Typeface.createFromAsset(activity.getResources().getAssets(), activity.getString(R.string.roboto_med));
-        Typeface Roboto = Typeface.createFromAsset(activity.getResources().getAssets(), activity.getString(R.string.roboto_font));
-        TextView textTitle = (TextView) dialog.findViewById(R.id.title);
-        ImageView iconImage = (ImageView) dialog.findViewById(R.id.alert_icon);
-        textTitle.setText(msg);
-        Drawable helpIcon = activity.getDrawable(R.drawable.help_2);
-        iconImage.setImageDrawable(helpIcon);
-        textTitle.setTypeface(RobotoMed);
-        if (dialog.isShowing()) {
-            dialog.dismiss();
-        }
-        Button okTv = (Button) dialog.findViewById(R.id.okTv);
-        okTv.setText(getString(R.string.call));
-        okTv.setTypeface(Roboto);
-        okTv.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                Intent callIntent = new Intent(Intent.ACTION_CALL);
-                callIntent.setData(Uri.parse("tel:" + getString(R.string.helpline)));
-                if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                    return;
-                }
-                startActivity(callIntent);
-            }
-        });
-
-        Button auxBtn = (Button) dialog.findViewById(R.id.auxBtn);
-        auxBtn.setVisibility(View.VISIBLE);
-        auxBtn.setText(getString(R.string.cancel));
-        auxBtn.setTypeface(Roboto);
-        auxBtn.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                dialog.dismiss();
-
-            }
-        });
-        dialog.show();
 
     }
     private class GetOrderIdAsynctask extends AsyncTask<Void, Void, String> {
@@ -221,6 +163,7 @@ public class LoginActivity extends AppCompatActivity {
             if (status==200){
                 String authToken = userData.optString("auth_token");
                 savePref.saveAuthToken(authToken);
+                savePref.saveUserInfo(userData.optString("name")+";"+userData.optString("email"));
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
             }else{

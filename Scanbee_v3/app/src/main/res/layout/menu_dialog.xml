@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/icon1"
+        android:layout_marginTop="@dimen/space_4x"
+        android:layout_marginLeft="@dimen/space_4x"
+        android:layout_marginBottom="@dimen/space_2x"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/img_icon1"
+            android:src="@drawable/img_w_shop"
+            android:padding="@dimen/icon_padding"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size" />
+
+        <TextView
+            android:layout_toRightOf="@id/img_icon1"
+            android:textAllCaps="true"
+            android:layout_marginTop="@dimen/space_0_5x"
+            android:layout_marginLeft="@dimen/space_2x"
+            android:id="@+id/text_icon1"
+            android:textColor="@color/sb_white"
+            android:text="@string/title_text_1"
+            android:textSize="@dimen/font_2_7x"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/icon2"
+        android:layout_marginLeft="@dimen/space_4x"
+        android:layout_marginBottom="@dimen/space_2x"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/img_icon2"
+            android:src="@drawable/img_w_orders"
+            android:padding="@dimen/icon_padding"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size" />
+
+        <TextView
+            android:layout_toRightOf="@id/img_icon2"
+            android:textAllCaps="true"
+            android:layout_marginTop="@dimen/space_0_5x"
+            android:layout_marginLeft="@dimen/space_2x"
+            android:id="@+id/text_icon2"
+            android:textColor="@color/sb_white"
+            android:text="@string/title_text_2"
+            android:textSize="@dimen/font_2_7x"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/icon3"
+        android:layout_marginLeft="@dimen/space_4x"
+        android:layout_marginBottom="@dimen/space_2x"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/img_icon3"
+            android:src="@drawable/img_w_shop"
+            android:padding="@dimen/icon_padding"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size" />
+
+        <TextView
+            android:layout_toRightOf="@id/img_icon3"
+            android:textAllCaps="true"
+            android:layout_marginTop="@dimen/space_0_5x"
+            android:layout_marginLeft="@dimen/space_2x"
+            android:id="@+id/text_icon3"
+            android:textColor="@color/sb_white"
+            android:text="@string/title_text_3"
+            android:textSize="@dimen/font_2_7x"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/icon4"
+        android:layout_marginLeft="@dimen/space_4x"
+        android:layout_marginBottom="@dimen/space_2x"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/img_icon4"
+            android:src="@drawable/img_w_analytics"
+            android:padding="@dimen/icon_padding"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size" />
+
+        <TextView
+            android:layout_toRightOf="@id/img_icon4"
+            android:textAllCaps="true"
+            android:layout_marginTop="@dimen/space_0_5x"
+            android:layout_marginLeft="@dimen/space_2x"
+            android:id="@+id/text_icon4"
+            android:textColor="@color/sb_white"
+            android:text="@string/title_text_4"
+            android:textSize="@dimen/font_2_7x"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/icon5"
+        android:layout_marginLeft="@dimen/space_4x"
+        android:layout_marginBottom="@dimen/space_2x"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/img_icon5"
+            android:src="@drawable/img_w_shop"
+            android:padding="@dimen/icon_padding"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size" />
+
+        <TextView
+            android:layout_toRightOf="@id/img_icon5"
+            android:textAllCaps="true"
+            android:layout_marginTop="@dimen/space_0_5x"
+            android:layout_marginLeft="@dimen/space_2x"
+            android:id="@+id/text_icon5"
+            android:textColor="@color/sb_white"
+            android:text="@string/title_text_5"
+            android:textSize="@dimen/font_2_7x"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/icon6"
+        android:layout_marginLeft="@dimen/space_4x"
+        android:layout_marginBottom="@dimen/space_2x"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/img_icon6"
+            android:src="@drawable/img_w_settings"
+            android:padding="@dimen/icon_padding"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size" />
+
+        <TextView
+            android:layout_toRightOf="@id/img_icon6"
+            android:textAllCaps="true"
+            android:layout_marginTop="@dimen/space_0_5x"
+            android:layout_marginLeft="@dimen/space_2x"
+            android:id="@+id/text_icon6"
+            android:textColor="@color/sb_white"
+            android:text="@string/title_text_6"
+            android:textSize="@dimen/font_2_7x"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+</LinearLayout>

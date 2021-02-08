@@ -2,10 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:id="@+id/payactivityRoot"
     android:layout_width="match_parent"
     android:background="@color/white"
     android:layout_height="match_parent">
     <LinearLayout
+        android:id="@+id/paymentData"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -49,7 +51,7 @@
                 android:orientation="vertical">
                 <TextView
                     android:id="@+id/store_creditTv"
-                    android:text="+832"
+                    android:text="-"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/head_title"
@@ -75,7 +77,7 @@
                 android:orientation="vertical">
                 <TextView
                     android:id="@+id/item_boughtTv"
-                    android:text="8"
+                    android:text="-"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/head_title"
@@ -132,18 +134,18 @@
                 android:id="@+id/tabButton1"
                 android:layout_width="@dimen/circle_icon"
                 android:layout_height="@dimen/circle_icon"
-                android:background="@drawable/solid_circle_app_color"
+                android:background="@drawable/circle"
                 android:padding="@dimen/row_margin"
-                android:src="@drawable/funds"
+                android:src="@drawable/funds_w"
                 android:scaleType="fitCenter"
                 />
             <ImageButton
                 android:id="@+id/tabButton2"
                 android:layout_width="@dimen/circle_icon"
                 android:layout_height="@dimen/circle_icon"
-                android:background="@drawable/circle"
+                android:background="@drawable/solid_circle_app_color"
                 android:padding="@dimen/row_margin"
-                android:src="@drawable/credit_w"
+                android:src="@drawable/credit"
                 android:scaleType="fitCenter"
                 android:layout_marginLeft="@dimen/row_item_margin"/>
             <ImageButton
@@ -156,14 +158,65 @@
                 android:scaleType="fitCenter"
                 android:layout_marginLeft="@dimen/row_item_margin"/>
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/tab1_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/side_margin"
+            android:layout_marginLeft="@dimen/top_margin"
+            android:layout_marginRight="@dimen/top_margin"
+            android:layout_marginBottom="@dimen/row_margin"
+            android:padding="@dimen/row_item_margin"
+            android:background="@drawable/rounded_bg_light"
+            android:layout_gravity="center"
+            android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/pendingIv"
+                    android:layout_width="@dimen/mid_icon"
+                    android:layout_height="@dimen/mid_icon"
+                    android:layout_marginLeft="@dimen/row_margin"
+                    android:layout_marginRight="@dimen/elem_margin"
+                    android:src="@drawable/funds"
+                    android:gravity="center_vertical" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/payCashTV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pay_in_cash"
+                        android:textSize="@dimen/body_title"
+                        android:textColor="@color/app_color"
+                        android:layout_marginLeft="@dimen/row_item_margin"/>
+                    <TextView
+                        android:id="@+id/payCashInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/app_color"
+                        android:text="@string/pay_cash"
+                        android:textSize="@dimen/body_caption"
+                        android:layout_marginTop="@dimen/body_margin"
+                        android:layout_marginLeft="@dimen/row_item_margin"/>
+                </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/tab2_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginTop="@dimen/line_margin"
             android:layout_marginLeft="@dimen/side_margin"
             android:layout_marginRight="@dimen/side_margin"
+            android:visibility="gone"
             android:gravity="center">
             <LinearLayout
                 android:layout_width="match_parent"
@@ -266,50 +319,54 @@
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/tab2_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="@dimen/line_margin"
-            android:layout_marginLeft="@dimen/side_margin"
-            android:layout_marginRight="@dimen/side_margin"
-            android:gravity="center"
-            android:visibility="gone">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.0"
-                android:orientation="horizontal"
-                android:gravity="center">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="second tab"
-                    android:textSize="25sp"/>
-                </LinearLayout>
-                </LinearLayout>
-        <LinearLayout
             android:id="@+id/tab3_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="@dimen/line_margin"
-            android:layout_marginLeft="@dimen/side_margin"
-            android:layout_marginRight="@dimen/side_margin"
-            android:gravity="center"
-            android:visibility="gone">
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/side_margin"
+            android:layout_marginLeft="@dimen/top_margin"
+            android:layout_marginRight="@dimen/top_margin"
+            android:layout_marginBottom="@dimen/row_margin"
+            android:padding="@dimen/row_item_margin"
+            android:background="@drawable/rounded_bg_light"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/creditIv"
+                android:layout_width="@dimen/mid_icon"
+                android:layout_height="@dimen/mid_icon"
+                android:layout_marginLeft="@dimen/row_margin"
+                android:layout_marginRight="@dimen/elem_margin"
+                android:src="@drawable/wallet"
+                android:gravity="center_vertical" />
+
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_gravity="center_vertical"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.0"
-                android:orientation="horizontal"
-                android:gravity="center">
+                android:orientation="vertical">
+
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/payCreditTV"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Thirld tab"
-                    android:textSize="25sp"/>
+                    android:text="@string/pay_in_credit"
+                    android:textSize="@dimen/body_title"
+                    android:textColor="@color/app_color"
+                    android:layout_marginLeft="@dimen/row_item_margin"/>
+                <TextView
+                    android:id="@+id/payCreditInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/app_color"
+                    android:text="@string/add_credit"
+                    android:textSize="@dimen/body_caption"
+                    android:layout_marginTop="@dimen/body_margin"
+                    android:layout_marginLeft="@dimen/row_item_margin"/>
             </LinearLayout>
+
         </LinearLayout>
         <Button
             android:id="@+id/continueToInvoiceBtn"

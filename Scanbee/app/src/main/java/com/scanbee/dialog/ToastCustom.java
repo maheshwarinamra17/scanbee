@@ -39,12 +39,4 @@ public class ToastCustom {
 			toast.show();
 		}
 	}
-
-	public void showTwoLine(String msg) {
-		if (toast != null) {
-			toastText = (TextView) layout.findViewById(R.id.toast_msg);
-			toastText.setText((msg));
-			toast.show();
-		}
-	}
 }

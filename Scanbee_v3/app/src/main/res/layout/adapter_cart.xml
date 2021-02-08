@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/sb_white"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/space_2x"
+    android:layout_marginRight="@dimen/space_2x">
+
+    <RelativeLayout
+        android:layout_marginTop="@dimen/space_2x"
+        android:layout_marginBottom="@dimen/space_2x"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/circle_symbol"
+            android:layout_height="@dimen/icon_size"
+            android:layout_width="@dimen/icon_size"
+            android:background="@drawable/sb_red_gradient">
+
+            <TextView
+                android:id="@+id/circle_symbol_text"
+                android:paddingBottom="@dimen/space_0_5x"
+                android:paddingLeft="@dimen/space_0_5x"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@color/sb_white"
+                android:textSize="@dimen/font_2_7x"
+                android:text="X" />
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:layout_toRightOf="@id/circle_symbol"
+            android:id="@+id/prod_name"
+            android:layout_marginLeft="@dimen/space_2x"
+            android:layout_marginTop="@dimen/space_0_6x"
+            android:layout_width="wrap_content"
+            android:text="Product Name"
+            android:textSize="@dimen/font_1_5x"
+            android:textColor="@color/sb_black"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_toRightOf="@id/circle_symbol"
+            android:layout_below="@id/prod_name"
+            android:layout_marginLeft="@dimen/space_2x"
+            android:id="@+id/prod_info"
+            android:layout_width="wrap_content"
+            android:letterSpacing="0.2"
+            android:textSize="@dimen/font_1x"
+            android:text="Content"
+            android:textColor="@color/sb_dark_grey"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/prod_price"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:textColor="@color/sb_black"
+            android:text="4223.40"
+            android:textSize="@dimen/font_1_5x"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:id="@+id/pay_sep"
+        android:background="@color/sb_grey"/>
+
+</LinearLayout>

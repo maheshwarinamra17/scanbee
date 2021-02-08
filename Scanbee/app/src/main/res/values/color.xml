@@ -2,6 +2,9 @@
 <resources>
     <color name="app_color">#1976D2</color>
     <color name="app_green">#4CAF50</color>
+    <color name="graph_shadow_green">#d4ecd5</color>
+    <color name="graph_shadow_blue">#c8e0f9</color>
+    <color name="dark_blue">#115292</color>
     <color name="app_ternary">#FF9800</color>
     <color name="black">#212121</color>
     <color name="white">#FFFFFFFF</color>
@@ -16,5 +19,18 @@
     <color name="loader_border_color">#057C35</color>
     <color name="loader_progress_color">#7ED5A5</color>
     <color name="leapColor">#00ac4c</color>
-    <color name="app_red">#FF5252</color>
+    <color name="app_red">#E57373</color>
+    <color name="app_success">#66BB6A</color>
+
+
+    <color name="sb_black">#4A4A4A</color>
+    <color name="sb_white">#ffffff</color>
+    <color name="sb_grey">#F5F5F5</color>
+    <color name="sb_dark_grey">#ADADAD</color>
+    <color name="sb_red">#F44336</color>
+    <color name="sb_green">#4CAF50</color>
+
+
+
+
 </resources>

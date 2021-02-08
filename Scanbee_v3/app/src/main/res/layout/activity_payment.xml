@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/sb_white"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/custom_actionbar"/>
+
+    <include layout="@layout/shop_toolbar"/>
+
+    <RelativeLayout
+        android:id="@+id/edit_panel"
+        android:background="@drawable/sb_numpad_button"
+        android:layout_width="match_parent"
+        android:paddingLeft="@dimen/space_2x"
+        android:paddingTop="@dimen/space_2x"
+        android:paddingBottom="@dimen/space_2x"
+        android:paddingRight="0dp"
+        android:gravity="center"
+        android:layout_marginLeft="@dimen/space_3x"
+        android:layout_marginRight="@dimen/space_3x"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="@string/cust_phone"
+            android:letterSpacing="0.2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/sb_black"
+            android:textAllCaps="true"
+            android:textSize="@dimen/font_1x"
+            android:id="@+id/head_cust_mobile" />
+
+        <EditText
+            android:hint="9000012345"
+            android:textColorHint="@color/sb_dark_grey"
+            android:inputType="number"
+            android:padding="0dp"
+            android:maxLength="10"
+            android:background="@android:color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/sb_black"
+            android:layout_below="@id/head_cust_mobile"
+            android:textAllCaps="true"
+            android:textSize="@dimen/font_3x"
+            android:id="@+id/text_cust_mobile" />
+
+        <ImageView
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:padding="@dimen/icon_padding"
+            app:srcCompat="@drawable/img_erase"
+            android:background="@drawable/sb_ripple_numpad_button"
+            android:id="@+id/erase_btn"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+
+    <include
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        layout="@layout/keyboard_layout" />
+
+
+    <RelativeLayout
+        android:id="@+id/payment_details"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/space_3x"
+        android:layout_marginLeft="@dimen/space_3x"
+        android:layout_marginRight="@dimen/space_3x"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="@string/total_items"
+            android:letterSpacing="0.2"
+            android:layout_marginTop="@dimen/space_1x"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/sb_black"
+            android:textAllCaps="true"
+            android:textSize="@dimen/font_1x"
+            android:id="@+id/head_total_items" />
+
+        <TextView
+            android:text="44"
+            android:layout_marginTop="@dimen/space_1x"
+            android:layout_alignParentRight="true"
+            android:letterSpacing="0.2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/sb_black"
+            android:textAllCaps="true"
+            android:textSize="@dimen/font_1x"
+            android:id="@+id/txt_total_items" />
+
+        <TextView
+            android:layout_below="@id/head_total_items"
+            android:layout_marginTop="@dimen/space_1x"
+            android:text="@string/sub_total"
+            android:letterSpacing="0.2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/sb_black"
+            android:textAllCaps="true"
+            android:textSize="@dimen/font_1x"
+            android:id="@+id/head_sub_total" />
+
+        <TextView
+            android:layout_below="@id/txt_total_items"
+            android:layout_marginTop="@dimen/space_1x"
+            android:text="0.0"
+            android:layout_alignParentRight="true"
+            android:letterSpacing="0.2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/sb_black"
+            android:textAllCaps="true"
+            android:textSize="@dimen/font_1x"
+            android:id="@+id/txt_sub_total" />
+
+        <TextView
+            android:layout_below="@id/head_sub_total"
+            android:layout_marginTop="@dimen/space_1x"
+            android:text="@string/discount"
+            android:letterSpacing="0.2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/sb_black"
+            android:textAllCaps="true"
+            android:textSize="@dimen/font_1x"
+            android:id="@+id/head_discount" />
+
+        <TextView
+            android:layout_below="@id/txt_sub_total"
+            android:layout_marginTop="@dimen/space_1x"
+            android:text="0.0"
+            android:layout_alignParentRight="true"
+            android:letterSpacing="0.2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/sb_green"
+            android:textAllCaps="true"
+            android:textSize="@dimen/font_1x"
+            android:id="@+id/txt_discount" />
+
+        <TextView
+            android:layout_below="@id/head_discount"
+            android:layout_marginTop="@dimen/space_1x"
+            android:text="@string/tax"
+            android:letterSpacing="0.2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/sb_black"
+            android:textAllCaps="true"
+            android:textSize="@dimen/font_1x"
+            android:id="@+id/head_tax" />
+
+        <TextView
+            android:layout_below="@id/txt_discount"
+            android:layout_marginTop="@dimen/space_1x"
+            android:text="0.0"
+            android:layout_alignParentRight="true"
+            android:letterSpacing="0.2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/sb_red"
+            android:textAllCaps="true"
+            android:textSize="@dimen/font_1x"
+            android:id="@+id/txt_tax" />
+
+        <View
+            android:layout_below="@id/head_tax"
+            android:layout_marginTop="@dimen/space_1x"
+            android:layout_marginBottom="@dimen/space_1x"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:id="@+id/pay_sep"
+            android:background="@color/sb_grey"/>
+
+        <TextView
+            android:text="0.0"
+            android:layout_below="@id/pay_sep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/sb_black"
+            android:textAllCaps="true"
+            android:textSize="@dimen/font_3x"
+            android:id="@+id/txt_amt_pay" />
+
+        <TextView
+            android:layout_below="@id/txt_amt_pay"
+            android:layout_marginTop="@dimen/space_0_6x"
+            android:text="@string/amt_pay"
+            android:letterSpacing="0.2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/sb_black"
+            android:textAllCaps="true"
+            android:textSize="@dimen/font_1x"
+            android:id="@+id/head_amt_pay" />
+
+        <ImageView
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/pay_sep"
+            android:layout_marginTop="@dimen/space_2x"
+            android:id="@+id/pay_cash"
+            android:layout_width="@dimen/icon_size_error_corrected"
+            android:layout_height="@dimen/icon_size_error_corrected"
+            android:padding="@dimen/icon_padding"
+            android:src="@drawable/img_cash"
+            android:background="@drawable/sb_ripple_circle_button"
+            />
+
+        <ImageView
+            android:layout_toLeftOf="@id/pay_cash"
+            android:layout_below="@id/pay_sep"
+            android:layout_marginRight="@dimen/space_3x"
+            android:layout_marginTop="@dimen/space_2x"
+            android:id="@+id/pay_online"
+            android:layout_width="@dimen/icon_size_error_corrected"
+            android:layout_height="@dimen/icon_size_error_corrected"
+            android:padding="@dimen/icon_padding"
+            android:src="@drawable/img_link"
+            android:background="@drawable/sb_ripple_circle_button"
+            />
+
+        <TextView
+            android:layout_marginTop="@dimen/space_3x"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/pay_hint_text"
+            android:lineSpacingExtra="2dp"
+            android:text="@string/pay_hint_text"
+            android:layout_below="@id/head_amt_pay"
+            android:textColor="@color/sb_dark_grey"
+            android:textAlignment="center"
+            android:textSize="@dimen/font_1x"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:layout_width="match_parent"
+            android:id="@+id/proceed_button"
+            android:textAllCaps="true"
+            android:layout_margin="@dimen/space_2x"
+            android:letterSpacing="0.2"
+            android:layout_height="@dimen/button_large"
+            android:background="@drawable/sb_ripple_black_button"
+            android:layout_alignParentBottom="true"
+            android:textColor="@color/sb_white"
+            android:textSize="@dimen/font_button"
+            android:visibility="gone"
+            android:text="@string/proceed_invoice" />
+
+    </RelativeLayout>
+</LinearLayout>

@@ -15,37 +15,50 @@ import android.widget.TextView;
 
 import com.scanbee.scanbee.MainActivity;
 import com.scanbee.scanbee.R;
+import com.scanbee.sharedpref.ReadPref;
+import com.scanbee.util.Utils;
 
 /**
  * Created by kshitij on 5/5/2016.
  */
 public class InvoiceFragment extends Fragment {
     View viewMain;
-    TextView amountPaid,amountPaidTxt,orderId,orderIdTxt,custName,custInfo;
+    TextView amountPaid,amountPaidTxt,orderId,orderIdTxt,custName,custInfo,circleImgTv;
+    ReadPref readPref;
+    Utils utilLib;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         viewMain=inflater.inflate(R.layout.invoice_frgment,null,false);
-
+        utilLib = new Utils(getActivity());
+        utilLib.hideKeyboard();
         amountPaid = (TextView)viewMain.findViewById(R.id.amount_paidin);
         amountPaidTxt = (TextView)viewMain.findViewById(R.id.amountPaidInTxt);
         orderId = (TextView)viewMain.findViewById(R.id.orderIdIn);
         orderIdTxt = (TextView)viewMain.findViewById(R.id.OrderIdInTxt);
         custName = (TextView)viewMain.findViewById(R.id.cust_nameTv);
         custInfo = (TextView)viewMain.findViewById(R.id.typeTv);
+        circleImgTv = (TextView)viewMain.findViewById(R.id.circleImgTv);
 
+        readPref = new ReadPref(getActivity());
 
         Typeface RobotoMed=Typeface.createFromAsset(getResources().getAssets(),getString(R.string.roboto_med));
         Typeface NotoSans=Typeface.createFromAsset(getResources().getAssets(),getString(R.string.noto_sans));
         Typeface Roboto=Typeface.createFromAsset(getResources().getAssets(),getString(R.string.roboto_font));
+        Typeface RobotoThin=Typeface.createFromAsset(getResources().getAssets(), getString(R.string.roboto_thin));
         amountPaid.setTypeface(NotoSans);
         amountPaidTxt.setTypeface(NotoSans);
         orderId.setTypeface(NotoSans);
         orderIdTxt.setTypeface(NotoSans);
         custName.setTypeface(RobotoMed);
         custInfo.setTypeface(NotoSans);
-
-        amountPaid.setText(getActivity().getString(R.string.Rs)+"54,321");
+        String[] customer_info = readPref.getCustInfo().split(";");
+        custName.setText(customer_info[0]);
+        custInfo.setText(customer_info[1]);
+        circleImgTv.setText(String.valueOf(customer_info[0].toString().charAt(0)));
+        circleImgTv.setTypeface(RobotoThin);
+        amountPaid.setText(getActivity().getString(R.string.Rs) + readPref.getAmountPaid());
+        orderId.setText("SBO"+readPref.getOrderId());
         setupActionBar();
 
         return viewMain;
@@ -64,12 +77,6 @@ public class InvoiceFragment extends Fragment {
         if(activity != null){
             Toolbar toolbar = (Toolbar)activity.findViewById(R.id.toolbar);
             TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-            ImageView cancelButton = (ImageView) activity.findViewById(R.id.cancelorder);
-            ImageView addMoreButton = (ImageView) activity.findViewById(R.id.addmore);
-            ImageView newOrder = (ImageView) activity.findViewById(R.id.neworder);
-            cancelButton.setVisibility(View.GONE);
-            addMoreButton.setVisibility(View.GONE);
-            newOrder.setVisibility(View.VISIBLE);
 
             mTitle.setText(R.string.invoice);
         }

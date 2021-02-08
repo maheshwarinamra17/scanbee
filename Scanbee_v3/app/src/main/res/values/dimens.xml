@@ -1,0 +1,61 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+
+    <dimen name="toolbar_height">56dp</dimen>
+    <dimen name="shop_toolbar_height">60dp</dimen>
+    <dimen name="top_shadow_height">20dp</dimen>
+    <dimen name="bottom_shadow_height">2dp</dimen>
+
+    <dimen name="space_0_5x">2dp</dimen>
+    <dimen name="space_1x">8dp</dimen>
+    <dimen name="space_1_5x">10dp</dimen>
+    <dimen name="space_2x">16dp</dimen>
+    <dimen name="space_3x">24dp</dimen>
+    <dimen name="space_4x">32dp</dimen>
+    <dimen name="space_4_5x">48dp</dimen>
+    <dimen name="space_5x">64dp</dimen>
+    <dimen name="space_0_6x">4dp</dimen>
+
+    <dimen name="card_height">160dp</dimen>
+    <dimen name="card_height_small">96dp</dimen>
+    <dimen name="corner_radius">4dp</dimen>
+    <dimen name="neg_1x">-8dp</dimen>
+    <dimen name="neg_2x">-16dp</dimen>
+    <dimen name="button_large">52dp</dimen>
+    <dimen name="logo_size">48dp</dimen>
+    <dimen name="logo_text_width">200dp</dimen>
+    <dimen name="logo_text_height">32dp</dimen>
+    <dimen name="video_width">200dp</dimen>
+    <dimen name="ripple_radius">32dp</dimen>
+
+    <dimen name="icon_size">46dp</dimen>
+    <dimen name="icon_size_error_corrected">40dp</dimen>
+    <dimen name="icon_size_small">24dp</dimen>
+    <dimen name="icon_padding">12dp</dimen>
+    <dimen name="keyboard_height">280dp</dimen>
+    <dimen name="key_width">48dp</dimen>
+    <dimen name="key_height">54dp</dimen>
+    <dimen name="big_key_height">124dp</dimen>
+    <dimen name="big_key_width">52dp</dimen>
+    <dimen name="qrcode">100dp</dimen>
+    <dimen name="custom_status_height">8dp</dimen>
+
+    <!-- new fonts_size -->
+    <dimen name="font_key">28sp</dimen>
+    <dimen name="font_button">10sp</dimen>
+    <dimen name="font_notif">8sp</dimen>
+    <dimen name="font_1x">10sp</dimen>
+    <dimen name="font_1_5x">12sp</dimen>
+    <dimen name="font_1_7x">14sp</dimen>
+    <dimen name="font_2x">16sp</dimen>
+    <dimen name="font_2_5x">18sp</dimen>
+    <dimen name="font_sm_heading">10sp</dimen>
+    <dimen name="font_2_7x">24sp</dimen>
+    <dimen name="font_3x">36sp</dimen>
+    <dimen name="font_5x">56sp</dimen>
+
+
+</resources>

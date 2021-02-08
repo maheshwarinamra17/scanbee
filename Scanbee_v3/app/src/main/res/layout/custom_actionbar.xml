@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/toolbar_height"
+    android:gravity="center"
+    android:elevation="@dimen/bottom_shadow_height"
+    android:background="@color/sb_white">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/custom_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/custom_menu_btn"
+                android:src="@drawable/img_menu"
+                android:padding="@dimen/icon_padding"
+                android:contentDescription="Menu btn"
+                android:background="@drawable/sb_ripple_effect"
+                android:paddingLeft="0dp"
+                android:layout_width="@dimen/icon_size_error_corrected"
+                android:layout_height="@dimen/icon_size_error_corrected" />
+
+
+            <TextView
+                android:text="Custom title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textAllCaps="true"
+                android:letterSpacing="0.2"
+                android:textSize="@dimen/font_sm_heading"
+                android:textColor="@color/sb_black"
+                android:id="@+id/custom_title" />
+
+            <ImageView
+                android:id="@+id/breader_btn"
+                android:layout_centerVertical="true"
+                android:src="@drawable/img_breader"
+                android:contentDescription="Menu btn"
+                android:background="@drawable/sb_ripple_effect"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/space_2x"
+                android:paddingLeft="0dp"
+                android:layout_width="@dimen/icon_size_small"
+                android:layout_height="@dimen/icon_size_small" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+</LinearLayout>
